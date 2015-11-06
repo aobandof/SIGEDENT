@@ -64,18 +64,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Sucursal`
+-- Table `beraudent`.`sucursal`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Sucursal` (
-  `id_sucu` INT NOT NULL,
-  `codi_sucu` VARCHAR(10) NULL,
-  `abre_sucu` VARCHAR(10) NULL,
-  `nomb_sucu` VARCHAR(25) NOT NULL,
-  `alia_sucu` VARCHAR(45) NULL,
+CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal` (
+  `id` INT NOT NULL,
+  `codigo` VARCHAR(10) NULL,
+  `abreviatura` VARCHAR(10) NULL,
+  `nombre` VARCHAR(25) NOT NULL,
+  `alias` VARCHAR(45) NULL,
   `Arancel_id_aran` INT NOT NULL,
   `Cliente_id_clie` INT NOT NULL,
   `Datos_Facturacion_id` INT NOT NULL,
-  PRIMARY KEY (`id_sucu`),
+  PRIMARY KEY (`id`),
   INDEX `fk_Sucursal_Arancel1_idx` (`Arancel_id_aran` ASC),
   INDEX `fk_Sucursal_Cliente1_idx` (`Cliente_id_clie` ASC),
   INDEX `fk_Sucursal_Datos_Facturacion1_idx` (`Datos_Facturacion_id` ASC),
@@ -100,15 +100,15 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Odontologo`
+-- Table `beraudent`.`odontologo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Odontologo` (
-  `id_odon` INT NOT NULL AUTO_INCREMENT,
-  `apel_odon` VARCHAR(45) NULL,
-  `nomb_odon` VARCHAR(45) NULL,
-  `mail_odon` VARCHAR(25) NULL,
-  `celu_odon` VARCHAR(10) NULL,
-  PRIMARY KEY (`id_odon`))
+CREATE TABLE IF NOT EXISTS `beraudent`.`odontologo` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `apellidos` VARCHAR(45) NULL,
+  `nombres` VARCHAR(45) NULL,
+  `email` VARCHAR(25) NULL,
+  `celular` VARCHAR(10) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -137,17 +137,6 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Arancel_has_Trabajo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel_has_Trabajo` (
-  `Arancel_id_aran` INT NOT NULL,
-  `Trabajo_id_trab` INT NOT NULL,
-  `prec_aran` INT NULL,
-  PRIMARY KEY (`Arancel_id_aran`, `Trabajo_id_trab`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `beraudent`.`Personal`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `beraudent`.`Personal` (
@@ -163,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`Personal` (
   INDEX `fk_Personal_Sucursal1_idx` (`Sucursal_id_sucu` ASC),
   CONSTRAINT `fk_Personal_Sucursal1`
     FOREIGN KEY (`Sucursal_id_sucu`)
-    REFERENCES `beraudent`.`Sucursal` (`id_sucu`)
+    REFERENCES `beraudent`.`sucursal` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -172,65 +161,67 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Sucursal_Odontologo`
+-- Table `beraudent`.`paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Sucursal_Odontologo` (
-  `Sucursal_id_sucu` INT NOT NULL,
-  `Odontologo_id_odon` INT NOT NULL,
-  PRIMARY KEY (`Sucursal_id_sucu`, `Odontologo_id_odon`),
-  INDEX `fk_Sucursal_has_Odontologo_Odontologo1_idx` (`Odontologo_id_odon` ASC),
-  INDEX `fk_Sucursal_has_Odontologo_Sucursal1_idx` (`Sucursal_id_sucu` ASC),
-  CONSTRAINT `fk_Sucursal_has_Odontologo_Sucursal1`
-    FOREIGN KEY (`Sucursal_id_sucu`)
-    REFERENCES `beraudent`.`Sucursal` (`id_sucu`)
+CREATE TABLE IF NOT EXISTS `beraudent`.`paciente` (
+  `id` INT UNSIGNED NOT NULL,
+  `rut` VARCHAR(10) NULL,
+  `apellidos` VARCHAR(45) NULL,
+  `nombres` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`sucursal_odontologo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal_odontologo` (
+  `id_sucursal-so` INT NOT NULL,
+  `id_odontologo-so` INT NOT NULL,
+  PRIMARY KEY (`id_sucursal-so`, `id_odontologo-so`),
+  INDEX `fk_sucursal_has_odontologo_odontologo1_idx` (`id_odontologo-so` ASC),
+  INDEX `fk_sucursal_has_odontologo_sucursal1_idx` (`id_sucursal-so` ASC),
+  CONSTRAINT `fk_sucursal_has_odontologo_sucursal1`
+    FOREIGN KEY (`id_sucursal-so`)
+    REFERENCES `beraudent`.`sucursal` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Sucursal_has_Odontologo_Odontologo1`
-    FOREIGN KEY (`Odontologo_id_odon`)
-    REFERENCES `beraudent`.`Odontologo` (`id_odon`)
+  CONSTRAINT `fk_sucursal_has_odontologo_odontologo1`
+    FOREIGN KEY (`id_odontologo-so`)
+    REFERENCES `beraudent`.`odontologo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Paciente`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Paciente` (
-  `id_paciente` INT UNSIGNED NOT NULL,
-  `rut_paciente` VARCHAR(10) NULL,
-  `nomb_paciente` VARCHAR(45) NULL,
-  `apel_paciente` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_paciente`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Orden_Trabajo`
+-- Table `beraudent`.`orden_trabajo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Orden_Trabajo` (
-  `ot_orde_trab` VARCHAR(10) NOT NULL,
-  `tick_orde_trab` VARCHAR(10) NULL,
-  `fech_ingr` DATETIME NULL,
-  `fech_entr` DATETIME NULL,
-  `nota_orde_trab` TEXT(100) NULL,
-  `Sucursal_Odontologo_Sucursal_id_sucu` INT NOT NULL,
-  `Sucursal_Odontologo_Odontologo_id_odon` INT NOT NULL,
-  `Paciente_id_paciente` INT UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `beraudent`.`orden_trabajo` (
+  `ot` VARCHAR(10) NOT NULL,
+  `ticket` VARCHAR(10) NULL,
+  `fecha_ingreso` DATETIME NULL,
+  `fecha_entrega` DATETIME NULL,
+  `detalle` TEXT(100) NULL,
   `suministros_enviados` VARCHAR(45) NULL,
-  INDEX `fk_Orden_Trabajo_Sucursal_Odontologo1_idx` (`Sucursal_Odontologo_Sucursal_id_sucu` ASC, `Sucursal_Odontologo_Odontologo_id_odon` ASC),
-  INDEX `fk_Orden_Trabajo_Paciente1_idx` (`Paciente_id_paciente` ASC),
-  PRIMARY KEY (`ot_orde_trab`),
-  CONSTRAINT `fk_Orden_Trabajo_Sucursal_Odontologo1`
-    FOREIGN KEY (`Sucursal_Odontologo_Sucursal_id_sucu` , `Sucursal_Odontologo_Odontologo_id_odon`)
-    REFERENCES `beraudent`.`Sucursal_Odontologo` (`Sucursal_id_sucu` , `Odontologo_id_odon`)
+  `id_paciente-ot` INT UNSIGNED NOT NULL,
+  `id_sucursal-so-ot` INT NOT NULL,
+  `id_odontologo-so-ot` INT NOT NULL,
+  INDEX `fk_Orden_Trabajo_Paciente1_idx` (`id_paciente-ot` ASC),
+  PRIMARY KEY (`ot`),
+  INDEX `fk_orden_trabajo_sucursal_odontologo1_idx` (`id_sucursal-so-ot` ASC, `id_odontologo-so-ot` ASC),
+  CONSTRAINT `fk_Orden_Trabajo_Paciente1`
+    FOREIGN KEY (`id_paciente-ot`)
+    REFERENCES `beraudent`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Orden_Trabajo_Paciente1`
-    FOREIGN KEY (`Paciente_id_paciente`)
-    REFERENCES `beraudent`.`Paciente` (`id_paciente`)
+  CONSTRAINT `fk_orden_trabajo_sucursal_odontologo1`
+    FOREIGN KEY (`id_sucursal-so-ot` , `id_odontologo-so-ot`)
+    REFERENCES `beraudent`.`sucursal_odontologo` (`id_sucursal-so` , `id_odontologo-so`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -239,25 +230,25 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Solicitud_Pedido`
+-- Table `beraudent`.`docped`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Solicitud_Pedido` (
-  `nume_soli_pedi` VARCHAR(10) NOT NULL,
-  `Sucursal_Odontologo_Sucursal_id_sucu` INT NOT NULL,
-  `Sucursal_Odontologo_Odontologo_id_odon` INT NOT NULL,
-  `Paciente_id_paciente` INT UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `beraudent`.`docped` (
+  `numero` VARCHAR(10) NOT NULL,
   `episodio` VARCHAR(10) NULL COMMENT 'Existen raros casos donde hay mas de un episodio por solped, colocarlo com nota',
-  PRIMARY KEY (`nume_soli_pedi`),
-  INDEX `fk_Solicitud_Pedido_Sucursal_Odontologo1_idx` (`Sucursal_Odontologo_Sucursal_id_sucu` ASC, `Sucursal_Odontologo_Odontologo_id_odon` ASC),
-  INDEX `fk_Solicitud_Pedido_Paciente1_idx` (`Paciente_id_paciente` ASC),
-  CONSTRAINT `fk_Solicitud_Pedido_Sucursal_Odontologo1`
-    FOREIGN KEY (`Sucursal_Odontologo_Sucursal_id_sucu` , `Sucursal_Odontologo_Odontologo_id_odon`)
-    REFERENCES `beraudent`.`Sucursal_Odontologo` (`Sucursal_id_sucu` , `Odontologo_id_odon`)
+  `id_paciente-d` INT UNSIGNED NOT NULL,
+  `id_sucursal-so-d` INT NOT NULL,
+  `id_odontologo-so-d` INT NOT NULL,
+  PRIMARY KEY (`numero`),
+  INDEX `fk_docped_paciente1_idx` (`id_paciente-d` ASC),
+  INDEX `fk_docped_sucursal_odontologo1_idx` (`id_sucursal-so-d` ASC, `id_odontologo-so-d` ASC),
+  CONSTRAINT `fk_docped_paciente1`
+    FOREIGN KEY (`id_paciente-d`)
+    REFERENCES `beraudent`.`paciente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Solicitud_Pedido_Paciente1`
-    FOREIGN KEY (`Paciente_id_paciente`)
-    REFERENCES `beraudent`.`Paciente` (`id_paciente`)
+  CONSTRAINT `fk_docped_sucursal_odontologo1`
+    FOREIGN KEY (`id_sucursal-so-d` , `id_odontologo-so-d`)
+    REFERENCES `beraudent`.`sucursal_odontologo` (`id_sucursal-so` , `id_odontologo-so`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -309,11 +300,11 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`grupo_cancelacion` (
   `periodo` VARCHAR(15) NULL,
   `monto` FLOAT NULL,
   `detalle` VARCHAR(45) NULL,
-  `comprobante_id` VARCHAR(10) NOT NULL,
+  `id_comprobante-gc` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_grupo_cancelacion_comprobante1_idx` (`comprobante_id` ASC),
+  INDEX `fk_grupo_cancelacion_comprobante1_idx` (`id_comprobante-gc` ASC),
   CONSTRAINT `fk_grupo_cancelacion_comprobante1`
-    FOREIGN KEY (`comprobante_id`)
+    FOREIGN KEY (`id_comprobante-gc`)
     REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -338,7 +329,7 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`Trabajo_Realizado` (
   INDEX `fk_Trabajo_Realizado_grupo_cancelacion1_idx` (`grupo_cancelacion_id` ASC),
   CONSTRAINT `fk_Trabajo_Realizado_Orden_Trabajo1`
     FOREIGN KEY (`id_orden_trabajo`)
-    REFERENCES `beraudent`.`Orden_Trabajo` (`ot_orde_trab`)
+    REFERENCES `beraudent`.`orden_trabajo` (`ot`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Trabajo_Realizado_trabajo1`
@@ -374,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`Ubicacion` (
   INDEX `fk_Ubicacion_Sucursal1_idx` (`Sucursal_id_sucu` ASC),
   CONSTRAINT `fk_Ubicacion_Sucursal1`
     FOREIGN KEY (`Sucursal_id_sucu`)
-    REFERENCES `beraudent`.`Sucursal` (`id_sucu`)
+    REFERENCES `beraudent`.`sucursal` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -402,11 +393,11 @@ COLLATE = utf8_turkish_ci;
 -- Table `beraudent`.`pago`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `beraudent`.`pago` (
-  `id_pago` INT NOT NULL,
-  `nume_reci_pago` VARCHAR(8) NULL,
-  `fech_reci_pago` DATETIME NULL,
-  `deta_pago` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_pago`))
+  `id` INT NOT NULL,
+  `numero_recibo` VARCHAR(8) NULL,
+  `fecha_recibo` DATETIME NULL,
+  `detalle` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -416,13 +407,13 @@ COLLATE = utf8_spanish_ci;
 -- Table `beraudent`.`item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `beraudent`.`item` (
-  `codigo_beraudent` VARCHAR(10) NOT NULL,
+  `codigo` VARCHAR(10) NOT NULL,
   `precio` FLOAT NULL,
-  `arancel_id1` INT NOT NULL,
-  PRIMARY KEY (`codigo_beraudent`),
-  INDEX `fk_item_arancel_arancel1_idx` (`arancel_id1` ASC),
+  `id_arancel-i` INT NOT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `fk_item_arancel_arancel1_idx` (`id_arancel-i` ASC),
   CONSTRAINT `fk_item_arancel_arancel1`
-    FOREIGN KEY (`arancel_id1`)
+    FOREIGN KEY (`id_arancel-i`)
     REFERENCES `beraudent`.`arancel` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -439,11 +430,11 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`orden_compra` (
   `fecha` DATE NULL,
   `monto` FLOAT NULL,
   `detalle` VARCHAR(45) NULL,
-  `comprobante_id` VARCHAR(10) NOT NULL,
+  `id_comprobante-oc` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`numero`),
-  INDEX `fk_orden_compra_comprobante1_idx` (`comprobante_id` ASC),
+  INDEX `fk_orden_compra_comprobante1_idx` (`id_comprobante-oc` ASC),
   CONSTRAINT `fk_orden_compra_comprobante1`
-    FOREIGN KEY (`comprobante_id`)
+    FOREIGN KEY (`id_comprobante-oc`)
     REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -454,7 +445,7 @@ ENGINE = InnoDB;
 -- Table `beraudent`.`prestacion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `beraudent`.`prestacion` (
-  `Solicitud_Pedido_nume_soli_pedi` VARCHAR(10) NOT NULL,
+  `numero_docped-p` VARCHAR(10) NOT NULL,
   `posicion` TINYINT(1) UNSIGNED NOT NULL,
   `fecha_registro` DATE NULL,
   `fecha_entrega` DATE NULL,
@@ -462,24 +453,24 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`prestacion` (
   `precio` FLOAT NOT NULL,
   `null_pres` ENUM('V', 'N') NULL DEFAULT 'V' COMMENT 'las posiciones pueden anularse con basurero, bomba  o valor total=0\nsiempre es bueno tener respald de que posicion esta nula',
   `detalle` VARCHAR(45) NULL,
-  `item_codigo_beraudent` VARCHAR(10) NOT NULL,
-  `orden_compra_numero` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`Solicitud_Pedido_nume_soli_pedi`, `posicion`),
-  INDEX `fk_prestacion_item1_idx` (`item_codigo_beraudent` ASC),
-  INDEX `fk_prestacion_Solicitud_Pedido1_idx` (`Solicitud_Pedido_nume_soli_pedi` ASC),
-  INDEX `fk_prestacion_orden_compra1_idx` (`orden_compra_numero` ASC),
+  `codigo_item-p` VARCHAR(10) NOT NULL,
+  `numero_orden_compra-p` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`numero_docped-p`, `posicion`),
+  INDEX `fk_prestacion_item1_idx` (`codigo_item-p` ASC),
+  INDEX `fk_prestacion_Solicitud_Pedido1_idx` (`numero_docped-p` ASC),
+  INDEX `fk_prestacion_orden_compra1_idx` (`numero_orden_compra-p` ASC),
   CONSTRAINT `fk_prestacion_item1`
-    FOREIGN KEY (`item_codigo_beraudent`)
-    REFERENCES `beraudent`.`item` (`codigo_beraudent`)
+    FOREIGN KEY (`codigo_item-p`)
+    REFERENCES `beraudent`.`item` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_prestacion_Solicitud_Pedido1`
-    FOREIGN KEY (`Solicitud_Pedido_nume_soli_pedi`)
-    REFERENCES `beraudent`.`Solicitud_Pedido` (`nume_soli_pedi`)
+    FOREIGN KEY (`numero_docped-p`)
+    REFERENCES `beraudent`.`docped` (`numero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_prestacion_orden_compra1`
-    FOREIGN KEY (`orden_compra_numero`)
+    FOREIGN KEY (`numero_orden_compra-p`)
     REFERENCES `beraudent`.`orden_compra` (`numero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -502,393 +493,6 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`Usuario` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish2_ci;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel1` (
-  `id` INT NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Prestacion1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion1` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Proceso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Proceso` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Prestacion_Proceso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion_Proceso` (
-  `Prestacion_id` INT NOT NULL,
-  `Proceso_id` INT NOT NULL,
-  PRIMARY KEY (`Prestacion_id`, `Proceso_id`),
-  INDEX `fk_Prestacion_has_Proceso_Proceso1_idx` (`Proceso_id` ASC),
-  INDEX `fk_Prestacion_has_Proceso_Prestacion_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Prestacion_has_Proceso_Prestacion`
-    FOREIGN KEY (`Prestacion_id`)
-    REFERENCES `beraudent`.`Prestacion1` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Prestacion_has_Proceso_Proceso1`
-    FOREIGN KEY (`Proceso_id`)
-    REFERENCES `beraudent`.`Proceso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Trabajo_Tecnico`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Trabajo_Tecnico` (
-  `codigo` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Proceso_Trabajo_Tecnico`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Proceso_Trabajo_Tecnico` (
-  `Proceso_id` INT NOT NULL,
-  `Trabajo_Tecnico_id` INT NOT NULL,
-  PRIMARY KEY (`Proceso_id`, `Trabajo_Tecnico_id`),
-  INDEX `fk_Proceso_has_Trabajo_Tecnico_Trabajo_Tecnico1_idx` (`Trabajo_Tecnico_id` ASC),
-  INDEX `fk_Proceso_has_Trabajo_Tecnico_Proceso1_idx` (`Proceso_id` ASC),
-  CONSTRAINT `fk_Proceso_has_Trabajo_Tecnico_Proceso1`
-    FOREIGN KEY (`Proceso_id`)
-    REFERENCES `beraudent`.`Proceso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Proceso_has_Trabajo_Tecnico_Trabajo_Tecnico1`
-    FOREIGN KEY (`Trabajo_Tecnico_id`)
-    REFERENCES `beraudent`.`Trabajo_Tecnico` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel_Prestacion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel_Prestacion` (
-  `codigo_cliente` VARCHAR(10) NULL,
-  `nomenclatura_cliente` VARCHAR(45) NULL,
-  `precio` FLOAT NULL,
-  `Arancel_id` INT NOT NULL,
-  `Prestacion_id` INT NOT NULL,
-  PRIMARY KEY (`Arancel_id`, `Prestacion_id`),
-  INDEX `fk_Arancel_Prestacion_Prestacion1_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Arancel_Prestacion_Arancel1`
-    FOREIGN KEY (`Arancel_id`)
-    REFERENCES `beraudent`.`Arancel1` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Arancel_Prestacion_Prestacion1`
-    FOREIGN KEY (`Prestacion_id`)
-    REFERENCES `beraudent`.`Prestacion1` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel_Proceso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel_Proceso` (
-  `Arancel_Prestacion_Arancel_id` INT NOT NULL,
-  `Arancel_Prestacion_Prestacion_id` INT NOT NULL,
-  `Prestacion_Proceso_Proceso_id` INT NOT NULL,
-  `precio` FLOAT NULL,
-  PRIMARY KEY (`Arancel_Prestacion_Arancel_id`, `Arancel_Prestacion_Prestacion_id`, `Prestacion_Proceso_Proceso_id`),
-  INDEX `fk_Arancel_Prestacion_has_Prestacion_Proceso_Prestacion_Pro_idx` (`Prestacion_Proceso_Proceso_id` ASC),
-  INDEX `fk_Arancel_Prestacion_has_Prestacion_Proceso_Arancel_Presta_idx` (`Arancel_Prestacion_Arancel_id` ASC, `Arancel_Prestacion_Prestacion_id` ASC),
-  CONSTRAINT `fk_Arancel_Prestacion_has_Prestacion_Proceso_Arancel_Prestaci1`
-    FOREIGN KEY (`Arancel_Prestacion_Arancel_id` , `Arancel_Prestacion_Prestacion_id`)
-    REFERENCES `beraudent`.`Arancel_Prestacion` (`Arancel_id` , `Prestacion_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Arancel_Prestacion_has_Prestacion_Proceso_Prestacion_Proce1`
-    FOREIGN KEY (`Prestacion_Proceso_Proceso_id`)
-    REFERENCES `beraudent`.`Prestacion_Proceso` (`Proceso_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel2` (
-  `id` INT NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Prestacion2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion2` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Proceso1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Proceso1` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Prestacion_Proceso1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion_Proceso1` (
-  `Prestacion_id` INT NOT NULL,
-  `Proceso_id` INT NOT NULL,
-  PRIMARY KEY (`Prestacion_id`, `Proceso_id`),
-  INDEX `fk_Prestacion_has_Proceso_Proceso1_idx` (`Proceso_id` ASC),
-  INDEX `fk_Prestacion_has_Proceso_Prestacion_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Prestacion_has_Proceso_Prestacion`
-    FOREIGN KEY (`Prestacion_id`)
-    REFERENCES `beraudent`.`Prestacion2` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Prestacion_has_Proceso_Proceso1`
-    FOREIGN KEY (`Proceso_id`)
-    REFERENCES `beraudent`.`Proceso1` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Trabajo_Tecnico1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Trabajo_Tecnico1` (
-  `codigo` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Proceso_Trabajo_Tecnico1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Proceso_Trabajo_Tecnico1` (
-  `Proceso_id` INT NOT NULL,
-  `Trabajo_Tecnico_id` INT NOT NULL,
-  PRIMARY KEY (`Proceso_id`, `Trabajo_Tecnico_id`),
-  INDEX `fk_Proceso_has_Trabajo_Tecnico_Trabajo_Tecnico1_idx` (`Trabajo_Tecnico_id` ASC),
-  INDEX `fk_Proceso_has_Trabajo_Tecnico_Proceso1_idx` (`Proceso_id` ASC),
-  CONSTRAINT `fk_Proceso_has_Trabajo_Tecnico_Proceso1`
-    FOREIGN KEY (`Proceso_id`)
-    REFERENCES `beraudent`.`Proceso1` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Proceso_has_Trabajo_Tecnico_Trabajo_Tecnico1`
-    FOREIGN KEY (`Trabajo_Tecnico_id`)
-    REFERENCES `beraudent`.`Trabajo_Tecnico1` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel_Prestacion1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel_Prestacion1` (
-  `codigo_cliente` VARCHAR(10) NULL,
-  `nomenclatura_cliente` VARCHAR(45) NULL,
-  `precio` FLOAT NULL,
-  `Arancel_id` INT NOT NULL,
-  `Prestacion_id` INT NOT NULL,
-  PRIMARY KEY (`Arancel_id`, `Prestacion_id`),
-  INDEX `fk_Arancel_Prestacion_Prestacion1_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Arancel_Prestacion_Arancel1`
-    FOREIGN KEY (`Arancel_id`)
-    REFERENCES `beraudent`.`Arancel2` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Arancel_Prestacion_Prestacion1`
-    FOREIGN KEY (`Prestacion_id`)
-    REFERENCES `beraudent`.`Prestacion2` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel_Proceso1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel_Proceso1` (
-  `Arancel_Prestacion_Arancel_id` INT NOT NULL,
-  `Arancel_Prestacion_Prestacion_id` INT NOT NULL,
-  `Prestacion_Proceso_Proceso_id` INT NOT NULL,
-  `precio` FLOAT NULL,
-  PRIMARY KEY (`Arancel_Prestacion_Arancel_id`, `Arancel_Prestacion_Prestacion_id`, `Prestacion_Proceso_Proceso_id`),
-  INDEX `fk_Arancel_Prestacion_has_Prestacion_Proceso_Prestacion_Pro_idx` (`Prestacion_Proceso_Proceso_id` ASC),
-  INDEX `fk_Arancel_Prestacion_has_Prestacion_Proceso_Arancel_Presta_idx` (`Arancel_Prestacion_Arancel_id` ASC, `Arancel_Prestacion_Prestacion_id` ASC),
-  CONSTRAINT `fk_Arancel_Prestacion_has_Prestacion_Proceso_Arancel_Prestaci1`
-    FOREIGN KEY (`Arancel_Prestacion_Arancel_id` , `Arancel_Prestacion_Prestacion_id`)
-    REFERENCES `beraudent`.`Arancel_Prestacion1` (`Arancel_id` , `Prestacion_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Arancel_Prestacion_has_Prestacion_Proceso_Prestacion_Proce1`
-    FOREIGN KEY (`Prestacion_Proceso_Proceso_id`)
-    REFERENCES `beraudent`.`Prestacion_Proceso1` (`Proceso_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel3`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel3` (
-  `id` INT NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Prestacion3`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion3` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Proceso2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Proceso2` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Prestacion_Proceso2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion_Proceso2` (
-  `Prestacion_id` INT NOT NULL,
-  `Proceso_id` INT NOT NULL,
-  PRIMARY KEY (`Prestacion_id`, `Proceso_id`),
-  INDEX `fk_Prestacion_has_Proceso_Proceso1_idx` (`Proceso_id` ASC),
-  INDEX `fk_Prestacion_has_Proceso_Prestacion_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Prestacion_has_Proceso_Prestacion`
-    FOREIGN KEY (`Prestacion_id`)
-    REFERENCES `beraudent`.`Prestacion3` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Prestacion_has_Proceso_Proceso1`
-    FOREIGN KEY (`Proceso_id`)
-    REFERENCES `beraudent`.`Proceso2` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Trabajo_Tecnico2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Trabajo_Tecnico2` (
-  `codigo` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Proceso_Trabajo_Tecnico2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Proceso_Trabajo_Tecnico2` (
-  `Proceso_id` INT NOT NULL,
-  `Trabajo_Tecnico_id` INT NOT NULL,
-  PRIMARY KEY (`Proceso_id`, `Trabajo_Tecnico_id`),
-  INDEX `fk_Proceso_has_Trabajo_Tecnico_Trabajo_Tecnico1_idx` (`Trabajo_Tecnico_id` ASC),
-  INDEX `fk_Proceso_has_Trabajo_Tecnico_Proceso1_idx` (`Proceso_id` ASC),
-  CONSTRAINT `fk_Proceso_has_Trabajo_Tecnico_Proceso1`
-    FOREIGN KEY (`Proceso_id`)
-    REFERENCES `beraudent`.`Proceso2` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Proceso_has_Trabajo_Tecnico_Trabajo_Tecnico1`
-    FOREIGN KEY (`Trabajo_Tecnico_id`)
-    REFERENCES `beraudent`.`Trabajo_Tecnico2` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel_Prestacion2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel_Prestacion2` (
-  `codigo_cliente` VARCHAR(10) NULL,
-  `nomenclatura_cliente` VARCHAR(45) NULL,
-  `precio` FLOAT NULL,
-  `Arancel_id` INT NOT NULL,
-  `Prestacion_id` INT NOT NULL,
-  PRIMARY KEY (`Arancel_id`, `Prestacion_id`),
-  INDEX `fk_Arancel_Prestacion_Prestacion1_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Arancel_Prestacion_Arancel1`
-    FOREIGN KEY (`Arancel_id`)
-    REFERENCES `beraudent`.`Arancel3` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Arancel_Prestacion_Prestacion1`
-    FOREIGN KEY (`Prestacion_id`)
-    REFERENCES `beraudent`.`Prestacion3` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Arancel_Proceso2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Arancel_Proceso2` (
-  `Arancel_Prestacion_Arancel_id` INT NOT NULL,
-  `Arancel_Prestacion_Prestacion_id` INT NOT NULL,
-  `Prestacion_Proceso_Proceso_id` INT NOT NULL,
-  `precio` FLOAT NULL,
-  PRIMARY KEY (`Arancel_Prestacion_Arancel_id`, `Arancel_Prestacion_Prestacion_id`, `Prestacion_Proceso_Proceso_id`),
-  INDEX `fk_Arancel_Prestacion_has_Prestacion_Proceso_Prestacion_Pro_idx` (`Prestacion_Proceso_Proceso_id` ASC),
-  INDEX `fk_Arancel_Prestacion_has_Prestacion_Proceso_Arancel_Presta_idx` (`Arancel_Prestacion_Arancel_id` ASC, `Arancel_Prestacion_Prestacion_id` ASC),
-  CONSTRAINT `fk_Arancel_Prestacion_has_Prestacion_Proceso_Arancel_Prestaci1`
-    FOREIGN KEY (`Arancel_Prestacion_Arancel_id` , `Arancel_Prestacion_Prestacion_id`)
-    REFERENCES `beraudent`.`Arancel_Prestacion2` (`Arancel_id` , `Prestacion_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Arancel_Prestacion_has_Prestacion_Proceso_Prestacion_Proce1`
-    FOREIGN KEY (`Prestacion_Proceso_Proceso_id`)
-    REFERENCES `beraudent`.`Prestacion_Proceso2` (`Proceso_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -962,65 +566,17 @@ ENGINE = InnoDB;
 -- Table `beraudent`.`detalle_item_arancel`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `beraudent`.`detalle_item_arancel` (
-  `item_arancel_codigo_beraudent` VARCHAR(10) NOT NULL,
+  `codigo_item-dia` VARCHAR(10) NOT NULL,
   `codigo_cliente` VARCHAR(10) NULL,
   `nomenclatura_cliente` VARCHAR(45) NULL,
   `detalle` VARCHAR(100) NULL,
-  PRIMARY KEY (`item_arancel_codigo_beraudent`),
-  CONSTRAINT `fk_detalle_item_arancel_item_arancel1`
-    FOREIGN KEY (`item_arancel_codigo_beraudent`)
-    REFERENCES `beraudent`.`item` (`codigo_beraudent`)
+  PRIMARY KEY (`codigo_item-dia`),
+  CONSTRAINT `fk_detalle_item_arancel_item1`
+    FOREIGN KEY (`codigo_item-dia`)
+    REFERENCES `beraudent`.`item` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Atachmes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Atachmes` (
-  `item_arancel_codigo_beraudent` VARCHAR(10) NOT NULL,
-  `trabajo_id` INT NOT NULL,
-  PRIMARY KEY (`item_arancel_codigo_beraudent`, `trabajo_id`),
-  INDEX `fk_item_arancel_has_trabajo_trabajo1_idx` (`trabajo_id` ASC),
-  INDEX `fk_item_arancel_has_trabajo_item_arancel1_idx` (`item_arancel_codigo_beraudent` ASC),
-  CONSTRAINT `fk_item_arancel_has_trabajo_item_arancel1`
-    FOREIGN KEY (`item_arancel_codigo_beraudent`)
-    REFERENCES `beraudent`.`item` (`codigo_beraudent`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_item_arancel_has_trabajo_trabajo1`
-    FOREIGN KEY (`trabajo_id`)
-    REFERENCES `beraudent`.`trabajo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`item_trabajo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`item_trabajo` (
-  `item_arancel_codigo_beraudent` VARCHAR(10) NOT NULL,
-  `trabajo_id` INT NOT NULL,
-  PRIMARY KEY (`item_arancel_codigo_beraudent`, `trabajo_id`),
-  INDEX `fk_item_arancel_has_trabajo_trabajo2_idx` (`trabajo_id` ASC),
-  INDEX `fk_item_arancel_has_trabajo_item_arancel2_idx` (`item_arancel_codigo_beraudent` ASC),
-  CONSTRAINT `fk_item_arancel_has_trabajo_item_arancel2`
-    FOREIGN KEY (`item_arancel_codigo_beraudent`)
-    REFERENCES `beraudent`.`item` (`codigo_beraudent`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_item_arancel_has_trabajo_trabajo2`
-    FOREIGN KEY (`trabajo_id`)
-    REFERENCES `beraudent`.`trabajo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -1052,16 +608,9 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion_has_Abono_Cargo` (
   `Prestacion_id_solicitud` VARCHAR(10) NOT NULL,
-  `Prestacion_posicion` TINYINT(1) UNSIGNED NOT NULL,
   `Abono_Cargo_id_abon_carg` INT NOT NULL,
-  PRIMARY KEY (`Prestacion_id_solicitud`, `Prestacion_posicion`, `Abono_Cargo_id_abon_carg`),
+  PRIMARY KEY (`Prestacion_id_solicitud`, `Abono_Cargo_id_abon_carg`),
   INDEX `fk_Prestacion_has_Abono_Cargo_Abono_Cargo1_idx` (`Abono_Cargo_id_abon_carg` ASC),
-  INDEX `fk_Prestacion_has_Abono_Cargo_Prestacion1_idx` (`Prestacion_id_solicitud` ASC, `Prestacion_posicion` ASC),
-  CONSTRAINT `fk_Prestacion_has_Abono_Cargo_Prestacion1`
-    FOREIGN KEY (`Prestacion_posicion`)
-    REFERENCES `beraudent`.`prestacion` (`posicion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Prestacion_has_Abono_Cargo_Abono_Cargo1`
     FOREIGN KEY (`Abono_Cargo_id_abon_carg`)
     REFERENCES `beraudent`.`Abono_Cargo` (`id_abon_carg`)
@@ -1076,23 +625,23 @@ COLLATE = utf8_spanish_ci;
 -- Table `beraudent`.`pago_comprobante`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `beraudent`.`pago_comprobante` (
-  `pago_id_pago` INT NOT NULL,
-  `comprobante_id` VARCHAR(10) NOT NULL,
+  `id_pago-pc` INT NOT NULL,
+  `id_comprobante-pc` VARCHAR(10) NOT NULL,
   `tipo_pago` ENUM('TF', 'TB', 'WP', 'CH') NULL,
   `numero` VARCHAR(20) NULL,
   `fecha_pago` DATE NULL,
   `fecha_vencimiento` DATE NULL,
   `detalle` VARCHAR(45) NULL,
-  PRIMARY KEY (`pago_id_pago`, `comprobante_id`),
-  INDEX `fk_pago_has_comprobante_comprobante1_idx` (`comprobante_id` ASC),
-  INDEX `fk_pago_has_comprobante_pago1_idx` (`pago_id_pago` ASC),
+  PRIMARY KEY (`id_pago-pc`, `id_comprobante-pc`),
+  INDEX `fk_pago_has_comprobante_pago1_idx` (`id_pago-pc` ASC),
+  INDEX `fk_pago_comprobante_comprobante1_idx` (`id_comprobante-pc` ASC),
   CONSTRAINT `fk_pago_has_comprobante_pago1`
-    FOREIGN KEY (`pago_id_pago`)
-    REFERENCES `beraudent`.`pago` (`id_pago`)
+    FOREIGN KEY (`id_pago-pc`)
+    REFERENCES `beraudent`.`pago` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pago_has_comprobante_comprobante1`
-    FOREIGN KEY (`comprobante_id`)
+  CONSTRAINT `fk_pago_comprobante_comprobante1`
+    FOREIGN KEY (`id_comprobante-pc`)
     REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -1113,12 +662,36 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`prestacion_has_Trabajo_Realizado` (
   INDEX `fk_prestacion_has_Trabajo_Realizado_prestacion1_idx` (`prestacion_Solicitud_Pedido_nume_soli_pedi` ASC, `prestacion_posicion` ASC),
   CONSTRAINT `fk_prestacion_has_Trabajo_Realizado_prestacion1`
     FOREIGN KEY (`prestacion_Solicitud_Pedido_nume_soli_pedi` , `prestacion_posicion`)
-    REFERENCES `beraudent`.`prestacion` (`Solicitud_Pedido_nume_soli_pedi` , `posicion`)
+    REFERENCES `beraudent`.`prestacion` (`numero_docped-p` , `posicion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_prestacion_has_Trabajo_Realizado_Trabajo_Realizado1`
     FOREIGN KEY (`Trabajo_Realizado_id`)
     REFERENCES `beraudent`.`Trabajo_Realizado` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`item_trabajo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `beraudent`.`item_trabajo` (
+  `codigo_item-it` VARCHAR(10) NOT NULL,
+  `id_trabajo-it` INT NOT NULL,
+  PRIMARY KEY (`codigo_item-it`, `id_trabajo-it`),
+  INDEX `fk_item_has_trabajo_trabajo1_idx` (`id_trabajo-it` ASC),
+  INDEX `fk_item_has_trabajo_item1_idx` (`codigo_item-it` ASC),
+  CONSTRAINT `fk_item_has_trabajo_item1`
+    FOREIGN KEY (`codigo_item-it`)
+    REFERENCES `beraudent`.`item` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_item_has_trabajo_trabajo1`
+    FOREIGN KEY (`id_trabajo-it`)
+    REFERENCES `beraudent`.`trabajo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
