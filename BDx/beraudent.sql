@@ -17,6 +17,8 @@ USE `beraudent` ;
 -- -----------------------------------------------------
 -- Table `beraudent`.`Cliente`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`Cliente` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`Cliente` (
   `id_clie` INT NOT NULL AUTO_INCREMENT,
   `nomb_clie` VARCHAR(25) NOT NULL,
@@ -31,6 +33,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`arancel`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`arancel` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`arancel` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(20) NULL,
@@ -44,6 +48,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`Datos_Facturacion`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`Datos_Facturacion` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`Datos_Facturacion` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `grupo_facturacion` VARCHAR(45) NOT NULL,
@@ -66,6 +72,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `beraudent`.`sucursal`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`sucursal` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal` (
   `id` INT NOT NULL,
   `codigo` VARCHAR(10) NULL,
@@ -102,6 +110,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`odontologo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`odontologo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`odontologo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `apellidos` VARCHAR(45) NULL,
@@ -115,6 +125,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `beraudent`.`Administrativo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`Administrativo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`Administrativo` (
   `id_admi` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nomb_admi` VARCHAR(35) NULL,
@@ -139,6 +151,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`Personal`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`Personal` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`Personal` (
   `id_pers` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nomb_pers` VARCHAR(35) NULL,
@@ -163,6 +177,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`paciente`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`paciente` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`paciente` (
   `id` INT UNSIGNED NOT NULL,
   `rut` VARCHAR(10) NULL,
@@ -177,6 +193,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`sucursal_odontologo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`sucursal_odontologo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal_odontologo` (
   `id_sucursal-so` INT NOT NULL,
   `id_odontologo-so` INT NOT NULL,
@@ -201,6 +219,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`orden_trabajo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`orden_trabajo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`orden_trabajo` (
   `ot` VARCHAR(10) NOT NULL,
   `ticket` VARCHAR(10) NULL,
@@ -232,6 +252,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`docped`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`docped` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`docped` (
   `numero` VARCHAR(10) NOT NULL,
   `episodio` VARCHAR(10) NULL COMMENT 'Existen raros casos donde hay mas de un episodio por solped, colocarlo com nota',
@@ -259,6 +281,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`trabajo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`trabajo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
@@ -278,6 +302,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `beraudent`.`comprobante`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`comprobante` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`comprobante` (
   `id` VARCHAR(10) NOT NULL COMMENT 'sera una cadena generada por el numero y el tipo de comprobante\n',
   `numero` VARCHAR(10) NULL,
@@ -289,12 +315,16 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`comprobante` (
   `detalle` VARCHAR(45) NULL,
   `valor_neto` FLOAT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
 -- Table `beraudent`.`grupo_cancelacion`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`grupo_cancelacion` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`grupo_cancelacion` (
   `id` INT NOT NULL,
   `periodo` VARCHAR(15) NULL,
@@ -308,13 +338,17 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`grupo_cancelacion` (
     REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Trabajo_Realizado`
+-- Table `beraudent`.`trabajo_realizado`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Trabajo_Realizado` (
+DROP TABLE IF EXISTS `beraudent`.`trabajo_realizado` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_realizado` (
   `id` INT NOT NULL,
   `piezas` VARCHAR(45) NULL,
   `precio` FLOAT NULL,
@@ -350,6 +384,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`Ubicacion`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`Ubicacion` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`Ubicacion` (
   `id_ubic` INT NOT NULL AUTO_INCREMENT,
   `dire_ubic` VARCHAR(30) NOT NULL,
@@ -374,24 +410,34 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Abono_Cargo`
+-- Table `beraudent`.`abono_cargo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Abono_Cargo` (
-  `id_abon_carg` INT NOT NULL,
-  `deta_abon_carg` VARCHAR(45) NULL,
-  `Trabajo_Pedido_Arancel_Trabajo_Trabajo_id_trab` INT NOT NULL,
-  `Trabajo_Pedido_Arancel_Trabajo_Arancel_id_aran` INT NOT NULL,
-  `Orden_Compra_id_orde_comp` INT UNSIGNED NOT NULL,
-  `mont_abon_carg` INT NULL,
-  PRIMARY KEY (`id_abon_carg`))
+DROP TABLE IF EXISTS `beraudent`.`abono_cargo` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`abono_cargo` (
+  `id` INT NOT NULL,
+  `detalle` VARCHAR(45) NULL,
+  `monto` FLOAT NULL,
+  `tipo` ENUM('A', 'C') NULL,
+  `cancelacion` VARCHAR(10) NULL COMMENT 'Contendra el numero de orden de compra o el grupo de cancelacion dependiendo de la sucursal, esto se puede calcular con querys pero considero correcto reflejarlo en un campo solo para referenciar',
+  `id_comprobante-ac` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_abono_cargo_comprobante1_idx` (`id_comprobante-ac` ASC),
+  CONSTRAINT `fk_abono_cargo_comprobante1`
+    FOREIGN KEY (`id_comprobante-ac`)
+    REFERENCES `beraudent`.`comprobante` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_turkish_ci;
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
 -- Table `beraudent`.`pago`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`pago` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`pago` (
   `id` INT NOT NULL,
   `numero_recibo` VARCHAR(8) NULL,
@@ -406,6 +452,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`item`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`item` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`item` (
   `codigo` VARCHAR(10) NOT NULL,
   `precio` FLOAT NULL,
@@ -423,29 +471,35 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`orden_compra`
+-- Table `beraudent`.`cancelacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`orden_compra` (
+DROP TABLE IF EXISTS `beraudent`.`cancelacion` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`cancelacion` (
   `numero` VARCHAR(10) NOT NULL,
   `fecha` DATE NULL,
   `monto` FLOAT NULL,
   `detalle` VARCHAR(45) NULL,
-  `id_comprobante-oc` VARCHAR(10) NOT NULL,
+  `id_comprobante-c` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`numero`),
-  INDEX `fk_orden_compra_comprobante1_idx` (`id_comprobante-oc` ASC),
-  CONSTRAINT `fk_orden_compra_comprobante1`
-    FOREIGN KEY (`id_comprobante-oc`)
+  INDEX `fk_cancelacion_comprobante1_idx` (`id_comprobante-c` ASC),
+  CONSTRAINT `fk_cancelacion_comprobante1`
+    FOREIGN KEY (`id_comprobante-c`)
     REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
 -- Table `beraudent`.`prestacion`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`prestacion` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`prestacion` (
-  `numero_docped-p` VARCHAR(10) NOT NULL,
+  `id` VARCHAR(12) NOT NULL,
   `posicion` TINYINT(1) UNSIGNED NOT NULL,
   `fecha_registro` DATE NULL,
   `fecha_entrega` DATE NULL,
@@ -454,24 +508,25 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`prestacion` (
   `null_pres` ENUM('V', 'N') NULL DEFAULT 'V' COMMENT 'las posiciones pueden anularse con basurero, bomba  o valor total=0\nsiempre es bueno tener respald de que posicion esta nula',
   `detalle` VARCHAR(45) NULL,
   `codigo_item-p` VARCHAR(10) NOT NULL,
-  `numero_orden_compra-p` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`numero_docped-p`, `posicion`),
+  `numero_docped-p` VARCHAR(10) NOT NULL,
+  `numero_cancelacion-p` VARCHAR(10) NOT NULL,
   INDEX `fk_prestacion_item1_idx` (`codigo_item-p` ASC),
-  INDEX `fk_prestacion_Solicitud_Pedido1_idx` (`numero_docped-p` ASC),
-  INDEX `fk_prestacion_orden_compra1_idx` (`numero_orden_compra-p` ASC),
+  PRIMARY KEY (`id`),
+  INDEX `fk_prestacion_docped1_idx` (`numero_docped-p` ASC),
+  INDEX `fk_prestacion_cancelacion1_idx` (`numero_cancelacion-p` ASC),
   CONSTRAINT `fk_prestacion_item1`
     FOREIGN KEY (`codigo_item-p`)
     REFERENCES `beraudent`.`item` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_prestacion_Solicitud_Pedido1`
+  CONSTRAINT `fk_prestacion_docped1`
     FOREIGN KEY (`numero_docped-p`)
     REFERENCES `beraudent`.`docped` (`numero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_prestacion_orden_compra1`
-    FOREIGN KEY (`numero_orden_compra-p`)
-    REFERENCES `beraudent`.`orden_compra` (`numero`)
+  CONSTRAINT `fk_prestacion_cancelacion1`
+    FOREIGN KEY (`numero_cancelacion-p`)
+    REFERENCES `beraudent`.`cancelacion` (`numero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -482,6 +537,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`Usuario`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`Usuario` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`Usuario` (
   `id_usua` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `apel_usua` VARCHAR(45) NULL,
@@ -498,6 +555,8 @@ COLLATE = utf8_spanish2_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`comision`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`comision` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`comision` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
@@ -509,6 +568,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `beraudent`.`grupo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`grupo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`grupo` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
@@ -520,6 +581,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `beraudent`.`trabajo_grupo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`trabajo_grupo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_grupo` (
   `Prestacion_id` INT NOT NULL,
   `Grupo_id` INT NOT NULL,
@@ -543,6 +606,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `beraudent`.`trabajo_comision`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`trabajo_comision` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_comision` (
   `id_prestacion` INT NOT NULL,
   `codigo_comision` INT NOT NULL,
@@ -565,6 +630,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `beraudent`.`detalle_item_arancel`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`detalle_item_arancel` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`detalle_item_arancel` (
   `codigo_item-dia` VARCHAR(10) NOT NULL,
   `codigo_cliente` VARCHAR(10) NULL,
@@ -576,100 +643,22 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`detalle_item_arancel` (
     REFERENCES `beraudent`.`item` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`Trabajo_Realizado_has_Abono_Cargo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Trabajo_Realizado_has_Abono_Cargo` (
-  `Trabajo_Realizado_id` INT NOT NULL,
-  `Abono_Cargo_id_abon_carg` INT NOT NULL,
-  PRIMARY KEY (`Trabajo_Realizado_id`, `Abono_Cargo_id_abon_carg`),
-  INDEX `fk_Trabajo_Realizado_has_Abono_Cargo_Abono_Cargo1_idx` (`Abono_Cargo_id_abon_carg` ASC),
-  INDEX `fk_Trabajo_Realizado_has_Abono_Cargo_Trabajo_Realizado1_idx` (`Trabajo_Realizado_id` ASC),
-  CONSTRAINT `fk_Trabajo_Realizado_has_Abono_Cargo_Trabajo_Realizado1`
-    FOREIGN KEY (`Trabajo_Realizado_id`)
-    REFERENCES `beraudent`.`Trabajo_Realizado` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Trabajo_Realizado_has_Abono_Cargo_Abono_Cargo1`
-    FOREIGN KEY (`Abono_Cargo_id_abon_carg`)
-    REFERENCES `beraudent`.`Abono_Cargo` (`id_abon_carg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Prestacion_has_Abono_Cargo`
+-- Table `beraudent`.`pago_comprobante_borrar`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`Prestacion_has_Abono_Cargo` (
-  `Prestacion_id_solicitud` VARCHAR(10) NOT NULL,
-  `Abono_Cargo_id_abon_carg` INT NOT NULL,
-  PRIMARY KEY (`Prestacion_id_solicitud`, `Abono_Cargo_id_abon_carg`),
-  INDEX `fk_Prestacion_has_Abono_Cargo_Abono_Cargo1_idx` (`Abono_Cargo_id_abon_carg` ASC),
-  CONSTRAINT `fk_Prestacion_has_Abono_Cargo_Abono_Cargo1`
-    FOREIGN KEY (`Abono_Cargo_id_abon_carg`)
-    REFERENCES `beraudent`.`Abono_Cargo` (`id_abon_carg`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
+DROP TABLE IF EXISTS `beraudent`.`pago_comprobante_borrar` ;
 
-
--- -----------------------------------------------------
--- Table `beraudent`.`pago_comprobante`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`pago_comprobante` (
-  `id_pago-pc` INT NOT NULL,
-  `id_comprobante-pc` VARCHAR(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `beraudent`.`pago_comprobante_borrar` (
   `tipo_pago` ENUM('TF', 'TB', 'WP', 'CH') NULL,
   `numero` VARCHAR(20) NULL,
   `fecha_pago` DATE NULL,
   `fecha_vencimiento` DATE NULL,
-  `detalle` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_pago-pc`, `id_comprobante-pc`),
-  INDEX `fk_pago_has_comprobante_pago1_idx` (`id_pago-pc` ASC),
-  INDEX `fk_pago_comprobante_comprobante1_idx` (`id_comprobante-pc` ASC),
-  CONSTRAINT `fk_pago_has_comprobante_pago1`
-    FOREIGN KEY (`id_pago-pc`)
-    REFERENCES `beraudent`.`pago` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pago_comprobante_comprobante1`
-    FOREIGN KEY (`id_comprobante-pc`)
-    REFERENCES `beraudent`.`comprobante` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`prestacion_has_Trabajo_Realizado`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `beraudent`.`prestacion_has_Trabajo_Realizado` (
-  `prestacion_Solicitud_Pedido_nume_soli_pedi` VARCHAR(10) NOT NULL,
-  `prestacion_posicion` TINYINT(1) UNSIGNED NOT NULL,
-  `Trabajo_Realizado_id` INT NOT NULL,
-  PRIMARY KEY (`prestacion_Solicitud_Pedido_nume_soli_pedi`, `prestacion_posicion`, `Trabajo_Realizado_id`),
-  INDEX `fk_prestacion_has_Trabajo_Realizado_Trabajo_Realizado1_idx` (`Trabajo_Realizado_id` ASC),
-  INDEX `fk_prestacion_has_Trabajo_Realizado_prestacion1_idx` (`prestacion_Solicitud_Pedido_nume_soli_pedi` ASC, `prestacion_posicion` ASC),
-  CONSTRAINT `fk_prestacion_has_Trabajo_Realizado_prestacion1`
-    FOREIGN KEY (`prestacion_Solicitud_Pedido_nume_soli_pedi` , `prestacion_posicion`)
-    REFERENCES `beraudent`.`prestacion` (`numero_docped-p` , `posicion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_prestacion_has_Trabajo_Realizado_Trabajo_Realizado1`
-    FOREIGN KEY (`Trabajo_Realizado_id`)
-    REFERENCES `beraudent`.`Trabajo_Realizado` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `detalle` VARCHAR(45) NULL)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -678,6 +667,8 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 -- Table `beraudent`.`item_trabajo`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`item_trabajo` ;
+
 CREATE TABLE IF NOT EXISTS `beraudent`.`item_trabajo` (
   `codigo_item-it` VARCHAR(10) NOT NULL,
   `id_trabajo-it` INT NOT NULL,
@@ -692,6 +683,88 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`item_trabajo` (
   CONSTRAINT `fk_item_has_trabajo_trabajo1`
     FOREIGN KEY (`id_trabajo-it`)
     REFERENCES `beraudent`.`trabajo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`trabajo_abono_cargo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`trabajo_abono_cargo` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_abono_cargo` (
+  `id_trabajo_realizado-tac` INT NOT NULL,
+  `id_abono_cargo-tac` INT NOT NULL,
+  PRIMARY KEY (`id_trabajo_realizado-tac`, `id_abono_cargo-tac`),
+  INDEX `fk_trabajo_realizado_has_abono_cargo_abono_cargo1_idx` (`id_abono_cargo-tac` ASC),
+  INDEX `fk_trabajo_realizado_has_abono_cargo_trabajo_realizado1_idx` (`id_trabajo_realizado-tac` ASC),
+  CONSTRAINT `fk_trabajo_realizado_has_abono_cargo_trabajo_realizado1`
+    FOREIGN KEY (`id_trabajo_realizado-tac`)
+    REFERENCES `beraudent`.`trabajo_realizado` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_trabajo_realizado_has_abono_cargo_abono_cargo1`
+    FOREIGN KEY (`id_abono_cargo-tac`)
+    REFERENCES `beraudent`.`abono_cargo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`prestacion_trabajo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`prestacion_trabajo` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`prestacion_trabajo` (
+  `id_prestacion-pt` VARCHAR(12) NOT NULL,
+  `id_trabajo_realizado-pt` INT NOT NULL,
+  PRIMARY KEY (`id_prestacion-pt`, `id_trabajo_realizado-pt`),
+  INDEX `fk_prestacion_has_trabajo_realizado_trabajo_realizado1_idx` (`id_trabajo_realizado-pt` ASC),
+  INDEX `fk_prestacion_has_trabajo_realizado_prestacion1_idx` (`id_prestacion-pt` ASC),
+  CONSTRAINT `fk_prestacion_has_trabajo_realizado_prestacion1`
+    FOREIGN KEY (`id_prestacion-pt`)
+    REFERENCES `beraudent`.`prestacion` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_prestacion_has_trabajo_realizado_trabajo_realizado1`
+    FOREIGN KEY (`id_trabajo_realizado-pt`)
+    REFERENCES `beraudent`.`trabajo_realizado` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`pago_comprobante`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`pago_comprobante` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`pago_comprobante` (
+  `id_pago-pc` INT NOT NULL,
+  `id_comprobante-pc` VARCHAR(10) NOT NULL,
+  `tipo_pago` ENUM('TF', 'TB', 'WP', 'CH') NULL,
+  `fecha` DATE NULL,
+  `fecha_vencimiento` DATE NULL,
+  `detalle` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_pago-pc`, `id_comprobante-pc`),
+  INDEX `fk_pago_has_comprobante_comprobante1_idx` (`id_comprobante-pc` ASC),
+  INDEX `fk_pago_has_comprobante_pago1_idx` (`id_pago-pc` ASC),
+  CONSTRAINT `fk_pago_has_comprobante_pago1`
+    FOREIGN KEY (`id_pago-pc`)
+    REFERENCES `beraudent`.`pago` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pago_has_comprobante_comprobante1`
+    FOREIGN KEY (`id_comprobante-pc`)
+    REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
