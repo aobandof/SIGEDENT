@@ -15,16 +15,15 @@ CREATE SCHEMA IF NOT EXISTS `beraudent` DEFAULT CHARACTER SET utf8 COLLATE utf8_
 USE `beraudent` ;
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Cliente`
+-- Table `beraudent`.`cliente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`Cliente` ;
+DROP TABLE IF EXISTS `beraudent`.`cliente` ;
 
-CREATE TABLE IF NOT EXISTS `beraudent`.`Cliente` (
-  `id_clie` INT NOT NULL AUTO_INCREMENT,
-  `nomb_clie` VARCHAR(25) NOT NULL,
-  `razo_clie` VARCHAR(45) NULL,
-  `rut_clie` VARCHAR(10) NULL,
-  PRIMARY KEY (`id_clie`))
+CREATE TABLE IF NOT EXISTS `beraudent`.`cliente` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(25) NOT NULL,
+  `direccion_admninistracion` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -46,24 +45,24 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Datos_Facturacion`
+-- Table `beraudent`.`datos_facturacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`Datos_Facturacion` ;
+DROP TABLE IF EXISTS `beraudent`.`datos_facturacion` ;
 
-CREATE TABLE IF NOT EXISTS `beraudent`.`Datos_Facturacion` (
+CREATE TABLE IF NOT EXISTS `beraudent`.`datos_facturacion` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `grupo_facturacion` VARCHAR(45) NOT NULL,
+  `grupo_facturacion` VARCHAR(45) NOT NULL COMMENT 'nombre del grupo de facturacion por ejemplo OMESA de vidaintegra contiene muchos sucursales que se facturan con este mismo grupo (misma razon social, etc)',
   `razon_social` VARCHAR(45) NOT NULL,
   `nombre_fantasia` VARCHAR(45) NOT NULL,
   `direccion` VARCHAR(45) NOT NULL,
   `rut` VARCHAR(45) NOT NULL,
   `detalle` VARCHAR(45) NULL,
-  `Cliente_id_clie` INT NOT NULL,
+  `id_cliente-df` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Datos_Facturacion_Cliente1_idx` (`Cliente_id_clie` ASC),
+  INDEX `fk_Datos_Facturacion_Cliente1_idx` (`id_cliente-df` ASC),
   CONSTRAINT `fk_Datos_Facturacion_Cliente1`
-    FOREIGN KEY (`Cliente_id_clie`)
-    REFERENCES `beraudent`.`Cliente` (`id_clie`)
+    FOREIGN KEY (`id_cliente-df`)
+    REFERENCES `beraudent`.`cliente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -80,26 +79,26 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal` (
   `abreviatura` VARCHAR(10) NULL,
   `nombre` VARCHAR(25) NOT NULL,
   `alias` VARCHAR(45) NULL,
-  `Arancel_id_aran` INT NOT NULL,
-  `Cliente_id_clie` INT NOT NULL,
-  `Datos_Facturacion_id` INT NOT NULL,
+  `id_arancel-s` INT NOT NULL,
+  `id_cliente-s` INT NOT NULL,
+  `id_datos_facturacion-s` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Sucursal_Arancel1_idx` (`Arancel_id_aran` ASC),
-  INDEX `fk_Sucursal_Cliente1_idx` (`Cliente_id_clie` ASC),
-  INDEX `fk_Sucursal_Datos_Facturacion1_idx` (`Datos_Facturacion_id` ASC),
+  INDEX `fk_Sucursal_Arancel1_idx` (`id_arancel-s` ASC),
+  INDEX `fk_Sucursal_Cliente1_idx` (`id_cliente-s` ASC),
+  INDEX `fk_Sucursal_Datos_Facturacion1_idx` (`id_datos_facturacion-s` ASC),
   CONSTRAINT `fk_Sucursal_Arancel1`
-    FOREIGN KEY (`Arancel_id_aran`)
+    FOREIGN KEY (`id_arancel-s`)
     REFERENCES `beraudent`.`arancel` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Sucursal_Cliente1`
-    FOREIGN KEY (`Cliente_id_clie`)
-    REFERENCES `beraudent`.`Cliente` (`id_clie`)
+    FOREIGN KEY (`id_cliente-s`)
+    REFERENCES `beraudent`.`cliente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Sucursal_Datos_Facturacion1`
-    FOREIGN KEY (`Datos_Facturacion_id`)
-    REFERENCES `beraudent`.`Datos_Facturacion` (`id`)
+    FOREIGN KEY (`id_datos_facturacion-s`)
+    REFERENCES `beraudent`.`datos_facturacion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -116,31 +115,32 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`odontologo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `apellidos` VARCHAR(45) NULL,
   `nombres` VARCHAR(45) NULL,
-  `email` VARCHAR(25) NULL,
+  `email1` VARCHAR(25) NULL,
+  `email2` VARCHAR(25) NULL,
   `celular` VARCHAR(10) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Administrativo`
+-- Table `beraudent`.`administrativo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`Administrativo` ;
+DROP TABLE IF EXISTS `beraudent`.`administrativo` ;
 
-CREATE TABLE IF NOT EXISTS `beraudent`.`Administrativo` (
-  `id_admi` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nomb_admi` VARCHAR(35) NULL,
-  `apel_admi` VARCHAR(35) NULL,
-  `mail_admi` VARCHAR(35) NULL,
-  `celu_admi` VARCHAR(10) NULL,
-  `carg_admi` VARCHAR(15) NULL,
-  `tele_admi` VARCHAR(10) NULL,
-  `Cliente_id_clie` INT NOT NULL,
-  PRIMARY KEY (`id_admi`, `Cliente_id_clie`),
-  INDEX `fk_Administrativo_Cliente1_idx` (`Cliente_id_clie` ASC),
+CREATE TABLE IF NOT EXISTS `beraudent`.`administrativo` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombres` VARCHAR(35) NULL,
+  `apellidos` VARCHAR(35) NULL,
+  `email` VARCHAR(25) NULL,
+  `celular` VARCHAR(10) NULL,
+  `telefono` VARCHAR(10) NULL,
+  `cargo` VARCHAR(15) NULL,
+  `id_cliente-a` INT NOT NULL,
+  PRIMARY KEY (`id`, `id_cliente-a`),
+  INDEX `fk_Administrativo_Cliente1_idx` (`id_cliente-a` ASC),
   CONSTRAINT `fk_Administrativo_Cliente1`
-    FOREIGN KEY (`Cliente_id_clie`)
-    REFERENCES `beraudent`.`Cliente` (`id_clie`)
+    FOREIGN KEY (`id_cliente-a`)
+    REFERENCES `beraudent`.`cliente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -149,23 +149,23 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Personal`
+-- Table `beraudent`.`personal`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`Personal` ;
+DROP TABLE IF EXISTS `beraudent`.`personal` ;
 
-CREATE TABLE IF NOT EXISTS `beraudent`.`Personal` (
-  `id_pers` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nomb_pers` VARCHAR(35) NULL,
-  `apel_pers` VARCHAR(35) NULL,
-  `mail_pers` VARCHAR(35) NULL,
-  `celu_pers` VARCHAR(10) NULL,
-  `carg_pers` VARCHAR(15) NULL,
-  `tele_pers` VARCHAR(45) NULL,
-  `Sucursal_id_sucu` INT NOT NULL,
-  PRIMARY KEY (`id_pers`, `Sucursal_id_sucu`),
-  INDEX `fk_Personal_Sucursal1_idx` (`Sucursal_id_sucu` ASC),
+CREATE TABLE IF NOT EXISTS `beraudent`.`personal` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombres` VARCHAR(35) NULL,
+  `apellidos` VARCHAR(35) NULL,
+  `email` VARCHAR(25) NULL,
+  `celular` INT NULL,
+  `telefono` VARCHAR(45) NULL,
+  `cargo` VARCHAR(15) NULL,
+  `id_sucursal-p` INT NOT NULL,
+  PRIMARY KEY (`id`, `id_sucursal-p`),
+  INDEX `fk_Personal_Sucursal1_idx` (`id_sucursal-p` ASC),
   CONSTRAINT `fk_Personal_Sucursal1`
-    FOREIGN KEY (`Sucursal_id_sucu`)
+    FOREIGN KEY (`id_sucursal-p`)
     REFERENCES `beraudent`.`sucursal` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -288,11 +288,11 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo` (
   `nombre` VARCHAR(45) NOT NULL,
   `detalle` VARCHAR(100) NULL,
   `etapa` ENUM('I', 'P', 'T') NULL,
-  `Prestacion_id` INT NOT NULL COMMENT 'AL SER UNA CLAVE FORANEA, no puede ser un valor nulo por lo que cuando es una prestacion que no tiene proces, colocar el mismo codigo',
+  `id_trabajo-t` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Prestacion_Prestacion1_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Prestacion_Prestacion1`
-    FOREIGN KEY (`Prestacion_id`)
+  INDEX `fk_trabajo_trabajo1_idx` (`id_trabajo-t` ASC),
+  CONSTRAINT `fk_trabajo_trabajo1`
+    FOREIGN KEY (`id_trabajo-t`)
     REFERENCES `beraudent`.`trabajo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -382,25 +382,22 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Ubicacion`
+-- Table `beraudent`.`ubicacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`Ubicacion` ;
+DROP TABLE IF EXISTS `beraudent`.`ubicacion` ;
 
-CREATE TABLE IF NOT EXISTS `beraudent`.`Ubicacion` (
-  `id_ubic` INT NOT NULL AUTO_INCREMENT,
-  `dire_ubic` VARCHAR(30) NOT NULL,
-  `tipo_dire` CHAR(2) NULL,
-  `num_ubic` MEDIUMINT(3) NOT NULL,
-  `depa_ubic` VARCHAR(5) NULL,
+CREATE TABLE IF NOT EXISTS `beraudent`.`ubicacion` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `direccion` VARCHAR(30) NOT NULL COMMENT 'esta direccion debe contener el tipo (calle, jiron o avenida en abreviatura), el numero y el departamento si fuera necesasrio.',
   `comu_ubic` VARCHAR(15) NULL,
   `regi_ubic` VARCHAR(45) NULL,
   `tel1_ubic` VARCHAR(45) NULL,
   `tel2_ubic` VARCHAR(45) NULL,
-  `Sucursal_id_sucu` INT NOT NULL,
-  PRIMARY KEY (`id_ubic`, `Sucursal_id_sucu`),
-  INDEX `fk_Ubicacion_Sucursal1_idx` (`Sucursal_id_sucu` ASC),
+  `id_sucursal-u` INT NOT NULL,
+  PRIMARY KEY (`id`, `id_sucursal-u`),
+  INDEX `fk_Ubicacion_Sucursal1_idx` (`id_sucursal-u` ASC),
   CONSTRAINT `fk_Ubicacion_Sucursal1`
-    FOREIGN KEY (`Sucursal_id_sucu`)
+    FOREIGN KEY (`id_sucursal-u`)
     REFERENCES `beraudent`.`sucursal` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -579,55 +576,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`trabajo_grupo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`trabajo_grupo` ;
-
-CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_grupo` (
-  `Prestacion_id` INT NOT NULL,
-  `Grupo_id` INT NOT NULL,
-  `detalle` VARCHAR(45) NULL,
-  PRIMARY KEY (`Prestacion_id`, `Grupo_id`),
-  INDEX `fk_Prestacion_has_Grupo_Grupo1_idx` (`Grupo_id` ASC),
-  INDEX `fk_Prestacion_has_Grupo_Prestacion1_idx` (`Prestacion_id` ASC),
-  CONSTRAINT `fk_Prestacion_has_Grupo_Prestacion1`
-    FOREIGN KEY (`Prestacion_id`)
-    REFERENCES `beraudent`.`trabajo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Prestacion_has_Grupo_Grupo1`
-    FOREIGN KEY (`Grupo_id`)
-    REFERENCES `beraudent`.`grupo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`trabajo_comision`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`trabajo_comision` ;
-
-CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_comision` (
-  `id_prestacion` INT NOT NULL,
-  `codigo_comision` INT NOT NULL,
-  PRIMARY KEY (`id_prestacion`, `codigo_comision`),
-  INDEX `fk_Prestacion_has_Trabajo_Trabajo1_idx` (`codigo_comision` ASC),
-  INDEX `fk_Prestacion_has_Trabajo_Prestacion1_idx` (`id_prestacion` ASC),
-  CONSTRAINT `fk_Prestacion_has_Trabajo_Prestacion1`
-    FOREIGN KEY (`id_prestacion`)
-    REFERENCES `beraudent`.`trabajo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Prestacion_has_Trabajo_Trabajo1`
-    FOREIGN KEY (`codigo_comision`)
-    REFERENCES `beraudent`.`comision` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `beraudent`.`detalle_item_arancel`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `beraudent`.`detalle_item_arancel` ;
@@ -643,22 +591,6 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`detalle_item_arancel` (
     REFERENCES `beraudent`.`item` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`pago_comprobante_borrar`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`pago_comprobante_borrar` ;
-
-CREATE TABLE IF NOT EXISTS `beraudent`.`pago_comprobante_borrar` (
-  `tipo_pago` ENUM('TF', 'TB', 'WP', 'CH') NULL,
-  `numero` VARCHAR(20) NULL,
-  `fecha_pago` DATE NULL,
-  `fecha_vencimiento` DATE NULL,
-  `detalle` VARCHAR(45) NULL)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -770,6 +702,55 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`pago_comprobante` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`trabajo_has_grupo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`trabajo_has_grupo` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_has_grupo` (
+  `id_trabajo-tg` INT NOT NULL,
+  `id_grupo-tg` INT NOT NULL,
+  `detalle` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_trabajo-tg`, `id_grupo-tg`),
+  INDEX `fk_trabajo_has_grupo_grupo1_idx` (`id_grupo-tg` ASC),
+  INDEX `fk_trabajo_has_grupo_trabajo1_idx` (`id_trabajo-tg` ASC),
+  CONSTRAINT `fk_trabajo_has_grupo_trabajo1`
+    FOREIGN KEY (`id_trabajo-tg`)
+    REFERENCES `beraudent`.`trabajo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_trabajo_has_grupo_grupo1`
+    FOREIGN KEY (`id_grupo-tg`)
+    REFERENCES `beraudent`.`grupo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`trabajo_has_comision`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`trabajo_has_comision` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_has_comision` (
+  `id_trabajo-tc` INT NOT NULL,
+  `id_comision-tc` INT NOT NULL,
+  PRIMARY KEY (`id_trabajo-tc`, `id_comision-tc`),
+  INDEX `fk_trabajo_has_comision_comision1_idx` (`id_comision-tc` ASC),
+  INDEX `fk_trabajo_has_comision_trabajo1_idx` (`id_trabajo-tc` ASC),
+  CONSTRAINT `fk_trabajo_has_comision_trabajo1`
+    FOREIGN KEY (`id_trabajo-tc`)
+    REFERENCES `beraudent`.`trabajo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_trabajo_has_comision_comision1`
+    FOREIGN KEY (`id_comision-tc`)
+    REFERENCES `beraudent`.`comision` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
