@@ -65,7 +65,9 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`datos_facturacion` (
     REFERENCES `beraudent`.`cliente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -119,7 +121,9 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`odontologo` (
   `email2` VARCHAR(25) NULL,
   `celular` VARCHAR(10) NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -296,7 +300,9 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo` (
     REFERENCES `beraudent`.`trabajo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -532,21 +538,20 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`Usuario`
+-- Table `beraudent`.`usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`Usuario` ;
+DROP TABLE IF EXISTS `beraudent`.`usuario` ;
 
-CREATE TABLE IF NOT EXISTS `beraudent`.`Usuario` (
-  `id_usua` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `apel_usua` VARCHAR(45) NULL,
-  `nomb_usua` VARCHAR(45) NULL,
-  `nick_usua` VARCHAR(45) NULL,
-  `pass_usua` VARCHAR(45) NULL,
-  `priv_usua` ENUM('A', 'L', 'E') NULL,
-  PRIMARY KEY (`id_usua`))
+CREATE TABLE IF NOT EXISTS `beraudent`.`usuario` (
+  `nickname` VARCHAR(15) NOT NULL,
+  `password` VARCHAR(20) NOT NULL,
+  `apellidos` VARCHAR(45) NULL,
+  `nombres` VARCHAR(45) NULL,
+  `permisos` ENUM('A', 'L', 'E') NULL DEFAULT 'L',
+  PRIMARY KEY (`nickname`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish2_ci;
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -559,7 +564,9 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`comision` (
   `nombre` VARCHAR(45) NOT NULL,
   `comision` FLOAT NULL,
   PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -572,7 +579,9 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`grupo` (
   `nombre` VARCHAR(45) NULL,
   `detalle` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -726,7 +735,9 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_has_grupo` (
     REFERENCES `beraudent`.`grupo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
@@ -750,7 +761,9 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`trabajo_has_comision` (
     REFERENCES `beraudent`.`comision` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -758,12 +771,12 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `beraudent`.`Usuario`
+-- Data for table `beraudent`.`usuario`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `beraudent`;
-INSERT INTO `beraudent`.`Usuario` (`id_usua`, `apel_usua`, `nomb_usua`, `nick_usua`, `pass_usua`, `priv_usua`) VALUES (DEFAULT, 'OBANDO FLORIAN', 'ABEL RAFAEL', 'ofaber', '123456', 'A');
-INSERT INTO `beraudent`.`Usuario` (`id_usua`, `apel_usua`, `nomb_usua`, `nick_usua`, `pass_usua`, `priv_usua`) VALUES (DEFAULT, 'QUIROZ ANDRADE', 'CARMEN DEL PILAR', 'cpilar', '123456', 'L');
+INSERT INTO `beraudent`.`usuario` (`nickname`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('ofaber', '123456', 'OBANDO FLORIAN', 'ABEL RAFAEL', 'A');
+INSERT INTO `beraudent`.`usuario` (`nickname`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('cpilar', '123456', 'QUIROZ ANDRADE', 'CARMEN DEL PILAR', 'L');
 
 COMMIT;
 
