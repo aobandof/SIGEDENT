@@ -54,6 +54,7 @@
             this.txb_password.PasswordChar = '*';
             this.txb_password.Size = new System.Drawing.Size(204, 26);
             this.txb_password.TabIndex = 2;
+            this.txb_password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txb_password_KeyPress);
             // 
             // label2
             // 
@@ -72,6 +73,7 @@
             this.txb_usuario.Name = "txb_usuario";
             this.txb_usuario.Size = new System.Drawing.Size(204, 26);
             this.txb_usuario.TabIndex = 1;
+            this.txb_usuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txb_usuario_KeyPress);
             // 
             // label1
             // 
