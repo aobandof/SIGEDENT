@@ -1,0 +1,7 @@
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\CapaPresentacion.csprojResolveAssemblyReference.cache
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormLogin.resources
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormPrincipal.resources
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.Properties.Resources.resources
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\CapaPresentacion.csproj.GenerateResource.Cache
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.exe
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.pdb

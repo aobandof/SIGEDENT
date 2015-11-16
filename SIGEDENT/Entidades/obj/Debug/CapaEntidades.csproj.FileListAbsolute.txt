@@ -1,0 +1,6 @@
+D:\GITHUB\SIGEDENT\SIGEDENT\Entidades\bin\Debug\Entidades.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\Entidades\bin\Debug\Entidades.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\Entidades\obj\Debug\Entidades.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\Entidades\obj\Debug\Entidades.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\Entidades\bin\Debug\Entidades.dll.CodeAnalysisLog.xml
+D:\GITHUB\SIGEDENT\SIGEDENT\Entidades\bin\Debug\Entidades.dll.lastcodeanalysissucceeded

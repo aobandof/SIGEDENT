@@ -20,7 +20,6 @@ namespace Presentacion
         private void FormLogin_Load(object sender, EventArgs e)
         {
             txb_usuario.Focus();
-
         }
 
         private void btn_ingresar_Click(object sender, EventArgs e)

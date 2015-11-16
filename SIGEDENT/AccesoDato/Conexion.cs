@@ -9,7 +9,7 @@ using System.Data;
 
 namespace AccesoDato
 {
-    class Conexion
+    public class Conexion
     {
         private SqlConnection con;
         private static Conexion instancia_conexion;
@@ -24,11 +24,12 @@ namespace AccesoDato
         //EL CONSTRUTOR:
         private Conexion()
         {
-            string cadena_conexion = "server=127.1.1.1; database=beraudent; Uid=root; pwd=;";
+            //string cadena_conexion = "server=127.1.1.1; database=beraudent; Uid=root; pwd=;"; //para mysql            
             try
             {
                 con = new SqlConnection();
-                con.ConnectionString = cadena_conexion;
+                con.ConnectionString = @"Data Source=CONTABILIDAD6; Initial Catalog=beraudent; Integrated Security=Yes";
+                //con.ConnectionString = @"Data Source=LIAM; Initial Catalog=beraudent; Integrated Security=Yes";
                 con.Open();
             }
             catch (SqlException ex)
@@ -37,6 +38,12 @@ namespace AccesoDato
                 //MessageBox.Show(ex.Message);   
                 //este try cath podemos implementarlos en el procedimiento almacenado.
             }
+        }
+        public int Sesion_Iniciar()
+        {
+            SqlCommand cmd = new SqlCommand("select * from usuario where nick_usua='ofaber' and pass_usua='123456'", con);
+            return cmd.ExecuteNonQuery();
+
         }
 
     }

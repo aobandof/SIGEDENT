@@ -12,7 +12,7 @@ namespace Presentacion
 {
     public partial class FormPrincipal : Form
     {
-        private FormLogin form_login;
+        private FormLogin form_login;        
         public FormPrincipal()
         {
             InitializeComponent();
@@ -23,7 +23,14 @@ namespace Presentacion
             form_login = new FormLogin();
             form_login.MdiParent=this;
             form_login.Show();
+            //NOS CONECTAMOS A LA BASE DE DATOS AUTOMATICAMENTE
 
+
+        }
+
+        private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //DEBEMOS PREGUNTAR SI REALMENTE DESEAMOS SALIR Y DESCONECTARNOS DE LA BASE DE DATOS
         }
     }
 }
