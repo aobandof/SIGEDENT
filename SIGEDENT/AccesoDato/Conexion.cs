@@ -11,7 +11,7 @@ namespace AccesoDato
 {
     public class Conexion
     {
-        private SqlConnection con;
+        public SqlConnection con;
         private static Conexion instancia_conexion;
 
         public static Conexion Conexion_Instanciar()
@@ -25,26 +25,17 @@ namespace AccesoDato
         private Conexion()
         {
             //string cadena_conexion = "server=127.1.1.1; database=beraudent; Uid=root; pwd=;"; //para mysql            
-            try
-            {
-                con = new SqlConnection();
-                con.ConnectionString = @"Data Source=CONTABILIDAD6; Initial Catalog=beraudent; Integrated Security=Yes";
-                //con.ConnectionString = @"Data Source=LIAM; Initial Catalog=beraudent; Integrated Security=Yes";
-                con.Open();
-            }
-            catch (SqlException ex)
-            {
-                //al ser un proyecto de biblioteca de clases no podemos usar windows.forms y por ende no son posibles los messagebox
-                //MessageBox.Show(ex.Message);   
-                //este try cath podemos implementarlos en el procedimiento almacenado.
-            }
+            con = new SqlConnection();
+            //con.ConnectionString = @"Data Source=CONTABILIDAD6; Initial Catalog=beraudent; Integrated Security=Yes";
+            con.ConnectionString = @"Data Source=LIAM; Initial Catalog=beraudent; Integrated Security=Yes";
+            con.Open();           
         }
-        public int Sesion_Iniciar()
-        {
-            SqlCommand cmd = new SqlCommand("select * from usuario where nick_usua='ofaber' and pass_usua='123456'", con);
-            return cmd.ExecuteNonQuery();
+        //public int Sesion_Iniciar()
+        //{
+        //    SqlCommand cmd = new SqlCommand("select * from usuario where nick_usua='ofaber' and pass_usua='123456'", con);
+        //    return cmd.ExecuteNonQuery();
 
-        }
+        //}
 
     }
 }

@@ -12,6 +12,7 @@ namespace Presentacion
 {
     public partial class FormLogin : Form
     {
+        
         public FormLogin()
         {
             InitializeComponent();
@@ -24,7 +25,8 @@ namespace Presentacion
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            // aca iran reglas de negocio
+            int logueado = 0;
+            //logueado=
         }
 
         private void txb_usuario_KeyPress(object sender, KeyPressEventArgs e)

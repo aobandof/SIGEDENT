@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    class LNUsuario
+    public class LNUsuario
     {
+        public static int Usuario_Iniciar(string pnickname, string ppassword)
+        {
+            return AccesoDato.ADUsuario.Usuario_Iniciar(pnickname, ppassword);
+        }
     }
 }

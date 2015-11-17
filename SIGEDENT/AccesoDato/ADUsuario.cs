@@ -10,10 +10,10 @@ using System.Data.SqlClient;
 
 namespace AccesoDato
 {    
-    public sealed class ADUsuario
+    public class ADUsuario
     {
-        public SqlCommand cmd;
-        public Conexion conexion;
+        public static SqlCommand cmd;
+        public static Conexion conexion;
         
         public static bool Usuario_Grabar(Entidades.Usuario pUsuario)
         {
@@ -22,13 +22,22 @@ namespace AccesoDato
             return true; //Convert.ToBoolean(cmd.ExcecuteNonQuery());
         }
 
-        public int Usuario_Leer(Entidades.Usuario pUsuario){ // devuelve valor entero indicando la cantidad de filas encontradas
+        public static int Usuario_Iniciar(string pnickname, string ppassword){ // devuelve valor entero indicando la cantidad de filas encontradas
 
-            //conexion = Conexion.Conexion_Instanciar();
-            ////cmd = conexion.CreateCommand();
+            conexion = Conexion.Conexion_Instanciar();
+            cmd = new SqlCommand();
+            cmd.CommandText = "sp_loguear";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion.con;
 
-            //cmd=new SqlCommand("select * from usuario",conexion);
-            return 1;
+            cmd.Parameters.Add(new SqlParameter("@nickname", pnickname));
+            cmd.Parameters.Add(new SqlParameter("@password", ppassword));
+
+            SqlParameter plogueado = new SqlParameter("@logueado", 0);
+            plogueado.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(plogueado);
+            cmd.ExecuteNonQuery();
+            return Int32.Parse(cmd.Parameters["@logueado"].Value.ToString());
         }
     }
 }
