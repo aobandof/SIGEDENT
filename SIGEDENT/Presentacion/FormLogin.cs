@@ -25,8 +25,11 @@ namespace Presentacion
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            int logueado = 0;
-            //logueado=
+            int logueado = LogicaNegocio.LNUsuario.Usuario_Iniciar(txb_usuario.Text, txb_password.Text);
+            if (logueado == 1)
+                MessageBox.Show("Bienvenido usuario");
+            else
+                MessageBox.Show("no se pudo iniciar");
         }
 
         private void txb_usuario_KeyPress(object sender, KeyPressEventArgs e)

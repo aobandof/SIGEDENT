@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Negocio")]
+[assembly: AssemblyProduct("LogicaNegocio")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como identificador de typelib si este proyecto se expone a COM
-[assembly: Guid("d9f739e2-b65e-4781-8398-f232ffd86181")]
+[assembly: Guid("bacc5598-4390-49b7-90ad-de59ccad8232")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //

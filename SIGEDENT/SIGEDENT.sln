@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDato\AccesoDatos.csproj", "{8CC79CB0-7DA8-4225-B2CC-C1BD6C6BCD18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaNegocio", "Negocio\LogicaNegocio.csproj", "{7DE3DB3D-4CA5-41DB-8764-13E0B544C6E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaNegocio", "LogicaNegocio\LogicaNegocio.csproj", "{0ECE89FE-9470-4FD8-9498-A54D50CE8E30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{8CC79CB0-7DA8-4225-B2CC-C1BD6C6BCD18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC79CB0-7DA8-4225-B2CC-C1BD6C6BCD18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC79CB0-7DA8-4225-B2CC-C1BD6C6BCD18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DE3DB3D-4CA5-41DB-8764-13E0B544C6E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DE3DB3D-4CA5-41DB-8764-13E0B544C6E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DE3DB3D-4CA5-41DB-8764-13E0B544C6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DE3DB3D-4CA5-41DB-8764-13E0B544C6E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECE89FE-9470-4FD8-9498-A54D50CE8E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECE89FE-9470-4FD8-9498-A54D50CE8E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECE89FE-9470-4FD8-9498-A54D50CE8E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECE89FE-9470-4FD8-9498-A54D50CE8E30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

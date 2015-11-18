@@ -24,7 +24,7 @@ namespace AccesoDato
 
         public static int Usuario_Iniciar(string pnickname, string ppassword){ // devuelve valor entero indicando la cantidad de filas encontradas
 
-            conexion = Conexion.Conexion_Instanciar();
+            conexion = Conexion.Conexion_Instanciar(); //aca es donde se realiza la conexion permanente
             cmd = new SqlCommand();
             cmd.CommandText = "sp_loguear";
             cmd.CommandType = CommandType.StoredProcedure;

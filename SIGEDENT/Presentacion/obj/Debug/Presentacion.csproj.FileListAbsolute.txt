@@ -19,8 +19,8 @@ D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.csproj.GenerateR
 D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Presentacion.exe
 D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Presentacion.pdb
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Entidades.dll
-C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Negocio.dll
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\AccesoDato.dll
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Entidades.pdb
-C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Negocio.pdb
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\AccesoDato.pdb
+C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.dll
+C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.pdb

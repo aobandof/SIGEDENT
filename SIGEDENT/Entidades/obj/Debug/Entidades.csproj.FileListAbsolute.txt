@@ -1,0 +1,5 @@
+C:\GITHUB\SIGEDENT\SIGEDENT\Entidades\bin\Debug\Entidades.dll
+C:\GITHUB\SIGEDENT\SIGEDENT\Entidades\bin\Debug\Entidades.pdb
+C:\GITHUB\SIGEDENT\SIGEDENT\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+C:\GITHUB\SIGEDENT\SIGEDENT\Entidades\obj\Debug\Entidades.dll
+C:\GITHUB\SIGEDENT\SIGEDENT\Entidades\obj\Debug\Entidades.pdb
