@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,12 @@ namespace AccesoDato
             return true; //Convert.ToBoolean(cmd.ExcecuteNonQuery());
         }
 
-        public static int Usuario_Iniciar(string pnickname, string ppassword){ // devuelve valor entero indicando la cantidad de filas encontradas
+        public static ArrayList Usuario_Loguear(string pnickname, string ppassword){ // devuelve valor entero indicando la cantidad de filas encontradas
+
+            ArrayList respuestas_bd = new ArrayList();
 
             conexion = Conexion.Conexion_Instanciar(); //aca es donde se realiza la conexion permanente
-            cmd = new SqlCommand("sp_loguear",conexion.con);
+            cmd = new SqlCommand("sp_usuario_loguear",conexion.con);
             //cmd.CommandText = "sp_loguear";
             cmd.CommandType = CommandType.StoredProcedure;
             //cmd.Connection = conexion.con;
@@ -36,8 +39,17 @@ namespace AccesoDato
             SqlParameter plogueado = new SqlParameter("@logueado", 0);
             plogueado.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(plogueado);
+            SqlParameter pmensaje = new SqlParameter("@mensaje", SqlDbType.VarChar);
+            pmensaje.Direction = ParameterDirection.Output;
+            pmensaje.Size = 40;
+            cmd.Parameters.Add(pmensaje);
             cmd.ExecuteNonQuery();
-            return Int32.Parse(cmd.Parameters["@logueado"].Value.ToString());
+
+            respuestas_bd.Add(cmd.Parameters["@logueado"].Value);
+            respuestas_bd.Add(cmd.Parameters["@mensaje"].Value.ToString());
+            //return cmd.Parameters["@mensaje"].Value.ToString();
+
+            return respuestas_bd;
         }
     }
 }

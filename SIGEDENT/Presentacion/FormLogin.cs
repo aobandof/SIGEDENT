@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -12,7 +13,7 @@ namespace Presentacion
 {
     public partial class FormLogin : Form
     {
-        
+        ArrayList resp_bd;
         public FormLogin()
         {
             InitializeComponent();
@@ -25,11 +26,17 @@ namespace Presentacion
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            int logueado = LogicaNegocio.LNUsuario.Usuario_Iniciar(txb_usuario.Text, txb_password.Text);
-            if (logueado == 1)
-                MessageBox.Show("Bienvenido usuario");
+            resp_bd=LogicaNegocio.LNUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text);
+
+            if (Convert.ToInt16(resp_bd[0]) == 1)
+            {
+                MessageBox.Show(resp_bd[1].ToString());
+                this.Hide();
+            }
             else
-                MessageBox.Show("no se pudo iniciar");
+            {
+                MessageBox.Show(resp_bd[1].ToString());
+            }            
         }
 
         private void txb_usuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -61,7 +68,19 @@ namespace Presentacion
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter)) // otra opcion: if ( e.keychar==13), pero recordemos que hay 2 enter en el teclado
             {
-                //llamar a metodo iniciar sesion
+                resp_bd = LogicaNegocio.LNUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text);
+                //MessageBox.Show(resp_bd[0].ToString());
+
+                if (Convert.ToInt16(resp_bd[0]) == 1)
+                {
+                    MessageBox.Show(resp_bd[1].ToString());
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show(resp_bd[1].ToString());
+                }  
+                //MessageBox.Show(LogicaNegocio.LNUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text));         
             }
         }
     }

@@ -24,3 +24,4 @@ C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Entidades.pdb
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\AccesoDato.pdb
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.dll
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.pdb
+C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormUsuario.resources
