@@ -25,3 +25,10 @@ C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\AccesoDato.pdb
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.dll
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.pdb
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormUsuario.resources
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Entidades.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\AccesoDato.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\Entidades.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\LogicaNegocio.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\AccesoDato.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormUsuario.resources

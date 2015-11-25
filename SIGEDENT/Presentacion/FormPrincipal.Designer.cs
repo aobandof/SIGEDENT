@@ -63,7 +63,7 @@
             // uSUARIOSToolStripMenuItem
             // 
             this.uSUARIOSToolStripMenuItem.Name = "uSUARIOSToolStripMenuItem";
-            this.uSUARIOSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.uSUARIOSToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.uSUARIOSToolStripMenuItem.Text = "USUARIOS";
             this.uSUARIOSToolStripMenuItem.Click += new System.EventHandler(this.uSUARIOSToolStripMenuItem_Click);
             // 
@@ -76,7 +76,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormPrincipal";
-            this.Text = "Sistema de Gestion Dental";
+            this.Text = "SIGEDENT: Sistema de Gestion Dental";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.FormPrincipal_Load);

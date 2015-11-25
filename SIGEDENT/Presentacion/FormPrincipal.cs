@@ -21,12 +21,9 @@ namespace Presentacion
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            form_login = new FormLogin();
+            form_login = new FormLogin();            
             form_login.MdiParent=this;
-            form_login.Show();
-            //NOS CONECTAMOS A LA BASE DE DATOS AUTOMATICAMENTE
-
-
+            form_login.Show();            
         }
 
         private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
@@ -37,6 +34,8 @@ namespace Presentacion
         private void uSUARIOSToolStripMenuItem_Click(object sender, EventArgs e)
         {
             form_usuario = new FormUsuario();
+            form_usuario = FormUsuario.FormUsuario_Instanciar();
+            // ver si despues lo contenemos en el formulario principal
             form_usuario.Show();
         }
     }

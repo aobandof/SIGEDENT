@@ -13,7 +13,9 @@ namespace Presentacion
 {
     public partial class FormLogin : Form
     {
-        ArrayList resp_bd;
+        //ArrayList resp_bd;
+        Entidades.Usuario logueado = new Entidades.Usuario();
+
         public FormLogin()
         {
             InitializeComponent();
@@ -26,17 +28,10 @@ namespace Presentacion
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            resp_bd=LogicaNegocio.LNUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text);
-
-            if (Convert.ToInt16(resp_bd[0]) == 1)
-            {
-                MessageBox.Show(resp_bd[1].ToString());
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show(resp_bd[1].ToString());
-            }            
+            logueado=LogicaNegocio.LNUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
+            MessageBox.Show("Bienvenidos " + logueado.nombres + " " + logueado.apellidos);
+            this.Hide();
+               
         }
 
         private void txb_usuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -68,20 +63,10 @@ namespace Presentacion
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter)) // otra opcion: if ( e.keychar==13), pero recordemos que hay 2 enter en el teclado
             {
-                resp_bd = LogicaNegocio.LNUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text);
-                //MessageBox.Show(resp_bd[0].ToString());
-
-                if (Convert.ToInt16(resp_bd[0]) == 1)
-                {
-                    MessageBox.Show(resp_bd[1].ToString());
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show(resp_bd[1].ToString());
-                }  
-                //MessageBox.Show(LogicaNegocio.LNUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text));         
-            }
+                logueado = LogicaNegocio.LNUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
+                MessageBox.Show("Bienvenidos " + logueado.nombres + " " + logueado.apellidos);
+                this.Hide();
+             }
         }
     }
 }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.pan_catalogo = new System.Windows.Forms.Panel();
-            this.pan_dato = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.txb_buscar = new System.Windows.Forms.TextBox();
-            this.txb_usuario = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pan_dato = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.txb_usuario = new System.Windows.Forms.TextBox();
             this.pan_catalogo.SuspendLayout();
             this.pan_dato.SuspendLayout();
             this.SuspendLayout();
@@ -47,14 +47,12 @@
             this.pan_catalogo.Size = new System.Drawing.Size(449, 368);
             this.pan_catalogo.TabIndex = 0;
             // 
-            // pan_dato
+            // txb_buscar
             // 
-            this.pan_dato.Controls.Add(this.label2);
-            this.pan_dato.Controls.Add(this.txb_usuario);
-            this.pan_dato.Location = new System.Drawing.Point(477, 16);
-            this.pan_dato.Name = "pan_dato";
-            this.pan_dato.Size = new System.Drawing.Size(240, 364);
-            this.pan_dato.TabIndex = 1;
+            this.txb_buscar.Location = new System.Drawing.Point(113, 19);
+            this.txb_buscar.Name = "txb_buscar";
+            this.txb_buscar.Size = new System.Drawing.Size(248, 20);
+            this.txb_buscar.TabIndex = 1;
             // 
             // label1
             // 
@@ -65,19 +63,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Buscar Usuario:";
             // 
-            // txb_buscar
+            // pan_dato
             // 
-            this.txb_buscar.Location = new System.Drawing.Point(113, 19);
-            this.txb_buscar.Name = "txb_buscar";
-            this.txb_buscar.Size = new System.Drawing.Size(248, 20);
-            this.txb_buscar.TabIndex = 1;
-            // 
-            // txb_usuario
-            // 
-            this.txb_usuario.Location = new System.Drawing.Point(30, 35);
-            this.txb_usuario.Name = "txb_usuario";
-            this.txb_usuario.Size = new System.Drawing.Size(191, 20);
-            this.txb_usuario.TabIndex = 0;
+            this.pan_dato.Controls.Add(this.label2);
+            this.pan_dato.Controls.Add(this.txb_usuario);
+            this.pan_dato.Location = new System.Drawing.Point(477, 16);
+            this.pan_dato.Name = "pan_dato";
+            this.pan_dato.Size = new System.Drawing.Size(240, 364);
+            this.pan_dato.TabIndex = 1;
             // 
             // label2
             // 
@@ -88,6 +81,13 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Usuario:";
             // 
+            // txb_usuario
+            // 
+            this.txb_usuario.Location = new System.Drawing.Point(30, 35);
+            this.txb_usuario.Name = "txb_usuario";
+            this.txb_usuario.Size = new System.Drawing.Size(191, 20);
+            this.txb_usuario.TabIndex = 0;
+            // 
             // FormUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -97,7 +97,7 @@
             this.Controls.Add(this.pan_catalogo);
             this.Name = "FormUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormUsuario";
+            this.Text = "Administracion de Usuarios del Sistema";
             this.pan_catalogo.ResumeLayout(false);
             this.pan_catalogo.PerformLayout();
             this.pan_dato.ResumeLayout(false);

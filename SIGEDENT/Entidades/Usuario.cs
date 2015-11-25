@@ -13,6 +13,6 @@ namespace Entidades
         public string password { get; set; }
         public string apellidos { get; set; }
         public string nombres { get; set; }
-        public char permisos { get; set; }
+        public string permisos { get; set; }
     }
 }

@@ -26,8 +26,10 @@ namespace AccesoDato
         {
             //string cadena_conexion = "server=127.1.1.1; database=beraudent; Uid=root; pwd=;"; //para mysql            
             con = new SqlConnection();
+            //cadenas de conexion mas portable (siempre y cuando el nombre de la instancia del Server SQL sea la misma que el nombre de la maquina
+            con.ConnectionString = @"Data Source=" + Environment.MachineName + "; Initial Catalog=beraudent; Integrated Security=Yes";
             //con.ConnectionString = @"Data Source=CONTABILIDAD6; Initial Catalog=beraudent; Integrated Security=Yes";
-            con.ConnectionString = @"Data Source=LIAM; Initial Catalog=beraudent; Integrated Security=Yes";
+            //con.ConnectionString = @"Data Source=LIAM; Initial Catalog=beraudent; Integrated Security=Yes";
             con.Open();           
         }
         //public int Sesion_Iniciar()
