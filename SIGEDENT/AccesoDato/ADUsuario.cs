@@ -25,6 +25,7 @@ namespace AccesoDato
 
         public static Entidades.Usuario Usuario_Loguear(string pnickname, string ppassword)
         {
+            //throw new Exception("PA VER");
             Entidades.Usuario usuario_conectado = new Entidades.Usuario();
             conexion = Conexion.Conexion_Instanciar(); //aca es donde se realiza la conexion permanente
             cmd = new SqlCommand("sp_usuario_loguear", conexion.con);
@@ -32,9 +33,17 @@ namespace AccesoDato
             cmd.Parameters.Add(new SqlParameter("@nickname", pnickname));
             cmd.Parameters.Add(new SqlParameter("@password", ppassword));
 
+            SqlParameter pmensaje = new SqlParameter("@mensaje", SqlDbType.VarChar);
+            pmensaje.Direction = ParameterDirection.Output;
+            pmensaje.Size = 200;
+            cmd.Parameters.Add(pmensaje);
+
             //SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
             SqlDataReader data_reader;           
             data_reader=cmd.ExecuteReader();
+            //if (cmd.Parameters["@mensaje"].Value.ToString() != "")
+            //    throw new Exception(cmd.Parameters["@mensaje"].Value.ToString());
+            
             while (data_reader.Read())
             {
                 usuario_conectado.nickname=data_reader["nickname"].ToString();
