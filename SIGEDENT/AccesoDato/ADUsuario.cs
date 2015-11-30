@@ -39,20 +39,28 @@ namespace AccesoDato
             cmd.Parameters.Add(pmensaje);
 
             //SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
-            SqlDataReader data_reader;           
-            data_reader=cmd.ExecuteReader();
-            //if (cmd.Parameters["@mensaje"].Value.ToString() != "")
-            //    throw new Exception(cmd.Parameters["@mensaje"].Value.ToString());
-            
-            while (data_reader.Read())
-            {
-                usuario_conectado.nickname=data_reader["nickname"].ToString();
-                usuario_conectado.password = data_reader["password"].ToString();
-                usuario_conectado.apellidos = data_reader["apellidos"].ToString();
-                usuario_conectado.nombres = data_reader["nombres"].ToString();
-                usuario_conectado.permisos = data_reader["permisos"].ToString();
+            SqlDataReader data_reader;
+            cmd.ExecuteNonQuery();//para obtener el parametro de salida @mensaje            
+
+            if (cmd.Parameters["@mensaje"].Value.ToString() != "") {
+                throw new Exception(cmd.Parameters["@mensaje"].Value.ToString());
+                //POR ALGUN MOTIVO, ESTA EXCEPCION NO SE CONTROLA ... VERIFICAR POR FAVOR
+                
             }
-            data_reader.Close();
+            else {
+                data_reader = cmd.ExecuteReader();//para llenar el data_reader con el select realizado
+                while (data_reader.Read())
+                {
+                    usuario_conectado.nickname=data_reader["nickname"].ToString();
+                    usuario_conectado.password = data_reader["password"].ToString();
+                    usuario_conectado.apellidos = data_reader["apellidos"].ToString();
+                    usuario_conectado.nombres = data_reader["nombres"].ToString();
+                    usuario_conectado.permisos = data_reader["permisos"].ToString();
+                }
+                data_reader.Close();
+            }
+            
+            
             return usuario_conectado;
 
             //tenemos ademas que enviar una variable output al procemiento almacenado que capture un mensaje que puede indicar:
