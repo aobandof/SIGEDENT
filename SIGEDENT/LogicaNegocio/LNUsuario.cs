@@ -13,5 +13,10 @@ namespace LogicaNegocio
         {
             return AccesoDato.ADUsuario.Usuario_Loguear(pnickname, ppassword);
         }
+
+        public static bool LNPa_Ver()
+        {
+            return AccesoDato.ADUsuario.Pa_Ver();
+        }
     }
 }

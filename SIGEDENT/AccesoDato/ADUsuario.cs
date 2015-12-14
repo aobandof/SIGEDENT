@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace AccesoDato
 {    
-    public class ADUsuario
+    public sealed class ADUsuario
     {
         public static SqlCommand cmd;
         public static Conexion conexion;
@@ -21,6 +21,12 @@ namespace AccesoDato
 
 
             return true; //Convert.ToBoolean(cmd.ExcecuteNonQuery());
+        }
+        public static bool Pa_Ver()
+        {
+            //throw new Exception("pa ver");
+            return true;
+
         }
 
         public static Entidades.Usuario Usuario_Loguear(string pnickname, string ppassword)
@@ -44,8 +50,7 @@ namespace AccesoDato
 
             if (cmd.Parameters["@mensaje"].Value.ToString() != "") {
                 throw new Exception(cmd.Parameters["@mensaje"].Value.ToString());
-                //POR ALGUN MOTIVO, ESTA EXCEPCION NO SE CONTROLA ... VERIFICAR POR FAVOR
-                
+                //POR ALGUN MOTIVO, ESTA EXCEPCION NO SE CONTROLA ... VERIFICAR POR FAVOR                  
             }
             else {
                 data_reader = cmd.ExecuteReader();//para llenar el data_reader con el select realizado
