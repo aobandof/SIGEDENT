@@ -49,8 +49,7 @@ namespace AccesoDato
             cmd.ExecuteNonQuery();//para obtener el parametro de salida @mensaje            
 
             if (cmd.Parameters["@mensaje"].Value.ToString() != "") {
-                throw new Exception(cmd.Parameters["@mensaje"].Value.ToString());
-                //POR ALGUN MOTIVO, ESTA EXCEPCION NO SE CONTROLA ... VERIFICAR POR FAVOR                  
+                throw new Exception(cmd.Parameters["@mensaje"].Value.ToString());                               
             }
             else {
                 data_reader = cmd.ExecuteReader();//para llenar el data_reader con el select realizado
