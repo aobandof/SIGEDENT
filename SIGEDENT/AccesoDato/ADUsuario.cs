@@ -13,17 +13,42 @@ namespace AccesoDato
 {    
     public sealed class ADUsuario
     {
-        public static SqlCommand cmd;
-        public static Conexion conexion;
-        
-        public static bool Usuario_Grabar(Entidades.Usuario pUsuario)
+    /*public static Conexion conexion; //esto ya no es necesario debido a que al invocar el metodo Conexion_instanciar estatico,
+    * no es necesario declarar ni isntanciar la clase, y además como es SINGLETON, si no existe la clase CONEXION, el metodo lo constuye
+    * para despues poder acceder a su parametro publico con que devuelve un sql conection */
+    public static SqlCommand cmd;   //lo declaramos aca para evitar hacerlo en muchas funciones
+ 
+  * /* metodo para loguearse, que facilmente podia devolver un entero indicando que encontro el registro,
+  * pero mejor devolver un objeto para trabajarlo en una sesion o para mostrar los datos del usuario logueado */
+        public static Entidades.Usuario Usuario_Loguear (string nick, string password)
         {
-
-
-            return true; //Convert.ToBoolean(cmd.ExcecuteNonQuery());
+            Entidades.Usuario usuario = new Entidades.Usuario();
+            //conexion = Conexion.Conexion_Instanciar();
+            //SqlCommand cmd = new SqlCommand(); // ya esta declarodo al inicio de la clase   
+            cmd=new SqlCommand("sp_usuario_loguear", Conexion.Conexion_Instanciar().con);// esta fila, reemplaza a las 2 siguientes comentadas
+            //cmd.Connection = conexion.con;
+            cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.CommandText = "sp_usuario_loguear";
+            cmd.Parameters.Add(new SqlParameter("@nick", nick));
+            cmd.Parameters.Add(new SqlParameter("@password", password));
+            try
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    usuario.nick = dr["nick"].ToString();
+                    usuario.password = dr["password"].ToString();// verificar despues, si es necesario este campos, por ser secreto
+                    usuario.apellidos = dr["apellidos"].ToString();
+                    usuario.nombres = dr["nombres"].ToString();
+                    usuario.permisos = dr["permisos"].ToString();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error encontrado: " + e.Message);
+            }
+            return usuario;                
         }
-
-
 
         //super flashap spot
         public static Entidades.Usuario Usuario_Loguear_antiguo(string pnickname, string ppassword)
@@ -52,7 +77,7 @@ namespace AccesoDato
                 data_reader = cmd.ExecuteReader();//para llenar el data_reader con el select realizado
                 while (data_reader.Read())
                 {
-                    usuario_conectado.nickname=data_reader["nickname"].ToString();
+                    usuario_conectado.nick=data_reader["nickname"].ToString();
                     usuario_conectado.password = data_reader["password"].ToString();
                     usuario_conectado.apellidos = data_reader["apellidos"].ToString();
                     usuario_conectado.nombres = data_reader["nombres"].ToString();

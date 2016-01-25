@@ -1,0 +1,10 @@
+CREATE TABLE `producto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `detalle` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `etapa` enum('I','P','T') COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_producto-p` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_producto_producto1_idx` (`id_producto-p`),
+  CONSTRAINT `fk_producto_producto1` FOREIGN KEY (`id_producto-p`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

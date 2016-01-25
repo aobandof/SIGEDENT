@@ -4,12 +4,12 @@ go
 
 /*PROCEDIMIENTO PARA LOGUEAR*/
 create procedure sp_usuario_loguear (
-	@nickname varchar(15),
+	@nick varchar(15),
 	@password varchar(20)
 )
 as
 begin
-	select * from usuario where nickname=@nickname and password=@password
+	select * from usuario where nick=@nick and password=@password
 end
 
 go
@@ -17,16 +17,16 @@ go
 /*PROCEDIMIENTO PARA SELECCIONAR Y ELIMINAR*/
 create procedure sp_usuario_se (
 	@operacion varchar(1),
-	@nickname varchar(15)
+	@nick varchar(15)
 )
 as
 begin
 if(@operacion='S')
-	select * from usuario where nickname=@nickname
+	select * from usuario where nick=@nick
 else 
 	begin
 		if(@operacion='E')
-			delete from usuario where nickname=@nickname
+			delete from usuario where nick=@nick
 		else
 			select * from usuario
 	end
@@ -37,7 +37,7 @@ go
 /*PRODEDIMIENTO PARA INSERTAR Y ACTUALIZAR*/
 create procedure sp_usuario_ia (
 	@operacion varchar(1),
-	@nickname varchar(15),
+	@nick varchar(15),
 	@password varchar(20),
 	@apellidos varchar(45),
 	@nombres varchar(45),
@@ -46,11 +46,11 @@ create procedure sp_usuario_ia (
 as
 begin
 if(@operacion='I')
-	insert into usuario values (@nickname,@password,@apellidos,@nombres,@permisos)
+	insert into usuario values (@nick,@password,@apellidos,@nombres,@permisos)
 else
 	if(@operacion='A')
-		update usuario set nickname=@nickname, password=@password, apellidos=@apellidos, nombres=@nombres, permisos=@permisos
+		update usuario set nick=@nick, password=@password, apellidos=@apellidos, nombres=@nombres, permisos=@permisos
 end
 
 
-select * from usuario
+select * from usuario where nick='cpilar'

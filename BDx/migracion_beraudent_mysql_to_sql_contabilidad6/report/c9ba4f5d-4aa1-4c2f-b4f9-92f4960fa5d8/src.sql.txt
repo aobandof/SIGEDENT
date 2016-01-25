@@ -1,0 +1,7 @@
+CREATE TABLE `pago` (
+  `id` int(11) NOT NULL,
+  `numero_recibo` varchar(8) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_recibo` datetime DEFAULT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

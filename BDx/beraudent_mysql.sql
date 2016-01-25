@@ -567,12 +567,12 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`usuario` (
-  `nickname` VARCHAR(15) NOT NULL,
+  `nick` VARCHAR(15) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
   `apellidos` VARCHAR(45) NULL,
   `nombres` VARCHAR(45) NULL,
-  `permisos` ENUM('A', 'L', 'E') NULL DEFAULT 'L',
-  PRIMARY KEY (`nickname`))
+  `permisos` ENUM('A', 'E', 'S', 'C', 'T', 'L') NULL DEFAULT 'L' COMMENT '\'A\'=Administrador\n\'E\'=Escritura / Control Total\n\'S\'=Secretaria\n\'C\'=Contabilidad\n\'T\'=Tecnicos\n\'L\'=Lectura',
+  PRIMARY KEY (`nick`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -758,8 +758,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `beraudent`;
-INSERT INTO `beraudent`.`usuario` (`nickname`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('ofaber', '123456', 'OBANDO FLORIAN', 'ABEL RAFAEL', 'A');
-INSERT INTO `beraudent`.`usuario` (`nickname`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('cpilar', '123456', 'QUIROZ ANDRADE', 'CARMEN DEL PILAR', 'L');
+INSERT INTO `beraudent`.`usuario` (`nick`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('ofaber', '123456', 'OBANDO FLORIAN', 'ABEL RAFAEL', 'A');
+INSERT INTO `beraudent`.`usuario` (`nick`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('cpilar', '123456', 'QUIROZ ANDRADE', 'CARMEN DEL PILAR', 'L');
 
 COMMIT;
 

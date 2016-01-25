@@ -1,0 +1,20 @@
+CREATE TABLE `prestacion` (
+  `id` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `posicion` tinyint(1) unsigned NOT NULL,
+  `fecha_registro` date DEFAULT NULL,
+  `fecha_entrega` date DEFAULT NULL,
+  `cant_pres` tinyint(1) unsigned DEFAULT NULL,
+  `precio` float NOT NULL,
+  `null_pres` enum('V','N') COLLATE utf8_spanish_ci DEFAULT 'V' COMMENT 'las posiciones pueden anularse con basurero, bomba  o valor total=0\nsiempre es bueno tener respald de que posicion esta nula',
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `codigo_item-p` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `numero_docped-p` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `numero_cancelacion-p` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_prestacion_item1_idx` (`codigo_item-p`),
+  KEY `fk_prestacion_docped1_idx` (`numero_docped-p`),
+  KEY `fk_prestacion_cancelacion1_idx` (`numero_cancelacion-p`),
+  CONSTRAINT `fk_prestacion_cancelacion1` FOREIGN KEY (`numero_cancelacion-p`) REFERENCES `cancelacion` (`numero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_prestacion_docped1` FOREIGN KEY (`numero_docped-p`) REFERENCES `docped` (`numero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_prestacion_item1` FOREIGN KEY (`codigo_item-p`) REFERENCES `item` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

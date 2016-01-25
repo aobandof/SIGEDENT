@@ -1,0 +1,9 @@
+CREATE TABLE `odontologo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombres` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email1` varchar(25) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email2` varchar(25) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `celular` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

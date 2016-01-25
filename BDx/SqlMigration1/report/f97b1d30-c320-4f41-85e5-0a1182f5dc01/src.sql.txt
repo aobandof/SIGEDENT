@@ -1,0 +1,9 @@
+CREATE TABLE `item_trabajo` (
+  `codigo_item-it` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `id_trabajo-it` int(11) NOT NULL,
+  PRIMARY KEY (`codigo_item-it`,`id_trabajo-it`),
+  KEY `fk_item_has_trabajo_trabajo1_idx` (`id_trabajo-it`),
+  KEY `fk_item_has_trabajo_item1_idx` (`codigo_item-it`),
+  CONSTRAINT `fk_item_has_trabajo_item1` FOREIGN KEY (`codigo_item-it`) REFERENCES `item` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_item_has_trabajo_trabajo1` FOREIGN KEY (`id_trabajo-it`) REFERENCES `trabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

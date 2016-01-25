@@ -1,0 +1,8 @@
+CREATE TABLE `usuario` (
+  `user` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombres` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `permisos` enum('A','L','E') COLLATE utf8_spanish_ci DEFAULT 'L',
+  PRIMARY KEY (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

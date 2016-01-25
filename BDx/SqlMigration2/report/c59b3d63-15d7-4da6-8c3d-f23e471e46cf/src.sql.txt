@@ -1,0 +1,21 @@
+CREATE TABLE `fase_realizada` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `piezas` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `precio` float DEFAULT NULL,
+  `color` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `costo_comision` float DEFAULT NULL,
+  `inicio` datetime DEFAULT NULL,
+  `fin` datetime DEFAULT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ot_orden_trabajo-fr` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `codigo_tecnico-fr` tinyint(1) NOT NULL,
+  `codigo_fase-fp-fr` int(11) NOT NULL,
+  `id_producto-fp-fr` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_fase_realizada_orden_trabajo1_idx` (`ot_orden_trabajo-fr`),
+  KEY `fk_fase_realizada_tecnico1_idx` (`codigo_tecnico-fr`),
+  KEY `fk_fase_realizada_fase_producto1_idx` (`codigo_fase-fp-fr`,`id_producto-fp-fr`),
+  CONSTRAINT `fk_fase_realizada_fase_producto1` FOREIGN KEY (`codigo_fase-fp-fr`, `id_producto-fp-fr`) REFERENCES `fase_producto` (`codigo_fase-fp`, `id_producto-fp`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fase_realizada_orden_trabajo1` FOREIGN KEY (`ot_orden_trabajo-fr`) REFERENCES `orden_trabajo` (`ot`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fase_realizada_tecnico1` FOREIGN KEY (`codigo_tecnico-fr`) REFERENCES `tecnico` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

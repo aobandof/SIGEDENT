@@ -1,0 +1,6 @@
+CREATE TABLE `fase` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `costo_comision` float NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

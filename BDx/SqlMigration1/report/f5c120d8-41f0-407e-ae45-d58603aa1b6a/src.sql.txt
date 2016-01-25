@@ -1,0 +1,9 @@
+CREATE TABLE `orden_trabajo` (
+  `ot` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `ticket` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_ingreso` datetime DEFAULT NULL,
+  `fecha_entrega` datetime DEFAULT NULL,
+  `detalle` text COLLATE utf8_spanish_ci,
+  `suministros_enviados` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`ot`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

@@ -1,0 +1,12 @@
+CREATE TABLE `docped` (
+  `numero` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `episodio` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Existen raros casos donde hay mas de un episodio por solped, colocarlo com nota',
+  `id_paciente-d` int(10) unsigned NOT NULL,
+  `id_sucursal-so-d` int(11) NOT NULL,
+  `id_odontologo-so-d` int(11) NOT NULL,
+  PRIMARY KEY (`numero`),
+  KEY `fk_docped_paciente1_idx` (`id_paciente-d`),
+  KEY `fk_docped_sucursal_odontologo1_idx` (`id_sucursal-so-d`,`id_odontologo-so-d`),
+  CONSTRAINT `fk_docped_paciente1` FOREIGN KEY (`id_paciente-d`) REFERENCES `paciente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_docped_sucursal_odontologo1` FOREIGN KEY (`id_sucursal-so-d`, `id_odontologo-so-d`) REFERENCES `sucursal_odontologo` (`id_sucursal-so`, `id_odontologo-so`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
