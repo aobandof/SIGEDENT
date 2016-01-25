@@ -1,0 +1,8 @@
+CREATE TABLE `item` (
+  `codigo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `precio` float DEFAULT NULL,
+  `id_arancel-i` int(11) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `fk_item_arancel_arancel1_idx` (`id_arancel-i`),
+  CONSTRAINT `fk_item_arancel_arancel1` FOREIGN KEY (`id_arancel-i`) REFERENCES `arancel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

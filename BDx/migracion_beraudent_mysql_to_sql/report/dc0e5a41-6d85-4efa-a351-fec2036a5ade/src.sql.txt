@@ -1,0 +1,6 @@
+CREATE TABLE `grupo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
