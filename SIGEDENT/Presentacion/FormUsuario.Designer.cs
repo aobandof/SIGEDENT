@@ -44,7 +44,7 @@
             this.pan_catalogo.Controls.Add(this.label1);
             this.pan_catalogo.Location = new System.Drawing.Point(12, 13);
             this.pan_catalogo.Name = "pan_catalogo";
-            this.pan_catalogo.Size = new System.Drawing.Size(449, 368);
+            this.pan_catalogo.Size = new System.Drawing.Size(520, 412);
             this.pan_catalogo.TabIndex = 0;
             // 
             // txb_buscar
@@ -62,15 +62,7 @@
             this.label1.Size = new System.Drawing.Size(82, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Buscar Usuario:";
-            // 
-            // pan_dato
-            // 
-            this.pan_dato.Controls.Add(this.label2);
-            this.pan_dato.Controls.Add(this.txb_usuario);
-            this.pan_dato.Location = new System.Drawing.Point(477, 16);
-            this.pan_dato.Name = "pan_dato";
-            this.pan_dato.Size = new System.Drawing.Size(240, 364);
-            this.pan_dato.TabIndex = 1;
+            
             // 
             // label2
             // 
@@ -92,12 +84,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 393);
+            this.ClientSize = new System.Drawing.Size(880, 511);
+            this.ControlBox = false;
             this.Controls.Add(this.pan_dato);
             this.Controls.Add(this.pan_catalogo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormUsuario";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administracion de Usuarios del Sistema";
+            this.Load += new System.EventHandler(this.FormUsuario_Load);
             this.pan_catalogo.ResumeLayout(false);
             this.pan_catalogo.PerformLayout();
             this.pan_dato.ResumeLayout(false);

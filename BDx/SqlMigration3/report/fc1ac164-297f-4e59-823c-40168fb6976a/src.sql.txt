@@ -1,0 +1,12 @@
+CREATE TABLE `ubicacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `direccion` varchar(30) COLLATE utf8_spanish_ci NOT NULL COMMENT 'esta direccion debe contener el tipo (calle, jiron o avenida en abreviatura), el numero y el departamento si fuera necesasrio.',
+  `comu_ubic` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `regi_ubic` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tel1_ubic` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tel2_ubic` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_sucursal-u` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`id_sucursal-u`),
+  KEY `fk_Ubicacion_Sucursal1_idx` (`id_sucursal-u`),
+  CONSTRAINT `fk_Ubicacion_Sucursal1` FOREIGN KEY (`id_sucursal-u`) REFERENCES `sucursal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

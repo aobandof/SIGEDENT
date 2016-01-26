@@ -27,6 +27,12 @@ namespace Presentacion
             }
             iform_usuario.BringToFront(); //traer al frende de los demas formularios
             return iform_usuario;
-        }        
+        }
+
+        private void FormUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
+    
     }
 }

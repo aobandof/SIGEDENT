@@ -1,0 +1,9 @@
+CREATE TABLE `prestacion_trabajo` (
+  `id_prestacion-pt` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `id_trabajo_realizado-pt` int(11) NOT NULL,
+  PRIMARY KEY (`id_prestacion-pt`,`id_trabajo_realizado-pt`),
+  KEY `fk_prestacion_has_trabajo_realizado_trabajo_realizado1_idx` (`id_trabajo_realizado-pt`),
+  KEY `fk_prestacion_has_trabajo_realizado_prestacion1_idx` (`id_prestacion-pt`),
+  CONSTRAINT `fk_prestacion_has_trabajo_realizado_prestacion1` FOREIGN KEY (`id_prestacion-pt`) REFERENCES `prestacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_prestacion_has_trabajo_realizado_trabajo_realizado1` FOREIGN KEY (`id_trabajo_realizado-pt`) REFERENCES `trabajo_realizado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

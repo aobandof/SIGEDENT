@@ -32,6 +32,7 @@
             this.aRCHIVOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cONFIGURACIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uSUARIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miCuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +56,8 @@
             // cONFIGURACIONToolStripMenuItem
             // 
             this.cONFIGURACIONToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.uSUARIOSToolStripMenuItem});
+            this.uSUARIOSToolStripMenuItem,
+            this.miCuentaToolStripMenuItem});
             this.cONFIGURACIONToolStripMenuItem.Name = "cONFIGURACIONToolStripMenuItem";
             this.cONFIGURACIONToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
             this.cONFIGURACIONToolStripMenuItem.Text = "CONFIGURACION";
@@ -63,9 +65,15 @@
             // uSUARIOSToolStripMenuItem
             // 
             this.uSUARIOSToolStripMenuItem.Name = "uSUARIOSToolStripMenuItem";
-            this.uSUARIOSToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.uSUARIOSToolStripMenuItem.Text = "USUARIOS";
+            this.uSUARIOSToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.uSUARIOSToolStripMenuItem.Text = "Control de Usuarios";
             this.uSUARIOSToolStripMenuItem.Click += new System.EventHandler(this.uSUARIOSToolStripMenuItem_Click);
+            // 
+            // miCuentaToolStripMenuItem
+            // 
+            this.miCuentaToolStripMenuItem.Name = "miCuentaToolStripMenuItem";
+            this.miCuentaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.miCuentaToolStripMenuItem.Text = "Mi Cuenta";
             // 
             // FormPrincipal
             // 
@@ -93,6 +101,7 @@
         private System.Windows.Forms.ToolStripMenuItem aRCHIVOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cONFIGURACIONToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uSUARIOSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miCuentaToolStripMenuItem;
     }
 }
 

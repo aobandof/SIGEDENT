@@ -1,0 +1,7 @@
+CREATE TABLE `tecnico` (
+  `codigo` tinyint(1) NOT NULL,
+  `nombres` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `rut` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

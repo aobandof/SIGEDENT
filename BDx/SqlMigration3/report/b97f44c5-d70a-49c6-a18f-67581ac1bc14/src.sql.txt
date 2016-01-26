@@ -1,0 +1,9 @@
+CREATE TABLE `fase_realizada_producto` (
+  `id_fase_realizada-frp` int(11) NOT NULL,
+  `id_producto_solicitado-frp` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_fase_realizada-frp`,`id_producto_solicitado-frp`),
+  KEY `fk_fase_realizada_has_producto_solicitado_producto_solicita_idx` (`id_producto_solicitado-frp`),
+  KEY `fk_fase_realizada_has_producto_solicitado_fase_realizada1_idx` (`id_fase_realizada-frp`),
+  CONSTRAINT `fk_fase_realizada_has_producto_solicitado_fase_realizada1` FOREIGN KEY (`id_fase_realizada-frp`) REFERENCES `fase_realizada` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fase_realizada_has_producto_solicitado_producto_solicitado1` FOREIGN KEY (`id_producto_solicitado-frp`) REFERENCES `producto_solicitado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
