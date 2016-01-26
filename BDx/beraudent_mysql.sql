@@ -188,8 +188,8 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`orden_trabajo` (
   `ticket` VARCHAR(10) NULL,
   `fecha_ingreso` DATETIME NULL,
   `fecha_entrega` DATETIME NULL,
+  `responsable` VARCHAR(10) NULL,
   `detalle` TEXT(100) NULL,
-  `suministros_enviados` VARCHAR(45) NULL,
   PRIMARY KEY (`ot`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -268,22 +268,6 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`tecnico`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`tecnico` ;
-
-CREATE TABLE IF NOT EXISTS `beraudent`.`tecnico` (
-  `codigo` TINYINT(1) NOT NULL,
-  `nombres` VARCHAR(45) NULL,
-  `apellidos` VARCHAR(45) NULL,
-  `rut` VARCHAR(45) NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
 -- Table `beraudent`.`fase`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `beraudent`.`fase` ;
@@ -348,6 +332,43 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
+-- Table `beraudent`.`Area`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`Area` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`Area` (
+  `id` INT NOT NULL,
+  `nombre` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`empleado`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`empleado` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`empleado` (
+  `codigo` VARCHAR(10) NOT NULL,
+  `nombres` VARCHAR(45) NULL,
+  `apellidos` VARCHAR(45) NULL,
+  `rut` VARCHAR(45) NULL,
+  `id_area-e` INT NOT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `fk_empleado_Area1_idx` (`id_area-e` ASC),
+  CONSTRAINT `fk_empleado_Area1`
+    FOREIGN KEY (`id_area-e`)
+    REFERENCES `beraudent`.`Area` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
 -- Table `beraudent`.`fase_realizada`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `beraudent`.`fase_realizada` ;
@@ -362,26 +383,26 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`fase_realizada` (
   `fin` DATETIME NULL,
   `detalle` VARCHAR(45) NULL,
   `ot_orden_trabajo-fr` VARCHAR(10) NOT NULL,
-  `codigo_tecnico-fr` TINYINT(1) NOT NULL,
   `codigo_fase-fp-fr` INT NOT NULL,
   `id_producto-fp-fr` INT NOT NULL,
+  `codigo_empleado-fr` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_fase_realizada_orden_trabajo1_idx` (`ot_orden_trabajo-fr` ASC),
-  INDEX `fk_fase_realizada_tecnico1_idx` (`codigo_tecnico-fr` ASC),
   INDEX `fk_fase_realizada_fase_producto1_idx` (`codigo_fase-fp-fr` ASC, `id_producto-fp-fr` ASC),
+  INDEX `fk_fase_realizada_empleado1_idx` (`codigo_empleado-fr` ASC),
   CONSTRAINT `fk_fase_realizada_orden_trabajo1`
     FOREIGN KEY (`ot_orden_trabajo-fr`)
     REFERENCES `beraudent`.`orden_trabajo` (`ot`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_fase_realizada_tecnico1`
-    FOREIGN KEY (`codigo_tecnico-fr`)
-    REFERENCES `beraudent`.`tecnico` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_fase_realizada_fase_producto1`
     FOREIGN KEY (`codigo_fase-fp-fr` , `id_producto-fp-fr`)
     REFERENCES `beraudent`.`fase_producto` (`codigo_fase-fp` , `id_producto-fp`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fase_realizada_empleado1`
+    FOREIGN KEY (`codigo_empleado-fr`)
+    REFERENCES `beraudent`.`empleado` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -569,8 +590,6 @@ DROP TABLE IF EXISTS `beraudent`.`usuario` ;
 CREATE TABLE IF NOT EXISTS `beraudent`.`usuario` (
   `nick` VARCHAR(15) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
-  `apellidos` VARCHAR(45) NULL,
-  `nombres` VARCHAR(45) NULL,
   `permisos` ENUM('A', 'E', 'S', 'C', 'T', 'L') NULL DEFAULT 'L' COMMENT '\'A\'=Administrador\n\'E\'=Escritura / Control Total\n\'S\'=Secretaria\n\'C\'=Contabilidad\n\'T\'=Tecnicos\n\'L\'=Lectura',
   PRIMARY KEY (`nick`))
 ENGINE = InnoDB
@@ -749,6 +768,32 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
 
+-- -----------------------------------------------------
+-- Table `beraudent`.`empleado_usuario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`empleado_usuario` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`empleado_usuario` (
+  `codigo_empleado-eu` VARCHAR(10) NOT NULL,
+  `nick_usuario-eu` VARCHAR(15) NOT NULL,
+  PRIMARY KEY (`codigo_empleado-eu`, `nick_usuario-eu`),
+  INDEX `fk_empleado_has_usuario_usuario1_idx` (`nick_usuario-eu` ASC),
+  INDEX `fk_empleado_has_usuario_empleado1_idx` (`codigo_empleado-eu` ASC),
+  CONSTRAINT `fk_empleado_has_usuario_empleado1`
+    FOREIGN KEY (`codigo_empleado-eu`)
+    REFERENCES `beraudent`.`empleado` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_empleado_has_usuario_usuario1`
+    FOREIGN KEY (`nick_usuario-eu`)
+    REFERENCES `beraudent`.`usuario` (`nick`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -758,8 +803,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `beraudent`;
-INSERT INTO `beraudent`.`usuario` (`nick`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('ofaber', '123456', 'OBANDO FLORIAN', 'ABEL RAFAEL', 'A');
-INSERT INTO `beraudent`.`usuario` (`nick`, `password`, `apellidos`, `nombres`, `permisos`) VALUES ('cpilar', '123456', 'QUIROZ ANDRADE', 'CARMEN DEL PILAR', 'L');
+INSERT INTO `beraudent`.`usuario` (`nick`, `password`, `permisos`) VALUES ('ofaber', '123456', 'A');
+INSERT INTO `beraudent`.`usuario` (`nick`, `password`, `permisos`) VALUES ('cpilar', '123456', 'L');
 
 COMMIT;
 

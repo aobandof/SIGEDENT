@@ -1,6 +1,0 @@
-CREATE TABLE `cliente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion_admninistracion` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

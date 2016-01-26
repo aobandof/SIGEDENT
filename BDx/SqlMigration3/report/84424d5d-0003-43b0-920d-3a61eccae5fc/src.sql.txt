@@ -1,6 +1,0 @@
-CREATE TABLE `arancel` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'deta_aran informará como se construyó el arancel (si deriba de algun porcentaje sobre algun arancel base o es un arancel con precios especiales)',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

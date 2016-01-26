@@ -28,12 +28,12 @@ namespace Presentacion
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            //logueado=LogicaNegocio.LNUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
+            //logueado=Negocio.NUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
             //MessageBox.Show("Bienvenidos " + logueado.nombres + " " + logueado.apellidos);
             //this.Hide();
             try
             {
-                logueado = LogicaNegocio.LNUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
+                logueado = Negocio.NUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
                 MessageBox.Show("Bienvenido " + logueado.nombres + " " + logueado.apellidos);
                 this.Hide();
             }
@@ -77,7 +77,7 @@ namespace Presentacion
             {
                 try
                 {
-                    logueado = LogicaNegocio.LNUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
+                    logueado = Negocio.NUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
                     MessageBox.Show("Bienvenido " + logueado.nombres + " " + logueado.apellidos);
                     this.Hide();
                 }

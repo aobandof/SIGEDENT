@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentacion", "Presentacio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{3989BD23-75CC-47EF-84C0-1443D4CB21A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDato\AccesoDatos.csproj", "{8CC79CB0-7DA8-4225-B2CC-C1BD6C6BCD18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "AccesoDato\Datos.csproj", "{8CC79CB0-7DA8-4225-B2CC-C1BD6C6BCD18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaNegocio", "LogicaNegocio\LogicaNegocio.csproj", "{0ECE89FE-9470-4FD8-9498-A54D50CE8E30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "LogicaNegocio\Negocio.csproj", "{0ECE89FE-9470-4FD8-9498-A54D50CE8E30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

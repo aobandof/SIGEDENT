@@ -1,8 +1,0 @@
-CREATE TABLE `detalle_item` (
-  `codigo_item-di` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `codigo_cliente` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nomenclatura_cliente` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `detalle` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`codigo_item-di`),
-  CONSTRAINT `fk_detalle_item_item1` FOREIGN KEY (`codigo_item-di`) REFERENCES `item` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

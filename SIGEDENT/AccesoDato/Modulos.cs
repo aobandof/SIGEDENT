@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace AccesoDato
+namespace Datos
 {
     public class Modulos
     {
         public static SqlCommand cmd;
         //modulo para obtener un Datatable de una consulta select
         
-        public DataTable Obtener_Registros(string nombre_procedimiento, String[] nombres_parametros, params Object[] valor_parametros){
+        public static DataTable Obtener_Registros(string nombre_procedimiento, String[] nombres_parametros, params Object[] valor_parametros){
             cmd = new SqlCommand(nombre_procedimiento,Conexion.Conexion_Instanciar().con);
             //cmd.CommandType=
             DataTable dt = new DataTable();
@@ -23,9 +23,8 @@ namespace AccesoDato
             return dt;
         }
 
-        //modulo ejecutar que se dinamiza para insertar, actualizar, seleccionar  y eliminar
-        
-        public int Ejecutar(string nombre_procedimiento, string[] nombres_parametros, params Object[] valor_parametros ){
+        //modulo ejecutar que se dinamiza para insertar, actualizar, seleccionar  y eliminar        
+        public static int Ejecutar(string nombre_procedimiento, string[] nombres_parametros, params Object[] valor_parametros ){
             
 
             return 0;

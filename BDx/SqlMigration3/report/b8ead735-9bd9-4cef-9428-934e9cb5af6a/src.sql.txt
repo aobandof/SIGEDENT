@@ -1,9 +1,0 @@
-CREATE TABLE `trabajo_has_comision` (
-  `id_trabajo-tc` int(11) NOT NULL,
-  `id_comision-tc` int(11) NOT NULL,
-  PRIMARY KEY (`id_trabajo-tc`,`id_comision-tc`),
-  KEY `fk_trabajo_has_comision_comision1_idx` (`id_comision-tc`),
-  KEY `fk_trabajo_has_comision_trabajo1_idx` (`id_trabajo-tc`),
-  CONSTRAINT `fk_trabajo_has_comision_comision1` FOREIGN KEY (`id_comision-tc`) REFERENCES `comision` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_trabajo_has_comision_trabajo1` FOREIGN KEY (`id_trabajo-tc`) REFERENCES `trabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

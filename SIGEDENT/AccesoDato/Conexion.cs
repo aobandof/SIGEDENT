@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 //using System.Windows.Forms;
 
-namespace AccesoDato
+namespace Datos
 {
     public class Conexion
     {

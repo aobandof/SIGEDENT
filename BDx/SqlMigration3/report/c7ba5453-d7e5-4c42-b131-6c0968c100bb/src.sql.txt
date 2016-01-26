@@ -1,9 +1,0 @@
-CREATE TABLE `trabajo_abono_cargo` (
-  `id_trabajo_realizado-tac` int(11) NOT NULL,
-  `id_abono_cargo-tac` int(11) NOT NULL,
-  PRIMARY KEY (`id_trabajo_realizado-tac`,`id_abono_cargo-tac`),
-  KEY `fk_trabajo_realizado_has_abono_cargo_abono_cargo1_idx` (`id_abono_cargo-tac`),
-  KEY `fk_trabajo_realizado_has_abono_cargo_trabajo_realizado1_idx` (`id_trabajo_realizado-tac`),
-  CONSTRAINT `fk_trabajo_realizado_has_abono_cargo_abono_cargo1` FOREIGN KEY (`id_abono_cargo-tac`) REFERENCES `abono_cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_trabajo_realizado_has_abono_cargo_trabajo_realizado1` FOREIGN KEY (`id_trabajo_realizado-tac`) REFERENCES `trabajo_realizado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
