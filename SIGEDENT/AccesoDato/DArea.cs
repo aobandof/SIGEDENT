@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Datos
 {
     public sealed class DArea
     {
+        public static SqlCommand cmd;
+
         //metodo para guardar nuevo registro en la base de datos
         public static int Area_Insertar(Entidades.Area a)
         {
@@ -47,7 +50,6 @@ namespace Datos
                 area.id = Convert.ToInt16(fila["id"]);
                 area.nombre = fila["nombre"].ToString();                
             }
-
             return area;
         }
 
@@ -57,6 +59,27 @@ namespace Datos
             //Modulos modulos = new Modulos();
             string[] nomb_parametros = { "@operacion", "@id" };
             return Modulos.Ejecutar("sp_area_se", nomb_parametros, 'E', id);
+        }
+
+        public static DataTable Area_Seleccionar_Filtro(string filtro)
+        {
+            //SqlDataReader dr;
+            DataTable dt = new DataTable();
+            //string[] nomb_parametros = { "@filtro", };
+            //return Modulos.Obtener_Registros("sp_area_filtrar", nomb_parametros);
+            cmd = new SqlCommand("sp_area_filtrar", Conexion.Conexion_Instanciar().con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@filtro", filtro));
+            try
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+                dt.Load(dr);
+                return dt;
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error encontrado: " + e.Message);
+            }
         }
 
     }

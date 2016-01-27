@@ -22,7 +22,7 @@ end
 go
 
 /*PRODEDIMIENTO PARA INSERTAR Y ACTUALIZAR*/
-create procedure sp_area_ia (
+CREATE procedure sp_area_ia (
 	@operacion varchar(1),
 	@id tinyint,
 	@nombre varchar(45)	
@@ -30,9 +30,20 @@ create procedure sp_area_ia (
 as
 begin
 if(@operacion='I')
-	insert into area values (DEFAULT,@nombre)
+	insert into area (nombre) values (@nombre)
 else
 	if(@operacion='A')
 		update area set nombre=@nombre where id=@id
+end
+
+go
+
+/*PROCEDIMIENTO ALMACENADO PARA SELECCIONAR FILTRO*/
+create procedure sp_area_filtrar(
+	@filtro varchar (20)
+)
+as
+begin
+	select * from area where nombre like @filtro + '%'
 end
 

@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormArea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormArea.Designer.cs">
+      <DependentUpon>FormArea.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormArea.resx">
+      <DependentUpon>FormArea.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +105,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccesoDato\Datos.csproj">
+      <Project>{8cc79cb0-7da8-4225-b2cc-c1bd6c6bcd18}</Project>
+      <Name>Datos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{3989bd23-75cc-47ef-84c0-1443d4cb21a8}</Project>
       <Name>Entidades</Name>
