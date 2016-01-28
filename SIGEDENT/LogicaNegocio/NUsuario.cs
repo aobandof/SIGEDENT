@@ -9,10 +9,10 @@ namespace Negocio
 {
     public class NUsuario
     {
-        public static Entidades.Usuario LNUsuario_Loguear(string pnickname, string ppassword)
-        {
-            return Datos.DUsuario.Usuario_Loguear(pnickname, ppassword);
-        }
+        //public static Entidades.Usuario LNUsuario_Loguear(string pnickname, string ppassword)
+        //{
+        //    //return Datos.DUsuario.Usuario_Loguear(pnickname, ppassword);
+        //}
 
     }
 }

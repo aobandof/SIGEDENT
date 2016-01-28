@@ -33,6 +33,7 @@
             this.cONFIGURACIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uSUARIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miCuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.controDeAreasYDptosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             // 
             this.cONFIGURACIONToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.uSUARIOSToolStripMenuItem,
+            this.controDeAreasYDptosToolStripMenuItem,
             this.miCuentaToolStripMenuItem});
             this.cONFIGURACIONToolStripMenuItem.Name = "cONFIGURACIONToolStripMenuItem";
             this.cONFIGURACIONToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
@@ -65,15 +67,22 @@
             // uSUARIOSToolStripMenuItem
             // 
             this.uSUARIOSToolStripMenuItem.Name = "uSUARIOSToolStripMenuItem";
-            this.uSUARIOSToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.uSUARIOSToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.uSUARIOSToolStripMenuItem.Text = "Control de Usuarios";
             this.uSUARIOSToolStripMenuItem.Click += new System.EventHandler(this.uSUARIOSToolStripMenuItem_Click);
             // 
             // miCuentaToolStripMenuItem
             // 
             this.miCuentaToolStripMenuItem.Name = "miCuentaToolStripMenuItem";
-            this.miCuentaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.miCuentaToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.miCuentaToolStripMenuItem.Text = "Mi Cuenta";
+            // 
+            // controDeAreasYDptosToolStripMenuItem
+            // 
+            this.controDeAreasYDptosToolStripMenuItem.Name = "controDeAreasYDptosToolStripMenuItem";
+            this.controDeAreasYDptosToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.controDeAreasYDptosToolStripMenuItem.Text = "Contro de Areas y Dptos.";
+            this.controDeAreasYDptosToolStripMenuItem.Click += new System.EventHandler(this.controDeAreasYDptosToolStripMenuItem_Click);
             // 
             // FormPrincipal
             // 
@@ -102,6 +111,7 @@
         private System.Windows.Forms.ToolStripMenuItem cONFIGURACIONToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uSUARIOSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miCuentaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem controDeAreasYDptosToolStripMenuItem;
     }
 }
 

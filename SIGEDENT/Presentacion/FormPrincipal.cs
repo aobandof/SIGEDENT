@@ -14,6 +14,7 @@ namespace Presentacion
     {
         private FormLogin form_login;
         private FormUsuario form_usuario;
+        private FormArea form_area;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -33,10 +34,17 @@ namespace Presentacion
 
         private void uSUARIOSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form_usuario = new FormUsuario();
+            //form_usuario = new FormUsuario();
             form_usuario = FormUsuario.FormUsuario_Instanciar();
             // ver si despues lo contenemos en el formulario principal
             form_usuario.Show();
+        }
+
+        private void controDeAreasYDptosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            form_area = FormArea.FormArea_Instanciar();
+            //form_area.MdiParent = this;
+            form_area.Show();
         }
     }
 }

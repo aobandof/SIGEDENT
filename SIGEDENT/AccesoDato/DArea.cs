@@ -25,7 +25,7 @@ namespace Datos
         {
             //Modulos modulos = new Modulos();
             string[] nomb_parametros = { "@operacion", "@id", "@nombre" };
-            return Modulos.Ejecutar("sp_area_ia", nomb_parametros, 'A', a.id, a.nombre,);
+            return Modulos.Ejecutar("sp_area_ia", nomb_parametros, 'A', a.id, a.nombre);
         }
 
         //metodo para seleccionar una tabla de registros
@@ -63,10 +63,7 @@ namespace Datos
 
         public static DataTable Area_Seleccionar_Filtro(string filtro)
         {
-            //SqlDataReader dr;
             DataTable dt = new DataTable();
-            //string[] nomb_parametros = { "@filtro", };
-            //return Modulos.Obtener_Registros("sp_area_filtrar", nomb_parametros);
             cmd = new SqlCommand("sp_area_filtrar", Conexion.Conexion_Instanciar().con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@filtro", filtro));

@@ -1,0 +1,9 @@
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\obj\Debug\LogicaNegocio.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\bin\Debug\LogicaNegocio.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\bin\Debug\LogicaNegocio.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\bin\Debug\AccesoDato.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\bin\Debug\Entidades.dll
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\bin\Debug\AccesoDato.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\bin\Debug\Entidades.pdb
+D:\GITHUB\SIGEDENT\SIGEDENT\LogicaNegocio\obj\Debug\LogicaNegocio.pdb

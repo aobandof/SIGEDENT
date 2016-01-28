@@ -12,12 +12,24 @@ namespace Presentacion
 {
     public partial class FormArea : Form
     {
+        private static FormArea iform_area = null;
+        private Entidades.Area area;
+        
         public FormArea()
         {
             InitializeComponent();
         }
 
-        private Entidades.Area area;
+        public static FormArea FormArea_Instanciar()
+        {
+            if (iform_area == null || iform_area.IsDisposed == true)
+            {
+                iform_area = new FormArea();
+            }
+            iform_area.BringToFront();
+            return iform_area;
+        }
+
 
         private void Activar_Panel(bool estado)
         {
@@ -39,6 +51,13 @@ namespace Presentacion
             {
 
             }
+        }
+
+        private void FormArea_Load(object sender, EventArgs e)
+        {
+            dgv_vista.AutoGenerateColumns = false;
+            //dgv_vista.AutoResizeColumn();
+            dgv_vista.AutoResizeColumns();
         }
     }
 }

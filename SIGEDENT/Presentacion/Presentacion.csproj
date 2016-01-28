@@ -113,10 +113,6 @@
       <Project>{3989bd23-75cc-47ef-84c0-1443d4cb21a8}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LogicaNegocio\Negocio.csproj">
-      <Project>{0ece89fe-9470-4fd8-9498-a54d50ce8e30}</Project>
-      <Name>Negocio</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
