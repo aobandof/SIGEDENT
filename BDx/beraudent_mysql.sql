@@ -337,8 +337,8 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`Area` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`Area` (
-  `id` INT NOT NULL,
-  `nombre` VARCHAR(45) NULL,
+  `id` TINYINT(1) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -354,8 +354,8 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`empleado` (
   `codigo` VARCHAR(10) NOT NULL,
   `nombres` VARCHAR(45) NULL,
   `apellidos` VARCHAR(45) NULL,
-  `rut` VARCHAR(45) NULL,
-  `id_area-e` INT NOT NULL,
+  `rut` VARCHAR(10) NULL,
+  `id_area-e` TINYINT(1) NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `fk_empleado_Area1_idx` (`id_area-e` ASC),
   CONSTRAINT `fk_empleado_Area1`

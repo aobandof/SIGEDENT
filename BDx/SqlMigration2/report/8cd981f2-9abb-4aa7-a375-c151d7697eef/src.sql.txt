@@ -1,0 +1,10 @@
+CREATE TABLE `producto_grupo` (
+  `id_producto-pg` int(11) NOT NULL,
+  `id_grupo-pg` int(11) NOT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_producto-pg`,`id_grupo-pg`),
+  KEY `fk_producto_has_grupo_grupo1_idx` (`id_grupo-pg`),
+  KEY `fk_producto_has_grupo_producto1_idx` (`id_producto-pg`),
+  CONSTRAINT `fk_producto_has_grupo_grupo1` FOREIGN KEY (`id_grupo-pg`) REFERENCES `grupo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_producto_has_grupo_producto1` FOREIGN KEY (`id_producto-pg`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

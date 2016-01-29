@@ -1,0 +1,10 @@
+CREATE TABLE `grupo_cancelacion` (
+  `id` int(11) NOT NULL,
+  `periodo` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `monto` float DEFAULT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_comprobante-gc` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_grupo_cancelacion_comprobante1_idx` (`id_comprobante-gc`),
+  CONSTRAINT `fk_grupo_cancelacion_comprobante1` FOREIGN KEY (`id_comprobante-gc`) REFERENCES `comprobante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
