@@ -1,0 +1,11 @@
+CREATE TABLE `abono_cargo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `monto` float DEFAULT NULL,
+  `tipo` enum('A','C') COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cancelacion` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Contendra el numero de orden de compra o el grupo de cancelacion dependiendo de la sucursal, esto se puede calcular con querys pero considero correcto reflejarlo en un campo solo para referenciar',
+  `id_comprobante-ac` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_abono_cargo_comprobante1_idx` (`id_comprobante-ac`),
+  CONSTRAINT `fk_abono_cargo_comprobante1` FOREIGN KEY (`id_comprobante-ac`) REFERENCES `comprobante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

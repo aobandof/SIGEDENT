@@ -76,7 +76,7 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`sucursal` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `codigo` VARCHAR(10) NULL,
   `abreviatura` VARCHAR(10) NULL,
   `nombre` VARCHAR(25) NOT NULL,
@@ -228,7 +228,7 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`paciente` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`paciente` (
-  `id` INT UNSIGNED NOT NULL,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `rut` VARCHAR(10) NULL,
   `apellidos` VARCHAR(45) NULL,
   `nombres` VARCHAR(45) NULL,
@@ -339,7 +339,8 @@ DROP TABLE IF EXISTS `beraudent`.`Area` ;
 CREATE TABLE IF NOT EXISTS `beraudent`.`Area` (
   `id` TINYINT(1) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -462,7 +463,7 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`abono_cargo` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`abono_cargo` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `detalle` VARCHAR(45) NULL,
   `monto` FLOAT NULL,
   `tipo` ENUM('A', 'C') NULL,
@@ -486,7 +487,7 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`pago` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`pago` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `numero_recibo` VARCHAR(8) NULL,
   `fecha_recibo` DATETIME NULL,
   `detalle` VARCHAR(45) NULL,
@@ -590,7 +591,7 @@ DROP TABLE IF EXISTS `beraudent`.`usuario` ;
 CREATE TABLE IF NOT EXISTS `beraudent`.`usuario` (
   `nick` VARCHAR(15) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
-  `permisos` ENUM('A', 'E', 'S', 'C', 'T', 'L') NULL DEFAULT 'L' COMMENT '\'A\'=Administrador\n\'E\'=Escritura / Control Total\n\'S\'=Secretaria\n\'C\'=Contabilidad\n\'T\'=Tecnicos\n\'L\'=Lectura',
+  `permisos` ENUM('A', 'E', 'S', 'C', 'T', 'L') NOT NULL DEFAULT 'L' COMMENT '\'A\'=Administrador\n\'E\'=Escritura / Control Total\n\'S\'=Secretaria\n\'C\'=Contabilidad\n\'T\'=Tecnicos\n\'L\'=Lectura',
   PRIMARY KEY (`nick`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -603,7 +604,7 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`grupo` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`grupo` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `detalle` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))

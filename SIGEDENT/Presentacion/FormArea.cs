@@ -58,6 +58,8 @@ namespace Presentacion
             dgv_vista.AutoGenerateColumns = false;
             //dgv_vista.AutoResizeColumn();
             dgv_vista.AutoResizeColumns();
+            LLenar_DataGridView("");
         }
+
     }
 }

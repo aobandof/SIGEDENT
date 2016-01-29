@@ -1,0 +1,13 @@
+CREATE TABLE `administrativo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(35) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellidos` varchar(35) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(25) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `celular` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cargo` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_cliente-a` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`id_cliente-a`),
+  KEY `fk_Administrativo_Cliente1_idx` (`id_cliente-a`),
+  CONSTRAINT `fk_Administrativo_Cliente1` FOREIGN KEY (`id_cliente-a`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
