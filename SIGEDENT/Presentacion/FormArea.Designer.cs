@@ -38,10 +38,10 @@
             this.btn_editar = new System.Windows.Forms.Button();
             this.btn_nuevo = new System.Windows.Forms.Button();
             this.dgv_vista = new System.Windows.Forms.DataGridView();
-            this.txb_buscar = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txb_buscar = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pan_registro.SuspendLayout();
             this.pan_vista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vista)).BeginInit();
@@ -63,7 +63,7 @@
             this.btn_cancelar.Location = new System.Drawing.Point(120, 72);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(96, 23);
-            this.btn_cancelar.TabIndex = 6;
+            this.btn_cancelar.TabIndex = 9;
             this.btn_cancelar.Text = "CANCELAR";
             this.btn_cancelar.UseVisualStyleBackColor = true;
             // 
@@ -72,16 +72,17 @@
             this.btn_aceptar.Location = new System.Drawing.Point(15, 72);
             this.btn_aceptar.Name = "btn_aceptar";
             this.btn_aceptar.Size = new System.Drawing.Size(96, 23);
-            this.btn_aceptar.TabIndex = 7;
+            this.btn_aceptar.TabIndex = 8;
             this.btn_aceptar.Text = "ACEPTAR";
             this.btn_aceptar.UseVisualStyleBackColor = true;
+            this.btn_aceptar.Click += new System.EventHandler(this.btn_aceptar_Click);
             // 
             // txb_nombre_area
             // 
             this.txb_nombre_area.Location = new System.Drawing.Point(15, 31);
             this.txb_nombre_area.Name = "txb_nombre_area";
             this.txb_nombre_area.Size = new System.Drawing.Size(205, 20);
-            this.txb_nombre_area.TabIndex = 5;
+            this.txb_nombre_area.TabIndex = 7;
             // 
             // label2
             // 
@@ -110,9 +111,10 @@
             this.btn_eliminar.Location = new System.Drawing.Point(296, 326);
             this.btn_eliminar.Name = "btn_eliminar";
             this.btn_eliminar.Size = new System.Drawing.Size(110, 23);
-            this.btn_eliminar.TabIndex = 4;
+            this.btn_eliminar.TabIndex = 6;
             this.btn_eliminar.Text = "ELIMINAR";
             this.btn_eliminar.UseVisualStyleBackColor = true;
+            this.btn_eliminar.Click += new System.EventHandler(this.btn_eliminar_Click);
             // 
             // btn_editar
             // 
@@ -122,15 +124,17 @@
             this.btn_editar.TabIndex = 5;
             this.btn_editar.Text = "EDITAR";
             this.btn_editar.UseVisualStyleBackColor = true;
+            this.btn_editar.Click += new System.EventHandler(this.btn_editar_Click);
             // 
             // btn_nuevo
             // 
             this.btn_nuevo.Location = new System.Drawing.Point(21, 326);
             this.btn_nuevo.Name = "btn_nuevo";
             this.btn_nuevo.Size = new System.Drawing.Size(110, 23);
-            this.btn_nuevo.TabIndex = 6;
+            this.btn_nuevo.TabIndex = 4;
             this.btn_nuevo.Text = "NUEVO";
             this.btn_nuevo.UseVisualStyleBackColor = true;
+            this.btn_nuevo.Click += new System.EventHandler(this.btn_nuevo_Click);
             // 
             // dgv_vista
             // 
@@ -143,22 +147,6 @@
             this.dgv_vista.Size = new System.Drawing.Size(377, 232);
             this.dgv_vista.TabIndex = 2;
             // 
-            // txb_buscar
-            // 
-            this.txb_buscar.Location = new System.Drawing.Point(79, 31);
-            this.txb_buscar.Name = "txb_buscar";
-            this.txb_buscar.Size = new System.Drawing.Size(253, 20);
-            this.txb_buscar.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Area:";
-            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -170,6 +158,24 @@
             this.nombre.DataPropertyName = "nombre";
             this.nombre.HeaderText = "Nombre de Area";
             this.nombre.Name = "nombre";
+            // 
+            // txb_buscar
+            // 
+            this.txb_buscar.Location = new System.Drawing.Point(79, 31);
+            this.txb_buscar.Name = "txb_buscar";
+            this.txb_buscar.Size = new System.Drawing.Size(253, 20);
+            this.txb_buscar.TabIndex = 1;
+            this.txb_buscar.TextChanged += new System.EventHandler(this.txb_buscar_TextChanged);
+            this.txb_buscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txb_buscar_KeyUp);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(41, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Area:";
             // 
             // FormArea
             // 

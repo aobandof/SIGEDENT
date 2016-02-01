@@ -1,0 +1,10 @@
+CREATE TABLE `trabajo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `detalle` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `etapa` enum('I','P','T') COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_trabajo-t` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_trabajo_trabajo1_idx` (`id_trabajo-t`),
+  CONSTRAINT `fk_trabajo_trabajo1` FOREIGN KEY (`id_trabajo-t`) REFERENCES `trabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

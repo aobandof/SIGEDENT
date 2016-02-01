@@ -1,0 +1,9 @@
+CREATE TABLE `empleado_usuario` (
+  `codigo_empleado-eu` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `nick_usuario-eu` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`codigo_empleado-eu`,`nick_usuario-eu`),
+  KEY `fk_empleado_has_usuario_usuario1_idx` (`nick_usuario-eu`),
+  KEY `fk_empleado_has_usuario_empleado1_idx` (`codigo_empleado-eu`),
+  CONSTRAINT `fk_empleado_has_usuario_empleado1` FOREIGN KEY (`codigo_empleado-eu`) REFERENCES `empleado` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_empleado_has_usuario_usuario1` FOREIGN KEY (`nick_usuario-eu`) REFERENCES `usuario` (`nick`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

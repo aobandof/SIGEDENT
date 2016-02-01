@@ -1,0 +1,13 @@
+CREATE TABLE `personal` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(35) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellidos` varchar(35) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(25) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `celular` int(11) DEFAULT NULL,
+  `telefono` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cargo` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_sucursal-p` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`id_sucursal-p`),
+  KEY `fk_Personal_Sucursal1_idx` (`id_sucursal-p`),
+  CONSTRAINT `fk_Personal_Sucursal1` FOREIGN KEY (`id_sucursal-p`) REFERENCES `sucursal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
