@@ -128,6 +128,11 @@ namespace Presentacion
             else
                 MessageBox.Show("Verifique los datos por favor");
         }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            Activar_Panel(false);
+        }
     }
 }
     
