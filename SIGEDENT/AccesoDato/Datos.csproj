@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DEmpleado.cs" />
     <Compile Include="DArea.cs" />
     <Compile Include="DUsuario.cs" />
     <Compile Include="Conexion.cs" />

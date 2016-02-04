@@ -147,6 +147,7 @@
             this.dgv_vista.Name = "dgv_vista";
             this.dgv_vista.Size = new System.Drawing.Size(377, 232);
             this.dgv_vista.TabIndex = 2;
+            this.dgv_vista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_vista_CellContentClick);
             // 
             // id
             // 

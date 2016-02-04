@@ -1,26 +1,5 @@
 use beraudent
 go
-
-/*PROCEDIMIENTO PARA SELECCIONAR Y ELIMINAR*/
-create procedure sp_area_se (
-	@operacion varchar(1),
-	@id tinyint
-)
-as
-begin
-if(@operacion='S')
-	select * from area where id=@id
-else 
-	begin
-		if(@operacion='E')
-			delete from area where id=@id
-		else
-			select * from area
-	end
-end
-
-go
-
 /*PROCEDIMIENTO PARA INSERTAR Y ACTUALIZAR */
 create procedure sp_area_grabar(
 	@id tinyint,
@@ -31,37 +10,49 @@ begin
 if(@id=0)
 	insert into area (nombre) values (@nombre)
 else
+	if(@id=1)
 	update area set nombre=@nombre where id=@id
 end
 
 go
-
-/*PROCEDIMIENTO ALMACENADO PARA SELECCIONAR FILTRO*/
-create procedure sp_area_filtrar(
-	@filtro varchar (20)
-)
+/*PROCEDIMIENTO PARA SELECCIONAR UNA TABLA*/
+create procedure sp_area_seleccionar_tabla
 as
 begin
-	select * from area where nombre like @filtro + '%'
+	select * from area
 end
-
 go
-
-/*YA NO SE USA, EN SU LUGAR sp_area_grabar */
-/*PRODEDIMIENTO PARA INSERTAR Y ACTUALIZAR*/
-/*CREATE procedure sp_area_ia (
-	@operacion varchar(1),
-	@id tinyint,
-	@nombre varchar(45)	
-)
+/*PROCEDMIENTO PARA SELECCIONAR UN REGISTRO POR ID*/
+create procedure sp_area_seleccionar_registro( @valor tinyint )
 as
 begin
-if(@operacion='I')
-	insert into area (nombre) values (@nombre)
-else
-	if(@operacion='A')
-		update area set nombre=@nombre where id=@id
-end*/
-
-
-
+	select * from area where id=@valor
+end
+go
+/*PROCEDIMIENTO PARA ELIMINAR REGISTRO*/
+create procedure sp_area_eliminar( @valor tinyint )
+as
+begin
+	delete from area where id=@valor
+end
+go
+/*PROCEDIMIENTO PARA SELECCIONAR FILTRO*/
+create procedure sp_area_filtrar_nombre( @valor varchar (20))
+as
+begin
+	select * from area where nombre like @valor + '%'
+end
+go
+/*PROCEDIMIENTO PARA BUSCAR POR ID*/
+create procedure sp_area_buscar_id( @valor tinyint, @encontrado tinyint output )
+as
+begin
+	select @encontrado =count(*) from area where id=@valor	
+end
+go
+/*PROCEDIMIENTO PARA BUSCAR POR NOMBRE*/
+create procedure sp_area_buscar_nombre( @valor varchar(45), @encontrado tinyint output )
+as
+begin
+	select @encontrado =count(*) from area where nombre=@valor	
+end

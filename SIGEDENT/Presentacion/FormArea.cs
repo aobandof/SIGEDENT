@@ -45,7 +45,7 @@ namespace Presentacion
         {
             try
             {
-                dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro(busqueda);
+                dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro("nombre",busqueda);
             }
             catch (Exception ex)
             {
@@ -56,8 +56,8 @@ namespace Presentacion
         private void FormArea_Load(object sender, EventArgs e)
         {
             dgv_vista.AutoGenerateColumns = false;
-            //dgv_vista.AutoResizeColumn();
-            dgv_vista.AutoResizeColumns();
+            dgv_vista.Columns[0].Width = (Screen.PrimaryScreen.Bounds.Width) / 35;
+            dgv_vista.Columns[1].Width =Convert.ToInt32((Screen.PrimaryScreen.Bounds.Width/ 4.8));
             LLenar_DataGridView("");
             Activar_Panel(false); //Inicialmente activamos el panel busqueda
         }
@@ -132,6 +132,11 @@ namespace Presentacion
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
             Activar_Panel(false);
+        }
+
+        private void dgv_vista_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
