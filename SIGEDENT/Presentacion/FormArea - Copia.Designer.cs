@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pan_registro = new System.Windows.Forms.Panel();
-            this.txb_nombre = new System.Windows.Forms.TextBox();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_aceptar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,6 +41,7 @@
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txb_buscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txb_nombre = new System.Windows.Forms.TextBox();
             this.pan_registro.SuspendLayout();
             this.pan_vista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vista)).BeginInit();
@@ -57,13 +57,6 @@
             this.pan_registro.Name = "pan_registro";
             this.pan_registro.Size = new System.Drawing.Size(235, 376);
             this.pan_registro.TabIndex = 0;
-            // 
-            // txb_nombre
-            // 
-            this.txb_nombre.Location = new System.Drawing.Point(17, 31);
-            this.txb_nombre.Name = "txb_nombre";
-            this.txb_nombre.Size = new System.Drawing.Size(199, 20);
-            this.txb_nombre.TabIndex = 10;
             // 
             // btn_cancelar
             // 
@@ -133,6 +126,7 @@
             this.btn_nuevo.Name = "btn_nuevo";
             this.btn_nuevo.Size = new System.Drawing.Size(110, 23);
             this.btn_nuevo.TabIndex = 4;
+            this.btn_nuevo.Text = "NUEVO";
             this.btn_nuevo.UseVisualStyleBackColor = true;
             this.btn_nuevo.Click += new System.EventHandler(this.btn_nuevo_Click);
             // 
@@ -177,6 +171,13 @@
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Area:";
+            // 
+            // txb_nombre
+            // 
+            this.txb_nombre.Location = new System.Drawing.Point(17, 31);
+            this.txb_nombre.Name = "txb_nombre";
+            this.txb_nombre.Size = new System.Drawing.Size(199, 20);
+            this.txb_nombre.TabIndex = 10;
             // 
             // FormArea
             // 

@@ -30,3 +30,5 @@ D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\bin\Debug\AccesoDato.pdb
 D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormUsuario.resources
 D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormArea.resources
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormArea.resources
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormModeloControl1.resources
+D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormEmpleado.resources

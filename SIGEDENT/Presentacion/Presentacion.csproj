@@ -44,23 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormEmpleado.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEmpleado.Designer.cs">
-      <DependentUpon>FormEmpleado.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormArea.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormArea.Designer.cs">
       <DependentUpon>FormArea.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpleado.Designer.cs">
+      <DependentUpon>FormEmpleado.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModeloControl1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModeloControl1.Designer.cs">
+      <DependentUpon>FormModeloControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="FormPrincipal.cs">
       <SubType>Form</SubType>
@@ -76,14 +82,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormEmpleado.resx">
-      <DependentUpon>FormEmpleado.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormArea.resx">
       <DependentUpon>FormArea.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpleado.resx">
+      <DependentUpon>FormEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModeloControl1.resx">
+      <DependentUpon>FormModeloControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>

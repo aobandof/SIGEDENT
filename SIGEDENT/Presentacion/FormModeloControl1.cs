@@ -10,18 +10,17 @@ using System.Windows.Forms;
 
 namespace Presentacion
 {
-    public partial class FormEmpleado : Form
+    public partial class FormModeloControl1 : Form
     {
-        private static FormEmpleado iform_empleado;
-        private Entidades.Empleado empleado;
+        private static FormModeloControl1 iform_modelocontrol1;
         private Entidades.Modelo modelo; //descomentar y declarar la entidad con la cual se trabajará
-
-        public FormEmpleado()
+        
+        public FormModeloControl1()
         {
             InitializeComponent();
         }
 
-        private void FormEmpleado_Load(object sender, EventArgs e)
+        private void FormModeloControl1_Load(object sender, EventArgs e)
         {
             dgv_vista.AutoGenerateColumns = false;
             //Elegir proporcion para cada columna con respecto al tamaño de la pantalla //descomentar la siguiente linea
@@ -30,14 +29,14 @@ namespace Presentacion
             Activar_Panel(false); //Inicialmente activamos el panel busqueda            
         }
 
-        public static FormEmpleado FormEmpleado_Instanciar()
+        public static FormModeloControl1 FormModeloControl1_Instanciar()
         {
-            if (iform_empleado == null || iform_empleado.IsDisposed == true)
+            if (iform_modelocontrol1 == null || iform_modelocontrol1.IsDisposed == true)
             {
-                iform_empleado = new FormEmpleado();
+                iform_modelocontrol1 = new FormModeloControl1();
             }
-            iform_empleado.BringToFront();
-            return iform_empleado;
+            iform_modelocontrol1.BringToFront();
+            return iform_modelocontrol1;
         }
 
         private void Activar_Panel(bool estado)
@@ -45,7 +44,7 @@ namespace Presentacion
             pan_registro.Enabled = estado;
             pan_vista.Enabled = !estado;
             if (estado)
-                txb_codigo.Focus();
+                txb_campo_prueba.Focus();
             else
                 txb_buscar.Focus();
         }
@@ -53,19 +52,13 @@ namespace Presentacion
         private void LLenar_DataGridView(string busqueda)
         {
             //modificar el metodo segun la tabla que queramos mostrar en el dgv_vista
-            try { dgv_vista.DataSource = Datos.DEmpleado.Empleado_Seleccionar_Filtro("apellidos", busqueda); }
+            try { dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro("nombre", busqueda); }
             catch (Exception ex) { MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
 
         private void Detallar_Elegido()
         {
             //llenar las cajas de texto del panel pan_registro con las propiedades de la clase instanciada actual
-            txb_codigo.Text = empleado.codigo;
-            txb_apellidos.Text=empleado.apellidos;
-            txb_nombres.Text=empleado.nombres;
-            txb_rut.Text=empleado.rut;
-            cbb_area.Text = empleado.Empleado_Area;
-
         }
 
         private void txb_buscar_KeyUp(object sender, KeyEventArgs e)
@@ -93,7 +86,7 @@ namespace Presentacion
             if (dgv_vista.CurrentRow != null)
             {
                 //instanciamos el objeto entidad con la fila elegida en el dgv_vista
-                empleado = (Entidades.Empleado)dgv_vista.CurrentRow.DataBoundItem;
+                //area = (Entidades.Area)dgv_vista.CurrentRow.DataBoundItem;
                 Detallar_Elegido();
             }
             else
@@ -107,8 +100,8 @@ namespace Presentacion
             {
                 if (dgv_vista.CurrentRow != null)
                 {
-                    try { Datos.DEmpleado.Empleado_Eliminar(dgv_vista.CurrentRow.Cells["Codigo"].Value.ToString()); }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    //try { Datos.DArea.Area_Eliminar(Convert.ToInt16(dgv_vista.CurrentRow.Cells["Id"].Value)); }
+                    //catch (Exception ex) { MessageBox.Show(ex.Message); }
                     LLenar_DataGridView("");
                 }
                 else
@@ -119,16 +112,13 @@ namespace Presentacion
         private void btn_aceptar_Click(object sender, EventArgs e)
         {
             /* si no usamos la capa Negocio, entonces debemos validar antes de este evento */
-            if (txb_codigo.Text != "" && txb_codigo.Text.Length > 2 && txb_apellidos.Text!="")
-            { //codigo y apellidos no vacios y codigo mayor de 2 cifras
-                if (empleado == null)
+            if ( txb_campo_prueba.Text != "" && txb_campo_prueba.Text.Length > 2)
+            { //nombre no vacio y mayo de 2 cifras
+                if (modelo == null)
                 { // el area a grabar no fue elgida del dgv, entonces instanciamos el objeto area indicando id=0 para que el sp_area_grabar realice un registro nuevo
-                    empleado= new Entidades.Empleado();
-                    empleado.codigo = txb_codigo.Text;
-                    empleado.apellidos= txb_apellidos.Text;
-                    empleado.nombres = txb_nombres.Text;
-                    empleado.rut = txb_rut.Text;
-                    empleado.area = (Entidades.Area)cbb_area.SelectedValue;
+                    modelo = new Entidades.Modelo();
+                    modelo.id = Convert.ToInt16(0);
+                    modelo.nombre = txb_campo_prueba.Text;
                 }
                 //descomentar el try catch
                 //try { Datos.DArea.Area_Grabar(area); }

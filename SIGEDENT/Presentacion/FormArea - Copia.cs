@@ -29,7 +29,7 @@ namespace Presentacion
             iform_area.BringToFront();
             return iform_area;
         }
-            
+
 
         private void Activar_Panel(bool estado)
         {
@@ -55,18 +55,15 @@ namespace Presentacion
 
         private void FormArea_Load(object sender, EventArgs e)
         {
-        dgv_vista.AutoGenerateColumns = false;
-        dgv_vista.Columns[0].Width = (Screen.PrimaryScreen.Bounds.Width) / 35;
-        dgv_vista.Columns[1].Width =Convert.ToInt32((Screen.PrimaryScreen.Bounds.Width/ 4.8));
-        LLenar_DataGridView("");
-        Activar_Panel(false); //Inicialmente activamos el panel busqueda
-        btn_aceptar.Text = "&Aceptar";
-        btn_nuevo.Text = "&Nuevo";
+            dgv_vista.AutoGenerateColumns = false;
+            dgv_vista.Columns[0].Width = (Screen.PrimaryScreen.Bounds.Width) / 35;
+            dgv_vista.Columns[1].Width =Convert.ToInt32((Screen.PrimaryScreen.Bounds.Width/ 4.8));
+            LLenar_DataGridView("");
+            Activar_Panel(false); //Inicialmente activamos el panel busqueda
         }
 
         private void Detallar_Elegido()
         {
-            //llenar las cajas de texto del panel pan_registro con las propiedades de la clase instanciada actual
             txb_nombre.Text = area.nombre;
         }
 

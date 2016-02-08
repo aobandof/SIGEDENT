@@ -1,6 +1,6 @@
 ﻿namespace Presentacion
 {
-    partial class FormEmpleado
+    partial class FormModeloControl1
     {
         /// <summary>
         /// Required designer variable.
@@ -28,40 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txb_buscar = new System.Windows.Forms.TextBox();
             this.pan_vista = new System.Windows.Forms.Panel();
             this.btn_eliminar = new System.Windows.Forms.Button();
             this.btn_editar = new System.Windows.Forms.Button();
             this.btn_nuevo = new System.Windows.Forms.Button();
             this.dgv_vista = new System.Windows.Forms.DataGridView();
+            this.txb_buscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pan_registro = new System.Windows.Forms.Panel();
-            this.txb_codigo = new System.Windows.Forms.TextBox();
+            this.txb_campo_prueba = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_aceptar = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txb_apellidos = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txb_nombres = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txb_rut = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbb_area = new System.Windows.Forms.ComboBox();
             this.pan_vista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vista)).BeginInit();
             this.pan_registro.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txb_buscar
-            // 
-            this.txb_buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_buscar.Location = new System.Drawing.Point(135, 26);
-            this.txb_buscar.Name = "txb_buscar";
-            this.txb_buscar.Size = new System.Drawing.Size(333, 22);
-            this.txb_buscar.TabIndex = 1;
-            this.txb_buscar.TextChanged += new System.EventHandler(this.txb_buscar_TextChanged);
-            this.txb_buscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txb_buscar_KeyUp);
             // 
             // pan_vista
             // 
@@ -71,10 +53,10 @@
             this.pan_vista.Controls.Add(this.dgv_vista);
             this.pan_vista.Controls.Add(this.txb_buscar);
             this.pan_vista.Controls.Add(this.label1);
-            this.pan_vista.Location = new System.Drawing.Point(0, 3);
+            this.pan_vista.Location = new System.Drawing.Point(2, 4);
             this.pan_vista.Name = "pan_vista";
             this.pan_vista.Size = new System.Drawing.Size(489, 379);
-            this.pan_vista.TabIndex = 2;
+            this.pan_vista.TabIndex = 0;
             // 
             // btn_eliminar
             // 
@@ -117,6 +99,16 @@
             this.dgv_vista.Size = new System.Drawing.Size(455, 241);
             this.dgv_vista.TabIndex = 2;
             // 
+            // txb_buscar
+            // 
+            this.txb_buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_buscar.Location = new System.Drawing.Point(135, 26);
+            this.txb_buscar.Name = "txb_buscar";
+            this.txb_buscar.Size = new System.Drawing.Size(333, 22);
+            this.txb_buscar.TabIndex = 1;
+            this.txb_buscar.TextChanged += new System.EventHandler(this.txb_buscar_TextChanged);
+            this.txb_buscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txb_buscar_KeyUp);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -129,30 +121,22 @@
             // 
             // pan_registro
             // 
-            this.pan_registro.Controls.Add(this.cbb_area);
-            this.pan_registro.Controls.Add(this.txb_rut);
-            this.pan_registro.Controls.Add(this.label6);
-            this.pan_registro.Controls.Add(this.label5);
-            this.pan_registro.Controls.Add(this.txb_nombres);
-            this.pan_registro.Controls.Add(this.label4);
-            this.pan_registro.Controls.Add(this.txb_apellidos);
-            this.pan_registro.Controls.Add(this.label3);
-            this.pan_registro.Controls.Add(this.txb_codigo);
+            this.pan_registro.Controls.Add(this.txb_campo_prueba);
             this.pan_registro.Controls.Add(this.label2);
             this.pan_registro.Controls.Add(this.btn_cancelar);
             this.pan_registro.Controls.Add(this.btn_aceptar);
-            this.pan_registro.Location = new System.Drawing.Point(495, 3);
+            this.pan_registro.Location = new System.Drawing.Point(497, 4);
             this.pan_registro.Name = "pan_registro";
             this.pan_registro.Size = new System.Drawing.Size(250, 379);
-            this.pan_registro.TabIndex = 3;
+            this.pan_registro.TabIndex = 1;
             // 
-            // txb_codigo
+            // txb_campo_prueba
             // 
-            this.txb_codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_codigo.Location = new System.Drawing.Point(21, 45);
-            this.txb_codigo.Name = "txb_codigo";
-            this.txb_codigo.Size = new System.Drawing.Size(212, 22);
-            this.txb_codigo.TabIndex = 5;
+            this.txb_campo_prueba.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_campo_prueba.Location = new System.Drawing.Point(21, 45);
+            this.txb_campo_prueba.Name = "txb_campo_prueba";
+            this.txb_campo_prueba.Size = new System.Drawing.Size(212, 22);
+            this.txb_campo_prueba.TabIndex = 5;
             // 
             // label2
             // 
@@ -160,9 +144,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(18, 26);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 16);
+            this.label2.Size = new System.Drawing.Size(102, 16);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Codigo:";
+            this.label2.Text = "Campo Prueba:";
             // 
             // btn_cancelar
             // 
@@ -186,88 +170,16 @@
             this.btn_aceptar.UseVisualStyleBackColor = true;
             this.btn_aceptar.Click += new System.EventHandler(this.btn_aceptar_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 75);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 16);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Apellidos:";
-            // 
-            // txb_apellidos
-            // 
-            this.txb_apellidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_apellidos.Location = new System.Drawing.Point(21, 94);
-            this.txb_apellidos.Name = "txb_apellidos";
-            this.txb_apellidos.Size = new System.Drawing.Size(212, 22);
-            this.txb_apellidos.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 16);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Nombres:";
-            // 
-            // txb_nombres
-            // 
-            this.txb_nombres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_nombres.Location = new System.Drawing.Point(21, 147);
-            this.txb_nombres.Name = "txb_nombres";
-            this.txb_nombres.Size = new System.Drawing.Size(212, 22);
-            this.txb_nombres.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 16);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Rut:";
-            // 
-            // txb_rut
-            // 
-            this.txb_rut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_rut.Location = new System.Drawing.Point(21, 200);
-            this.txb_rut.Name = "txb_rut";
-            this.txb_rut.Size = new System.Drawing.Size(212, 22);
-            this.txb_rut.TabIndex = 5;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(18, 237);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 16);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Area:";
-            // 
-            // cbb_area
-            // 
-            this.cbb_area.FormattingEnabled = true;
-            this.cbb_area.Location = new System.Drawing.Point(21, 257);
-            this.cbb_area.Name = "cbb_area";
-            this.cbb_area.Size = new System.Drawing.Size(212, 21);
-            this.cbb_area.TabIndex = 6;
-            // 
-            // FormEmpleado
+            // FormModeloControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 385);
-            this.Controls.Add(this.pan_vista);
+            this.ClientSize = new System.Drawing.Size(751, 389);
             this.Controls.Add(this.pan_registro);
-            this.Name = "FormEmpleado";
-            this.Text = "FControl de Empleados";
-            this.Load += new System.EventHandler(this.FormEmpleado_Load);
+            this.Controls.Add(this.pan_vista);
+            this.Name = "FormModeloControl1";
+            this.Text = "FormModeloControl1";
+            this.Load += new System.EventHandler(this.FormModeloControl1_Load);
             this.pan_vista.ResumeLayout(false);
             this.pan_vista.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vista)).EndInit();
@@ -279,25 +191,17 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txb_buscar;
         private System.Windows.Forms.Panel pan_vista;
+        private System.Windows.Forms.Panel pan_registro;
+        private System.Windows.Forms.TextBox txb_buscar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgv_vista;
+        private System.Windows.Forms.Button btn_nuevo;
         private System.Windows.Forms.Button btn_eliminar;
         private System.Windows.Forms.Button btn_editar;
-        private System.Windows.Forms.Button btn_nuevo;
-        private System.Windows.Forms.DataGridView dgv_vista;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel pan_registro;
-        private System.Windows.Forms.TextBox txb_codigo;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_cancelar;
         private System.Windows.Forms.Button btn_aceptar;
-        private System.Windows.Forms.ComboBox cbb_area;
-        private System.Windows.Forms.TextBox txb_rut;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txb_nombres;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txb_apellidos;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txb_campo_prueba;
+        private System.Windows.Forms.Label label2;
     }
 }
