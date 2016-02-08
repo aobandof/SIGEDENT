@@ -17,10 +17,10 @@ namespace Datos
             cmd.CommandType = CommandType.StoredProcedure;
         }
         //METODO PARA INSERTAR y ACTUALIZAR REGISTRO
-        public static int Area_Grabar(Entidades.Area a){
+        public static int Area_Grabar(Entidades.Area pa){
             instanciar_cmd("sp_area_grabar");
             string[] nombres_parametros =   { "@id", "@nombre" }; //SIEMPRE HAY QUE VERIFICAR QUE AMBOS ARREGLOS TENGAN LA MISMA LONGITUD
-            Object[] valores_parametros =   { a.id, a.nombre };
+            Object[] valores_parametros =   { pa.id, pa.nombre };
             int i = 0;
             foreach (string nombre_parametro in nombres_parametros) {
                 cmd.Parameters.Add(new SqlParameter(nombre_parametro, valores_parametros[i++]));
@@ -32,13 +32,13 @@ namespace Datos
         public static int Area_Eliminar(int id)
         {
             instanciar_cmd("sp_area_eliminar");
-            cmd.Parameters.Add(new SqlParameter("@valor", id));
+            cmd.Parameters.Add(new SqlParameter("@id", id));
             try { return cmd.ExecuteNonQuery(); }
             catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
         }
          //METODO PARA SELECCIONAR UN REGISTRO
-        public static Entidades.Area Area_Seleccionar_Registro(int id) {
-            instanciar_cmd("sp_area_seleccionar_registro");            
+        public static Entidades.Area Area_Seleccionar_Id(int id) {
+            instanciar_cmd("sp_area_seleccionar_id");            
             Entidades.Area area = new Entidades.Area();
             cmd.Parameters.Add(new SqlParameter("@id", id));
             try {
@@ -67,11 +67,13 @@ namespace Datos
         //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS
         public static DataTable Area_Seleccionar_Filtro(string nombre_columna, object valor_columna)
         {
-            if(nombre_columna=="nombre")
+            if (nombre_columna == "nombre")
+            {
                 instanciar_cmd("sp_area_filtrar_nombre");
+                cmd.Parameters.Add(new SqlParameter("@nombre", valor_columna));
+            }
             //si hubieran mas columnas posibles a filtrar, crear mas CONDICIONALES con su respectivo nombre de columna y sp
             DataTable dt = new DataTable();
-            cmd.Parameters.Add(new SqlParameter("@valor", valor_columna));
             try {
                 SqlDataReader dr = cmd.ExecuteReader();
                 dt.Load(dr);
@@ -81,13 +83,18 @@ namespace Datos
         }
         //METOD PARA BUSCAR UN REGISTRO ya sea ID, CODIGO U OTRA COLUMNA, el metodo determinar que proedimiento tomar
         public static int Area_Buscar(string nombre_columna, object valor_columna)
-        {           
-            if (nombre_columna == "id") //parece que para los id autoincrementables, nadie busca por id. Y PARA aquellas key con otro nombre cambiar el campo
-                instanciar_cmd("sp_area_buscar_id");//el nombre de parametro varía segun el nombre de la columna y la tabla a buscar                         
+        {
+            if (nombre_columna == "id")
+            { //parece que para los id autoincrementables, nadie busca por id. Y PARA aquellas key con otro nombre cambiar el campo
+                instanciar_cmd("sp_area_buscar_id");//el nombre de parametro varía segun el nombre de la columna y la tabla a buscar   
+                cmd.Parameters.Add(new SqlParameter("@id", valor_columna));
+            }
             if (nombre_columna == "nombre")
-                instanciar_cmd("sp_area_buscar_nombre");                        
+            {
+                instanciar_cmd("sp_area_buscar_nombre");
+                cmd.Parameters.Add(new SqlParameter("@nombre", valor_columna));
+            }
             //si hubieran otras columnas a buscar, agregarlas tanto aca y crear su respectivo procedimiento                        
-            cmd.Parameters.Add(new SqlParameter("@valor", valor_columna));
             SqlParameter pencontrado = new SqlParameter("@encontrado", 0);
             pencontrado.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(pencontrado);

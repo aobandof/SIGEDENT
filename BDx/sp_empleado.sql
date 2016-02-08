@@ -10,10 +10,9 @@ create procedure sp_empleado_grabar(
 )
 as
 begin
-if(@codigo='a')
-	insert into empleado (codigo,apellidos,nombres,rut,[id_area-e]) values (@codigo,@apellidos,@nombres,@id_area)
+if(@codigo='i')
+	insert into empleado (codigo,apellidos,nombres,rut,[id_area-e]) values (@codigo,@apellidos,@nombres,@rut,@id_area)
 else
-	if(@codigo=1)
 	update empleado set codigo=@codigo,apellidos=@apellidos,nombres=@nombres,rut=@rut,[id_area-e]=@id_area where codigo=@codigo
 end
 
@@ -26,36 +25,36 @@ begin
 end
 go
 /*PROCEDMIENTO PARA SELECCIONAR UN REGISTRO POR codigo*/
-create procedure sp_empleado_seleccionar_registro( @valor varchar(10) )
+create procedure sp_empleado_seleccionar_codigo( @codigo varchar(10) )
 as
 begin
-	select * from empleado where codigo=@valor
+	select * from empleado where codigo=@codigo
 end
 go
 /*PROCEDIMIENTO PARA ELIMINAR REGISTRO*/
-create procedure sp_empleado_eliminar( @valor varchar(10) )
+create procedure sp_empleado_eliminar( @codigo varchar(10) )
 as
 begin
-	delete from empleado where codigo=@valor
+	delete from empleado where codigo=@codigo
 end
 go
 /*PROCEDIMIENTO PARA SELECCIONAR FILTRO*/
-create procedure sp_empleado_filtrar_apellido( @valor varchar (20))
+create procedure sp_empleado_filtrar_apellidos( @apellidos varchar (20))
 as
 begin
-	select * from empleado where apellidos like @valor + '%'
+	select * from empleado where apellidos like @apellidos + '%'
 end
 go
 /*PROCEDIMIENTO PARA BUSCAR POR codigo*/
-create procedure sp_empleado_buscar_codigo( @valor varchar(10), @encontrado tinyint output )
+create procedure sp_empleado_buscar_codigo( @codigo varchar(10), @encontrado tinyint output )
 as
 begin
-	select @encontrado =count(*) from empleado where codigo=@valor	
+	select @encontrado =count(*) from empleado where codigo=@codigo	
 end
 go
-/*PROCEDIMIENTO PARA BUSCAR POR NOMBRE*/
-create procedure sp_empleado_buscar_apellido( @valor varchar(45), @encontrado tinyint output )
+/*PROCEDIMIENTO PARA BUSCAR POR APELLIDOS*/
+create procedure sp_empleado_buscar_apellidos( @apellidos varchar(45), @encontrado tinyint output )
 as
 begin
-	select @encontrado =count(*) from empleado where apellidos=@valor	
+	select @encontrado =count(*) from empleado where apellidos=@apellidos	
 end

@@ -12,22 +12,22 @@ namespace Presentacion
 {
     public partial class FormEmpleado : Form
     {
-        private static FormEmpleado iform_empleado = null;
-        private Entidades.Empleado empleado;
+        private static FormEmpleado iform_area = null;
+        private Entidades.Area area;
         
         public FormEmpleado()
         {
             InitializeComponent();
         }
 
-        public static FormEmpleado FormEmpleado_Instanciar()
+        public static FormEmpleado FormArea_Instanciar()
         {
-            if (iform_empleado == null || iform_empleado.IsDisposed == true)
+            if (iform_area == null || iform_area.IsDisposed == true)
             {
-                iform_empleado = new FormEmpleado();
+                iform_area = new FormEmpleado();
             }
-            iform_empleado.BringToFront();
-            return iform_empleado;
+            iform_area.BringToFront();
+            return iform_area;
         }
 
 
@@ -45,7 +45,7 @@ namespace Presentacion
         {
             try
             {
-                dgv_vista.DataSource = Datos.DEmpleado.Empleado_Seleccionar_Filtro("apellidos",busqueda);
+                dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro("nombre",busqueda);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace Presentacion
             }
         }
 
-        private void FormEmpleado_Load(object sender, EventArgs e)
+        private void FormArea_Load(object sender, EventArgs e)
         {
             dgv_vista.AutoGenerateColumns = false;
             dgv_vista.Columns[0].Width = (Screen.PrimaryScreen.Bounds.Width) / 35;
@@ -64,12 +64,7 @@ namespace Presentacion
 
         private void Detallar_Elegido()
         {
-            txb_codigo.Text = empleado.codigo;
-            txb_apellidos.Text = empleado.apellidos;
-            txb_nombres.Text = empleado.nombres;
-            txb_rut.Text = empleado.rut;
-            cbb_area.Text=empleado.area.nombre;
-            LLenar_Areas(empleado.area.);
+            txb_codigo.Text = area.nombre;
         }
 
         private void txb_buscar_KeyUp(object sender, KeyEventArgs e)
@@ -87,7 +82,7 @@ namespace Presentacion
 
         private void btn_nuevo_Click(object sender, EventArgs e)
         {
-            empleado = null;
+            area = null;
             txb_codigo.Clear();
             Activar_Panel(true);
         }
@@ -96,21 +91,21 @@ namespace Presentacion
         {
             if (dgv_vista.CurrentRow != null)
             {
-                empleado = (Entidades.Empleado)dgv_vista.CurrentRow.DataBoundItem;
+                area = (Entidades.Area)dgv_vista.CurrentRow.DataBoundItem;
                 Detallar_Elegido();
             }
             else
-                MessageBox.Show("Debe elegir una fila en la relacion de empleados");           
+                MessageBox.Show("Debe elegir una fila en la relacion de areas");           
         }
 
         private void btn_eliminar_Click(object sender, EventArgs e) {
             if (dgv_vista.CurrentRow != null) {
-                try {  Datos.DEmpleado.Empleado_Eliminar(Convert.ToInt16(dgv_vista.CurrentRow.Cells["Id"].Value));  }
+                try {  Datos.DArea.Area_Eliminar(Convert.ToInt16(dgv_vista.CurrentRow.Cells["Id"].Value));  }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }                
                 LLenar_DataGridView("");
             }
             else
-                MessageBox.Show("Debe elegir una fila en la relacion de empleados"); 
+                MessageBox.Show("Debe elegir una fila en la relacion de areas"); 
         }
 
         private void btn_aceptar_Click(object sender, EventArgs e)
@@ -118,12 +113,12 @@ namespace Presentacion
             /* si no usamos la capa Negocio, entonces debemos validar antes de este evento */                        
             if (txb_codigo.Text != "" && txb_codigo.Text.Length > 2)
             { //nombre no vacio y mayo de 2 cifras
-                if(empleado==null) { // el empleado a grabar no fue elgida del dgv, entonces instanciamos el objeto empleado indicando id=0 para que el sp_empleado_grabar realice un registro nuevo
-                    empleado = new Entidades.Empleado();
-                    empleado.id = Convert.ToInt16(0);
-                    empleado.nombre=txb_codigo.Text;
+                if(area==null) { // el area a grabar no fue elgida del dgv, entonces instanciamos el objeto area indicando id=0 para que el sp_area_grabar realice un registro nuevo
+                    area = new Entidades.Area();
+                    area.id = Convert.ToInt16(0);
+                    area.nombre=txb_codigo.Text;
                 }
-                try { Datos.DEmpleado.Empleado_Grabar(empleado);}
+                try { Datos.DArea.Area_Grabar(area);}
                 catch(Exception ex) { MessageBox.Show(ex.Message);}
                 Activar_Panel(false);
                 LLenar_DataGridView("");

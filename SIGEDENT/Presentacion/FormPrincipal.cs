@@ -14,7 +14,7 @@ namespace Presentacion
     {
         private FormLogin form_login;
         private FormUsuario form_usuario;
-        private FormArea form_area;
+        private FormEmpleado form_area;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace Presentacion
 
         private void controDeAreasYDptosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form_area = FormArea.FormArea_Instanciar();
+            form_area = FormEmpleado.FormArea_Instanciar();
             //form_area.MdiParent = this;
             form_area.Show();
         }
