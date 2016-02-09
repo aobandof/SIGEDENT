@@ -48,6 +48,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_aceptar = new System.Windows.Forms.Button();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.area = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pan_vista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vista)).BeginInit();
             this.pan_registro.SuspendLayout();
@@ -73,15 +78,15 @@
             this.pan_vista.Controls.Add(this.label1);
             this.pan_vista.Location = new System.Drawing.Point(0, 3);
             this.pan_vista.Name = "pan_vista";
-            this.pan_vista.Size = new System.Drawing.Size(489, 379);
+            this.pan_vista.Size = new System.Drawing.Size(668, 379);
             this.pan_vista.TabIndex = 2;
             // 
             // btn_eliminar
             // 
             this.btn_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_eliminar.Location = new System.Drawing.Point(321, 331);
+            this.btn_eliminar.Location = new System.Drawing.Point(418, 331);
             this.btn_eliminar.Name = "btn_eliminar";
-            this.btn_eliminar.Size = new System.Drawing.Size(116, 30);
+            this.btn_eliminar.Size = new System.Drawing.Size(136, 30);
             this.btn_eliminar.TabIndex = 5;
             this.btn_eliminar.Text = "Eliminar";
             this.btn_eliminar.UseVisualStyleBackColor = true;
@@ -90,9 +95,9 @@
             // btn_editar
             // 
             this.btn_editar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editar.Location = new System.Drawing.Point(184, 331);
+            this.btn_editar.Location = new System.Drawing.Point(249, 331);
             this.btn_editar.Name = "btn_editar";
-            this.btn_editar.Size = new System.Drawing.Size(116, 30);
+            this.btn_editar.Size = new System.Drawing.Size(136, 30);
             this.btn_editar.TabIndex = 4;
             this.btn_editar.Text = "&Editar";
             this.btn_editar.UseVisualStyleBackColor = true;
@@ -101,9 +106,9 @@
             // btn_nuevo
             // 
             this.btn_nuevo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_nuevo.Location = new System.Drawing.Point(43, 331);
+            this.btn_nuevo.Location = new System.Drawing.Point(80, 331);
             this.btn_nuevo.Name = "btn_nuevo";
-            this.btn_nuevo.Size = new System.Drawing.Size(116, 30);
+            this.btn_nuevo.Size = new System.Drawing.Size(136, 30);
             this.btn_nuevo.TabIndex = 3;
             this.btn_nuevo.Text = "&Nuevo";
             this.btn_nuevo.UseVisualStyleBackColor = true;
@@ -112,9 +117,15 @@
             // dgv_vista
             // 
             this.dgv_vista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_vista.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codigo,
+            this.apellidos,
+            this.nombres,
+            this.rut,
+            this.area});
             this.dgv_vista.Location = new System.Drawing.Point(13, 67);
             this.dgv_vista.Name = "dgv_vista";
-            this.dgv_vista.Size = new System.Drawing.Size(455, 241);
+            this.dgv_vista.Size = new System.Drawing.Size(643, 241);
             this.dgv_vista.TabIndex = 2;
             // 
             // label1
@@ -141,7 +152,7 @@
             this.pan_registro.Controls.Add(this.label2);
             this.pan_registro.Controls.Add(this.btn_cancelar);
             this.pan_registro.Controls.Add(this.btn_aceptar);
-            this.pan_registro.Location = new System.Drawing.Point(495, 3);
+            this.pan_registro.Location = new System.Drawing.Point(674, 3);
             this.pan_registro.Name = "pan_registro";
             this.pan_registro.Size = new System.Drawing.Size(250, 379);
             this.pan_registro.TabIndex = 3;
@@ -188,7 +199,7 @@
             this.txb_nombres.Location = new System.Drawing.Point(21, 147);
             this.txb_nombres.Name = "txb_nombres";
             this.txb_nombres.Size = new System.Drawing.Size(212, 22);
-            this.txb_nombres.TabIndex = 7;
+            this.txb_nombres.TabIndex = 8;
             // 
             // label4
             // 
@@ -258,11 +269,41 @@
             this.btn_aceptar.UseVisualStyleBackColor = true;
             this.btn_aceptar.Click += new System.EventHandler(this.btn_aceptar_Click);
             // 
+            // codigo
+            // 
+            this.codigo.DataPropertyName = "codigo";
+            this.codigo.HeaderText = "Codigo";
+            this.codigo.Name = "codigo";
+            // 
+            // apellidos
+            // 
+            this.apellidos.DataPropertyName = "apellidos";
+            this.apellidos.HeaderText = "Apellidos";
+            this.apellidos.Name = "apellidos";
+            // 
+            // nombres
+            // 
+            this.nombres.DataPropertyName = "nombres";
+            this.nombres.HeaderText = "Nombres";
+            this.nombres.Name = "nombres";
+            // 
+            // rut
+            // 
+            this.rut.DataPropertyName = "rut";
+            this.rut.HeaderText = "Rut";
+            this.rut.Name = "rut";
+            // 
+            // area
+            // 
+            this.area.DataPropertyName = "nombre_area";
+            this.area.HeaderText = "Area";
+            this.area.Name = "area";
+            // 
             // FormEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 385);
+            this.ClientSize = new System.Drawing.Size(926, 389);
             this.Controls.Add(this.pan_vista);
             this.Controls.Add(this.pan_registro);
             this.Name = "FormEmpleado";
@@ -299,5 +340,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txb_apellidos;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellidos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombres;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn area;
     }
 }

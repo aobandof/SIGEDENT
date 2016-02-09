@@ -94,7 +94,13 @@ namespace Presentacion
         {
             if (dgv_vista.CurrentRow != null)
             {
-                area = (Entidades.Area)dgv_vista.CurrentRow.DataBoundItem;
+                area = new Entidades.Area();
+                //area = (Entidades.Area)dgv_vista.CurrentRow.DataBoundItem;
+                //area = dgv_vista.CurrentRow.DataBoundItem as Entidades.Area;
+                //area= dgv_vista.CurrentRow.DataBoundItem as Entidades.Area;
+                area.id = Convert.ToInt32(dgv_vista.CurrentRow.Cells["Id"].Value);
+                area.nombre = dgv_vista.CurrentRow.Cells["Nombre"].Value.ToString();
+                Activar_Panel(true);
                 Detallar_Elegido();
             }
             else

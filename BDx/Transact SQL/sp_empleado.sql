@@ -21,14 +21,14 @@ go
 create procedure sp_empleado_seleccionar_tabla
 as
 begin
-	select * from empleado
+	select codigo,apellidos,nombres,rut,nombre as nombre_area from empleado, area where [id_area-e]=id
 end
 go
 /*PROCEDMIENTO PARA SELECCIONAR UN REGISTRO POR codigo*/
 create procedure sp_empleado_seleccionar_codigo( @codigo varchar(10) )
 as
 begin
-	select * from empleado where codigo=@codigo
+	select codigo,apellidos,nombres,rut,nombre as nombre_area from empleado, area where [id_area-e]=id and codigo=@codigo
 end
 go
 /*PROCEDIMIENTO PARA ELIMINAR REGISTRO*/
@@ -42,7 +42,7 @@ go
 create procedure sp_empleado_filtrar_apellidos( @apellidos varchar (20))
 as
 begin
-	select * from empleado where apellidos like @apellidos + '%'
+	select codigo,apellidos,nombres,rut,nombre as nombre_area from empleado, area where [id_area-e]=id and apellidos like @apellidos + '%'
 end
 go
 /*PROCEDIMIENTO PARA BUSCAR POR codigo*/

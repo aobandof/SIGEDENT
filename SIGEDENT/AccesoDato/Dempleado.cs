@@ -28,6 +28,7 @@ namespace Datos
             try {   return cmd.ExecuteNonQuery(); }
             catch (SqlException e)  { throw new Exception("Error encontrado: " + e.Message); }
         }
+
         //METODO PARA ELIMINAR REGISTRO
         public static int Empleado_Eliminar(string codigo)
         {
@@ -36,6 +37,7 @@ namespace Datos
             try { return cmd.ExecuteNonQuery(); }
             catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
         }
+
          //METODO PARA SELECCIONAR UN REGISTRO
         public static Entidades.Empleado Empleado_Seleccionar_Codigo(string codigo) {
             instanciar_cmd("sp_empleado_seleccionar_codigo");            
@@ -55,6 +57,7 @@ namespace Datos
             catch (Exception e){ throw new Exception("Error Encontrado: " + e.Message);  }            
             return empleado;
         }
+
         //METODO PARA SELECCIONAR TODOS REGISTRO
         public static DataTable Empleado_Seleccionar_Tabla()
         {
@@ -67,6 +70,7 @@ namespace Datos
             catch (SqlException e) { throw new Exception("Error Encontrado: " + e.Message); }
             return dt;            
         }      
+
         //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS
         public static DataTable Empleado_Seleccionar_Filtro(string nombre_columna, object valor_columna)
         {
@@ -84,6 +88,7 @@ namespace Datos
             }
             catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
         }
+
         //METOD PARA BUSCAR UN REGISTRO ya sea ID, CODIGO U OTRA COLUMNA, el metodo determinar que proedimiento tomar
         public static int Empleado_Buscar(string nombre_columna, object valor_columna)
         {
