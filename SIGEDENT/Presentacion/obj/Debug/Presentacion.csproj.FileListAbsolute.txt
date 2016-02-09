@@ -32,3 +32,5 @@ D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormArea.resourc
 C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormArea.resources
 D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormModeloControl1.resources
 D:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormEmpleado.resources
+C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormEmpleado.resources
+C:\GITHUB\SIGEDENT\SIGEDENT\Presentacion\obj\Debug\Presentacion.FormModeloControl1.resources

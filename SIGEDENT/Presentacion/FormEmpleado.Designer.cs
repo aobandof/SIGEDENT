@@ -36,18 +36,18 @@
             this.dgv_vista = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.pan_registro = new System.Windows.Forms.Panel();
+            this.cbb_area = new System.Windows.Forms.ComboBox();
+            this.txb_rut = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txb_nombres = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txb_apellidos = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.txb_codigo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_aceptar = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txb_apellidos = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txb_nombres = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txb_rut = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbb_area = new System.Windows.Forms.ComboBox();
             this.pan_vista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vista)).BeginInit();
             this.pan_registro.SuspendLayout();
@@ -146,13 +146,85 @@
             this.pan_registro.Size = new System.Drawing.Size(250, 379);
             this.pan_registro.TabIndex = 3;
             // 
+            // cbb_area
+            // 
+            this.cbb_area.FormattingEnabled = true;
+            this.cbb_area.Location = new System.Drawing.Point(21, 257);
+            this.cbb_area.Name = "cbb_area";
+            this.cbb_area.Size = new System.Drawing.Size(212, 21);
+            this.cbb_area.TabIndex = 10;
+            // 
+            // txb_rut
+            // 
+            this.txb_rut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_rut.Location = new System.Drawing.Point(21, 200);
+            this.txb_rut.Name = "txb_rut";
+            this.txb_rut.Size = new System.Drawing.Size(212, 22);
+            this.txb_rut.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(18, 237);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 16);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Area:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(18, 181);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 16);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Rut:";
+            // 
+            // txb_nombres
+            // 
+            this.txb_nombres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_nombres.Location = new System.Drawing.Point(21, 147);
+            this.txb_nombres.Name = "txb_nombres";
+            this.txb_nombres.Size = new System.Drawing.Size(212, 22);
+            this.txb_nombres.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(18, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 16);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Nombres:";
+            // 
+            // txb_apellidos
+            // 
+            this.txb_apellidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_apellidos.Location = new System.Drawing.Point(21, 94);
+            this.txb_apellidos.Name = "txb_apellidos";
+            this.txb_apellidos.Size = new System.Drawing.Size(212, 22);
+            this.txb_apellidos.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(18, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 16);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Apellidos:";
+            // 
             // txb_codigo
             // 
             this.txb_codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_codigo.Location = new System.Drawing.Point(21, 45);
             this.txb_codigo.Name = "txb_codigo";
             this.txb_codigo.Size = new System.Drawing.Size(212, 22);
-            this.txb_codigo.TabIndex = 5;
+            this.txb_codigo.TabIndex = 6;
             // 
             // label2
             // 
@@ -170,7 +242,7 @@
             this.btn_cancelar.Location = new System.Drawing.Point(134, 331);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(99, 30);
-            this.btn_cancelar.TabIndex = 3;
+            this.btn_cancelar.TabIndex = 12;
             this.btn_cancelar.Text = "&Cancelar";
             this.btn_cancelar.UseVisualStyleBackColor = true;
             this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
@@ -181,82 +253,10 @@
             this.btn_aceptar.Location = new System.Drawing.Point(21, 331);
             this.btn_aceptar.Name = "btn_aceptar";
             this.btn_aceptar.Size = new System.Drawing.Size(99, 30);
-            this.btn_aceptar.TabIndex = 3;
+            this.btn_aceptar.TabIndex = 11;
             this.btn_aceptar.Text = "&Aceptar";
             this.btn_aceptar.UseVisualStyleBackColor = true;
             this.btn_aceptar.Click += new System.EventHandler(this.btn_aceptar_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 75);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 16);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Apellidos:";
-            // 
-            // txb_apellidos
-            // 
-            this.txb_apellidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_apellidos.Location = new System.Drawing.Point(21, 94);
-            this.txb_apellidos.Name = "txb_apellidos";
-            this.txb_apellidos.Size = new System.Drawing.Size(212, 22);
-            this.txb_apellidos.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 16);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Nombres:";
-            // 
-            // txb_nombres
-            // 
-            this.txb_nombres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_nombres.Location = new System.Drawing.Point(21, 147);
-            this.txb_nombres.Name = "txb_nombres";
-            this.txb_nombres.Size = new System.Drawing.Size(212, 22);
-            this.txb_nombres.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 16);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Rut:";
-            // 
-            // txb_rut
-            // 
-            this.txb_rut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_rut.Location = new System.Drawing.Point(21, 200);
-            this.txb_rut.Name = "txb_rut";
-            this.txb_rut.Size = new System.Drawing.Size(212, 22);
-            this.txb_rut.TabIndex = 5;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(18, 237);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 16);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Area:";
-            // 
-            // cbb_area
-            // 
-            this.cbb_area.FormattingEnabled = true;
-            this.cbb_area.Location = new System.Drawing.Point(21, 257);
-            this.cbb_area.Name = "cbb_area";
-            this.cbb_area.Size = new System.Drawing.Size(212, 21);
-            this.cbb_area.TabIndex = 6;
             // 
             // FormEmpleado
             // 
