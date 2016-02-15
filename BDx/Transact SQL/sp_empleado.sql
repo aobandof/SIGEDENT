@@ -18,14 +18,14 @@ end
 
 go
 /*PROCEDIMIENTO PARA SELECCIONAR UNA TABLA*/
-create procedure sp_empleado_seleccionar_tabla
+alter procedure sp_empleado_seleccionar_tabla
 as
 begin
 	select codigo,apellidos,nombres,rut,nombre as nombre_area from empleado, area where [id_area-e]=id
 end
 go
 /*PROCEDMIENTO PARA SELECCIONAR UN REGISTRO POR codigo*/
-create procedure sp_empleado_seleccionar_codigo( @codigo varchar(10) )
+alter procedure sp_empleado_seleccionar_codigo( @codigo varchar(10) )
 as
 begin
 	select codigo,apellidos,nombres,rut,nombre as nombre_area from empleado, area where [id_area-e]=id and codigo=@codigo
@@ -39,7 +39,7 @@ begin
 end
 go
 /*PROCEDIMIENTO PARA SELECCIONAR FILTRO*/
-create procedure sp_empleado_filtrar_apellidos( @apellidos varchar (20))
+alter procedure sp_empleado_filtrar_apellidos( @apellidos varchar (20))
 as
 begin
 	select codigo,apellidos,nombres,rut,nombre as nombre_area from empleado, area where [id_area-e]=id and apellidos like @apellidos + '%'

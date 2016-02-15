@@ -52,7 +52,7 @@ namespace Presentacion
         private void LLenar_DataGridView(string busqueda)
         {
             //modificar el metodo segun la tabla que queramos mostrar en el dgv_vista
-            try { dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro("nombre", busqueda); }
+            try { dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro_Lista("nombre", busqueda); }
             catch (Exception ex) { MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
 

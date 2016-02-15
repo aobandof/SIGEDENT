@@ -45,7 +45,7 @@ namespace Presentacion
         {
             try
             {
-                dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro("nombre",busqueda);
+                dgv_vista.DataSource = Datos.DArea.Area_Seleccionar_Filtro_Lista("nombre",busqueda);
             }
             catch (Exception ex)
             {

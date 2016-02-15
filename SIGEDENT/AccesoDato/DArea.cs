@@ -52,7 +52,7 @@ namespace Datos
             catch (Exception e){ throw new Exception("Error Encontrado: " + e.Message);  }            
             return area;
         }
-        //METODO PARA SELECCIONAR TODOS REGISTRO
+        //METODO PARA SELECCIONAR TODOS REGISTRO en un Datatable
         public static DataTable Area_Seleccionar_Tabla()
         {
             instanciar_cmd("sp_area_seleccionar_tabla");
@@ -63,9 +63,28 @@ namespace Datos
             }
             catch (SqlException e) { throw new Exception("Error Encontrado: " + e.Message); }
             return dt;            
-        }      
-        //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS
-        public static DataTable Area_Seleccionar_Filtro(string nombre_columna, object valor_columna)
+        }
+        //METODO PARA SELECCIONAR TODOS REGISTRO en una Lista de Objetos
+        public static List<Entidades.Area> Area_Seleccionar_Lista()
+        {
+            instanciar_cmd("sp_area_seleccionar_tabla");
+            var lista=new List<Entidades.Area>();            
+            try
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+                while(dr.Read()){
+                    var area = new Entidades.Area();
+                    area.id = dr.GetInt16(0);
+                    area.nombre = dr.GetString(1);
+                    lista.Add(area);
+                    area=null;
+                }                
+            }
+            catch (SqlException e) { throw new Exception("Error Encontrado: " + e.Message); }
+            return lista;
+        }  
+        //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS en un Datatable
+        public static DataTable Area_Seleccionar_Filtro_Tabla(string nombre_columna, object valor_columna)
         {
             if (nombre_columna == "nombre")
             {
@@ -81,6 +100,35 @@ namespace Datos
             }
             catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
         }
+
+        //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS en una lista de objetos
+        public static List<Entidades.Area> Area_Seleccionar_Filtro_Lista(string nombre_columna, object valor_columna)
+        {
+            var lista=new List<Entidades.Area>();
+                
+            if (nombre_columna == "nombre")
+            {
+                instanciar_cmd("sp_area_filtrar_nombre");
+                cmd.Parameters.Add(new SqlParameter("@nombre", valor_columna));
+            }
+            //si hubieran mas columnas posibles a filtrar, crear mas CONDICIONALES con su respectivo nombre de columna y sp
+            try
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+                while(dr.Read()){
+                    var area = new Entidades.Area();
+                    area.id=dr.GetInt16(0);
+                    //area.id=Convert.ToInt16(dr[dr.GetOrdinal("id")]);
+                    area.nombre=dr.GetString(1);
+                    //area.nombre=dr[dr.GetOrdinal("nombre")].ToString();
+                    lista.Add(area);
+                    area=null;
+                }
+            }
+            catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
+            return lista;
+        }
+
         //METOD PARA BUSCAR UN REGISTRO ya sea ID, CODIGO U OTRA COLUMNA, el metodo determinar que proedimiento tomar
         public static int Area_Buscar(string nombre_columna, object valor_columna)
         {

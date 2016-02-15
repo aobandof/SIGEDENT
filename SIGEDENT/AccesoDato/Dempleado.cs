@@ -58,7 +58,7 @@ namespace Datos
             return empleado;
         }
 
-        //METODO PARA SELECCIONAR TODOS REGISTRO
+        //METODO PARA SELECCIONAR TODOS REGISTRO EN UN DATATABLE
         public static DataTable Empleado_Seleccionar_Tabla()
         {
             instanciar_cmd("sp_empleado_seleccionar_tabla");
@@ -69,10 +69,37 @@ namespace Datos
             }
             catch (SqlException e) { throw new Exception("Error Encontrado: " + e.Message); }
             return dt;            
-        }      
+        }
 
-        //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS
-        public static DataTable Empleado_Seleccionar_Filtro(string nombre_columna, object valor_columna)
+        //METODO PARA SELECCIONAR TODOS REGISTRO EN UNA LISTA DE OBJETOS
+        public static List<Entidades.Empleado> Empleado_Seleccionar_Lista()
+        {
+            var lista = new List<Entidades.Empleado>();
+            instanciar_cmd("sp_empleado_seleccionar_tabla");
+            DataTable dt = new DataTable();
+            try
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    var empleado=new Entidades.Empleado();
+                    var area=new Entidades.Area();
+                    empleado.codigo = dr[dr.GetOrdinal("codigo")].ToString();
+                    empleado.apellidos = dr[dr.GetOrdinal("apellidos")].ToString();
+                    empleado.nombres = dr[dr.GetOrdinal("nombres")].ToString();
+                    empleado.rut = dr[dr.GetOrdinal("rut")].ToString();
+                    area.nombre=dr[dr.GetOrdinal("nombre")].ToString();
+                    empleado.area = area;
+                    empleado = null;
+                    area = null;
+                }
+            }
+            catch (SqlException e) { throw new Exception("Error Encontrado: " + e.Message); }
+            return lista;
+        }     
+
+        //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS EN DATATABLE
+        public static DataTable Empleado_Seleccionar_Filtro_Tabla(string nombre_columna, object valor_columna)
         {
             if (nombre_columna == "apellidos")
             {
@@ -87,6 +114,34 @@ namespace Datos
                 return dt;
             }
             catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
+        }
+
+        //METODO PARA SELECCIONAR UN FILTRO DE REGISTROS EN LISTA DE OBJETOS
+        public static List<Entidades.Empleado> Empleado_Seleccionar_Filtro_Lista(string nombre_columna, object valor_columna)
+        {
+            var lista = new List<Entidades.Empleado>();
+            if (nombre_columna == "apellidos")
+            {
+                instanciar_cmd("sp_empleado_filtrar_apellidos");
+                cmd.Parameters.Add(new SqlParameter("@apellidos", valor_columna));
+            }
+            //si hubieran mas columnas posibles a filtrar, crear mas CONDICIONALES con su respectivo nombre de columna y sp
+            try
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+                var empleado = new Entidades.Empleado();
+                var area = new Entidades.Area();
+                empleado.codigo = dr[dr.GetOrdinal("codigo")].ToString();
+                empleado.apellidos = dr[dr.GetOrdinal("apellidos")].ToString();
+                empleado.nombres = dr[dr.GetOrdinal("nombres")].ToString();
+                empleado.rut = dr[dr.GetOrdinal("rut")].ToString();
+                area.nombre = dr[dr.GetOrdinal("nombre")].ToString();
+                empleado.area = area;
+                empleado = null;
+                area = null;
+            }
+            catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
+            return lista;
         }
 
         //METOD PARA BUSCAR UN REGISTRO ya sea ID, CODIGO U OTRA COLUMNA, el metodo determinar que proedimiento tomar

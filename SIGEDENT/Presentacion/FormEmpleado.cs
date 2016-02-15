@@ -57,7 +57,7 @@ namespace Presentacion
         private void LLenar_DataGridView(string busqueda)
         {
             //modificar el metodo segun la tabla que queramos mostrar en el dgv_vista
-            try { dgv_vista.DataSource = Datos.DEmpleado.Empleado_Seleccionar_Filtro("apellidos", busqueda); }
+            try { dgv_vista.DataSource = Datos.DEmpleado.Empleado_Seleccionar_Filtro_Lista("apellidos", busqueda); }
             catch (Exception ex) { MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
 
@@ -65,7 +65,7 @@ namespace Presentacion
         {
             cbb_area.ValueMember = "id";
             cbb_area.DisplayMember = "nombre";
-            try { cbb_area.DataSource = Datos.DArea.Area_Seleccionar_Tabla(); }
+            try { cbb_area.DataSource = Datos.DArea.Area_Seleccionar_Lista(); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
