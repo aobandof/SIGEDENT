@@ -270,10 +270,11 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`usuario` (
-  `email` VARCHAR(25) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user` VARCHAR(10) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
-  `permisos` ENUM('A', 'E', 'S', 'C', 'T', 'L') NOT NULL DEFAULT 'L' COMMENT '\'A\'=Administrador\n\'E\'=Escritura / Control Total\n\'S\'=Secretaria\n\'C\'=Contabilidad\n\'T\'=Tecnicos\n\'L\'=Lectura',
-  PRIMARY KEY (`email`))
+  `permisos` ENUM('A', 'S', 'E', 'T', 'D') NOT NULL COMMENT '\'A\'=Administrador\n\'S\'=Super Usuario \n\'U\'=Usuario solo con pocos atributos de modificación\n\'E\'=Ejecutivo\n\'T\'=Tecnico\n\'D\'=Doctor',
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -290,18 +291,18 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`empleado` (
   `apellidos` VARCHAR(45) NULL,
   `rut` VARCHAR(10) NULL,
   `id_area_e` TINYINT(1) NOT NULL,
-  `email_usuario_e` VARCHAR(25) NOT NULL,
+  `id_usuario` INT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `fk_empleado_Area1_idx` (`id_area_e` ASC),
-  INDEX `fk_empleado_usuario1_idx` (`email_usuario_e` ASC),
+  INDEX `fk_empleado_usuario1_idx` (`id_usuario` ASC),
   CONSTRAINT `fk_empleado_Area1`
     FOREIGN KEY (`id_area_e`)
     REFERENCES `beraudent`.`Area` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_empleado_usuario1`
-    FOREIGN KEY (`email_usuario_e`)
-    REFERENCES `beraudent`.`usuario` (`email`)
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `beraudent`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -872,8 +873,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `beraudent`;
-INSERT INTO `beraudent`.`usuario` (`email`, `password`, `permisos`) VALUES ('ofaber', '123456', 'A');
-INSERT INTO `beraudent`.`usuario` (`email`, `password`, `permisos`) VALUES ('cpilar', '123456', 'L');
+INSERT INTO `beraudent`.`usuario` (`id`, `user`, `password`, `permisos`) VALUES (DEFAULT, 'indefinido', '11111', 'U');
+INSERT INTO `beraudent`.`usuario` (`id`, `user`, `password`, `permisos`) VALUES (DEFAULT, 'admin', '013821', 'A');
 
 COMMIT;
 
@@ -883,7 +884,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `beraudent`;
-INSERT INTO `beraudent`.`comprobante` (`id`, `numero`, `tipo`, `fecha`, `referencia`, `rut_cliente`, `razon_cliente`, `detalle`, `valor_neto`) VALUES (, 'NO CREADO', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `beraudent`.`comprobante` (`id`, `numero`, `tipo`, `fecha`, `referencia`, `rut_cliente`, `razon_cliente`, `detalle`, `valor_neto`) VALUES (DEFAULT, 'NO CREADO', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -893,7 +894,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `beraudent`;
-INSERT INTO `beraudent`.`cancelacion` (`id`, `codigo`, `periodo`, `monto`, `descuento`, `total`, `detalle`, `id_comprobante_c`) VALUES (DEFAULT, 'IMPAGO', NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `beraudent`.`cancelacion` (`id`, `codigo`, `periodo`, `monto`, `descuento`, `total`, `detalle`, `id_comprobante_c`) VALUES (DEFAULT, 'IMPAGO', NULL, NULL, NULL, NULL, NULL, 1);
 
 COMMIT;
 
