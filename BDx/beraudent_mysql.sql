@@ -30,21 +30,6 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
--- Table `beraudent`.`arancel`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`arancel` ;
-
-CREATE TABLE IF NOT EXISTS `beraudent`.`arancel` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(20) NULL,
-  `detalle` VARCHAR(45) NULL COMMENT 'deta_aran informará como se construyó el arancel (si deriba de algun porcentaje sobre algun arancel base o es un arancel con precios especiales)',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
 -- Table `beraudent`.`datos_facturacion`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `beraudent`.`datos_facturacion` ;
@@ -71,6 +56,20 @@ COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
+-- Table `beraudent`.`arancel`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`arancel` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`arancel` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(20) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
 -- Table `beraudent`.`sucursal`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `beraudent`.`sucursal` ;
@@ -78,21 +77,15 @@ DROP TABLE IF EXISTS `beraudent`.`sucursal` ;
 CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `codigo` VARCHAR(10) NULL,
-  `abreviatura` VARCHAR(10) NULL,
   `nombre` VARCHAR(25) NOT NULL,
-  `alias` VARCHAR(45) NULL,
-  `id_arance_s` INT NOT NULL,
+  `tipo_cobro` ENUM('T', 'P') NULL DEFAULT 'T',
   `id_cliente_s` INT NOT NULL,
   `id_datos_facturacion_s` INT NOT NULL,
+  `id_arancel_s` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Sucursal_Arancel1_idx` (`id_arance_s` ASC),
   INDEX `fk_Sucursal_Cliente1_idx` (`id_cliente_s` ASC),
   INDEX `fk_Sucursal_Datos_Facturacion1_idx` (`id_datos_facturacion_s` ASC),
-  CONSTRAINT `fk_Sucursal_Arancel1`
-    FOREIGN KEY (`id_arance_s`)
-    REFERENCES `beraudent`.`arancel` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_sucursal_arancel1_idx` (`id_arancel_s` ASC),
   CONSTRAINT `fk_Sucursal_Cliente1`
     FOREIGN KEY (`id_cliente_s`)
     REFERENCES `beraudent`.`cliente` (`id`)
@@ -101,6 +94,11 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`sucursal` (
   CONSTRAINT `fk_Sucursal_Datos_Facturacion1`
     FOREIGN KEY (`id_datos_facturacion_s`)
     REFERENCES `beraudent`.`datos_facturacion` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sucursal_arancel1`
+    FOREIGN KEY (`id_arancel_s`)
+    REFERENCES `beraudent`.`arancel` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -361,7 +359,7 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`comprobante` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`comprobante` (
-  `id` VARCHAR(10) NOT NULL COMMENT 'sera una cadena generada por el numero y el tipo de comprobante\n',
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '\n',
   `numero` VARCHAR(10) NULL,
   `tipo` ENUM('F', 'B', 'FE', 'BE', 'NC', 'ND', 'CE', 'DE') NULL,
   `fecha` DATE NULL,
@@ -382,13 +380,15 @@ COLLATE = utf8_spanish_ci;
 DROP TABLE IF EXISTS `beraudent`.`cancelacion` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`cancelacion` (
-  `numero` VARCHAR(10) NOT NULL,
-  `fecha` DATE NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `codigo` VARCHAR(10) NULL,
+  `periodo` VARCHAR(11) NULL COMMENT '2016-02-ENE   son 11 caracteres',
   `monto` FLOAT NULL,
+  `descuento` FLOAT NULL DEFAULT 0,
+  `total` FLOAT NULL,
   `detalle` VARCHAR(45) NULL,
-  `periodo` VARCHAR(15) NULL,
-  `id_comprobante_c` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`numero`),
+  `id_comprobante_c` INT NOT NULL,
+  PRIMARY KEY (`id`),
   INDEX `fk_cancelacion_comprobante1_idx` (`id_comprobante_c` ASC),
   CONSTRAINT `fk_cancelacion_comprobante1`
     FOREIGN KEY (`id_comprobante_c`)
@@ -416,11 +416,11 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`producto_solicitado` (
   `detalle` VARCHAR(45) NULL,
   `codigo_item_ps` VARCHAR(10) NOT NULL,
   `numero_pedido_ps` VARCHAR(10) NOT NULL,
-  `numero_cancelacion_ps` VARCHAR(10) NOT NULL,
+  `id_cancelacion_ps` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_producto_solicitado_item1_idx` (`codigo_item_ps` ASC),
   INDEX `fk_producto_solicitado_pedido1_idx` (`numero_pedido_ps` ASC),
-  INDEX `fk_producto_solicitado_cancelacion1_idx` (`numero_cancelacion_ps` ASC),
+  INDEX `fk_producto_solicitado_cancelacion1_idx` (`id_cancelacion_ps` ASC),
   CONSTRAINT `fk_producto_solicitado_item1`
     FOREIGN KEY (`codigo_item_ps`)
     REFERENCES `beraudent`.`item` (`codigo`)
@@ -432,8 +432,8 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`producto_solicitado` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_producto_solicitado_cancelacion1`
-    FOREIGN KEY (`numero_cancelacion_ps`)
-    REFERENCES `beraudent`.`cancelacion` (`numero`)
+    FOREIGN KEY (`id_cancelacion_ps`)
+    REFERENCES `beraudent`.`cancelacion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -563,11 +563,11 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`abono_cargo` (
   `monto` FLOAT NULL,
   `tipo` ENUM('A', 'C') NULL,
   `cancelacion` VARCHAR(10) NULL COMMENT 'Contendra el numero de orden de compra o el grupo de cancelacion dependiendo de la sucursal, esto se puede calcular con querys pero considero correcto reflejarlo en un campo solo para referenciar',
-  `id_comprobante_ac` VARCHAR(10) NOT NULL,
+  `id_comprobante` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_abono_cargo_comprobante1_idx` (`id_comprobante_ac` ASC),
+  INDEX `fk_abono_cargo_comprobante1_idx` (`id_comprobante` ASC),
   CONSTRAINT `fk_abono_cargo_comprobante1`
-    FOREIGN KEY (`id_comprobante_ac`)
+    FOREIGN KEY (`id_comprobante`)
     REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -635,21 +635,21 @@ DROP TABLE IF EXISTS `beraudent`.`pago_comprobante` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`pago_comprobante` (
   `id_pago_pc` INT NOT NULL,
-  `id_comprobante_pc` VARCHAR(10) NOT NULL,
+  `id_comprobante` INT NOT NULL,
   `tipo_pago` ENUM('TF', 'TB', 'WP', 'CH') NULL,
   `fecha` DATE NULL,
   `fecha_vencimiento` DATE NULL,
   `detalle` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_pago_pc`, `id_comprobante_pc`),
-  INDEX `fk_pago_has_comprobante_comprobante1_idx` (`id_comprobante_pc` ASC),
+  PRIMARY KEY (`id_pago_pc`, `id_comprobante`),
   INDEX `fk_pago_has_comprobante_pago1_idx` (`id_pago_pc` ASC),
+  INDEX `fk_pago_comprobante_comprobante1_idx` (`id_comprobante` ASC),
   CONSTRAINT `fk_pago_has_comprobante_pago1`
     FOREIGN KEY (`id_pago_pc`)
     REFERENCES `beraudent`.`pago` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pago_has_comprobante_comprobante1`
-    FOREIGN KEY (`id_comprobante_pc`)
+  CONSTRAINT `fk_pago_comprobante_comprobante1`
+    FOREIGN KEY (`id_comprobante`)
     REFERENCES `beraudent`.`comprobante` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -677,32 +677,6 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`fase_producto` (
   CONSTRAINT `fk_fase_has_producto_producto1`
     FOREIGN KEY (`id_producto_fp`)
     REFERENCES `beraudent`.`producto` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
--- Table `beraudent`.`abono_cargo_producto`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `beraudent`.`abono_cargo_producto` ;
-
-CREATE TABLE IF NOT EXISTS `beraudent`.`abono_cargo_producto` (
-  `id_abono_cargo_acp` INT NOT NULL,
-  `id_producto_solicitado_acp` VARCHAR(12) NOT NULL,
-  PRIMARY KEY (`id_abono_cargo_acp`, `id_producto_solicitado_acp`),
-  INDEX `fk_abono_cargo_has_producto_solicitado_producto_solicitado1_idx` (`id_producto_solicitado_acp` ASC),
-  INDEX `fk_abono_cargo_has_producto_solicitado_abono_cargo1_idx` (`id_abono_cargo_acp` ASC),
-  CONSTRAINT `fk_abono_cargo_has_producto_solicitado_abono_cargo1`
-    FOREIGN KEY (`id_abono_cargo_acp`)
-    REFERENCES `beraudent`.`abono_cargo` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_abono_cargo_has_producto_solicitado_producto_solicitado1`
-    FOREIGN KEY (`id_producto_solicitado_acp`)
-    REFERENCES `beraudent`.`producto_solicitado` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -791,6 +765,104 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
 
+-- -----------------------------------------------------
+-- Table `beraudent`.`descuento`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`descuento` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`descuento` (
+  `id_sucursal` INT NOT NULL,
+  `porcentaje` INT NULL,
+  `detalle` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_sucursal`),
+  CONSTRAINT `fk_descuento_sucursal1`
+    FOREIGN KEY (`id_sucursal`)
+    REFERENCES `beraudent`.`sucursal` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`precio_expcional`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`precio_expcional` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`precio_expcional` (
+  `id_sucursal_pe` INT NOT NULL,
+  `codigo_item_pe` VARCHAR(10) NOT NULL,
+  `precio` FLOAT NULL,
+  PRIMARY KEY (`id_sucursal_pe`, `codigo_item_pe`),
+  INDEX `fk_sucursal_has_item_item1_idx` (`codigo_item_pe` ASC),
+  INDEX `fk_sucursal_has_item_sucursal1_idx` (`id_sucursal_pe` ASC),
+  CONSTRAINT `fk_sucursal_has_item_sucursal1`
+    FOREIGN KEY (`id_sucursal_pe`)
+    REFERENCES `beraudent`.`sucursal` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sucursal_has_item_item1`
+    FOREIGN KEY (`codigo_item_pe`)
+    REFERENCES `beraudent`.`item` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`dependencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`dependencia` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`dependencia` (
+  `id_arancel_base_d` INT NOT NULL,
+  `id_arancel_derivado_d` INT NOT NULL,
+  `porcentaje` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_arancel_base_d`, `id_arancel_derivado_d`),
+  INDEX `fk_arancel_has_arancel_arancel2_idx` (`id_arancel_derivado_d` ASC),
+  INDEX `fk_arancel_has_arancel_arancel1_idx` (`id_arancel_base_d` ASC),
+  CONSTRAINT `fk_arancel_has_arancel_arancel1`
+    FOREIGN KEY (`id_arancel_base_d`)
+    REFERENCES `beraudent`.`arancel` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_arancel_has_arancel_arancel2`
+    FOREIGN KEY (`id_arancel_derivado_d`)
+    REFERENCES `beraudent`.`arancel` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `beraudent`.`abono_cargo_producto`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `beraudent`.`abono_cargo_producto` ;
+
+CREATE TABLE IF NOT EXISTS `beraudent`.`abono_cargo_producto` (
+  `id_abono_cargo_acp` INT NOT NULL,
+  `id_producto_solicitado_acp` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id_abono_cargo_acp`, `id_producto_solicitado_acp`),
+  INDEX `fk_abono_cargo_has_producto_solicitado_producto_solicitado1_idx` (`id_producto_solicitado_acp` ASC),
+  INDEX `fk_abono_cargo_has_producto_solicitado_abono_cargo1_idx` (`id_abono_cargo_acp` ASC),
+  CONSTRAINT `fk_abono_cargo_has_producto_solicitado_abono_cargo1`
+    FOREIGN KEY (`id_abono_cargo_acp`)
+    REFERENCES `beraudent`.`abono_cargo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_abono_cargo_has_producto_solicitado_producto_solicitado1`
+    FOREIGN KEY (`id_producto_solicitado_acp`)
+    REFERENCES `beraudent`.`producto_solicitado` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -802,6 +874,26 @@ START TRANSACTION;
 USE `beraudent`;
 INSERT INTO `beraudent`.`usuario` (`email`, `password`, `permisos`) VALUES ('ofaber', '123456', 'A');
 INSERT INTO `beraudent`.`usuario` (`email`, `password`, `permisos`) VALUES ('cpilar', '123456', 'L');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `beraudent`.`comprobante`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `beraudent`;
+INSERT INTO `beraudent`.`comprobante` (`id`, `numero`, `tipo`, `fecha`, `referencia`, `rut_cliente`, `razon_cliente`, `detalle`, `valor_neto`) VALUES (, 'NO CREADO', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `beraudent`.`cancelacion`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `beraudent`;
+INSERT INTO `beraudent`.`cancelacion` (`id`, `codigo`, `periodo`, `monto`, `descuento`, `total`, `detalle`, `id_comprobante_c`) VALUES (DEFAULT, 'IMPAGO', NULL, NULL, NULL, NULL, NULL, 0);
 
 COMMIT;
 
