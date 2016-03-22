@@ -27,7 +27,8 @@ namespace Presentacion
         {
             form_login = new FormLogin();            
             form_login.MdiParent=this;
-            form_login.Show();            
+            form_login.Show();
+            //MessageBox.Show(Environment.MachineName);       
         }
 
         private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)

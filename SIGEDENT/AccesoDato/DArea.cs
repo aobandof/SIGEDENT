@@ -11,9 +11,11 @@ namespace Datos
     public sealed class DArea
     {
         public static SqlCommand cmd;
-        
+        public static Conexion conec = Conexion.Conexion_Instanciar();
+
         private static void instanciar_cmd(string nombre_procedimiento){
-            cmd = new SqlCommand(nombre_procedimiento, Conexion.Conexion_Instanciar().con);
+            //cmd = new SqlCommand(nombre_procedimiento, Conexion.Conexion_Instanciar().con);
+            cmd = new SqlCommand(nombre_procedimiento, conec.con);
             cmd.CommandType = CommandType.StoredProcedure;
         }
         //METODO PARA INSERTAR y ACTUALIZAR REGISTRO
@@ -48,8 +50,9 @@ namespace Datos
                     area.id = dr.GetInt16(0);
                     area.nombre = dr.GetString(1);
                 }
+                dr.Close();
             }
-            catch (Exception e){ throw new Exception("Error Encontrado: " + e.Message);  }            
+            catch (Exception e){ throw new Exception("Error Encontrado: " + e.Message);  }                        
             return area;
         }
         //METODO PARA SELECCIONAR TODOS REGISTRO en un Datatable
@@ -60,6 +63,7 @@ namespace Datos
             try {
                 SqlDataReader dr = cmd.ExecuteReader();
                 dt.Load(dr);
+                dr.Close();
             }
             catch (SqlException e) { throw new Exception("Error Encontrado: " + e.Message); }
             return dt;            
@@ -78,7 +82,8 @@ namespace Datos
                     area.nombre = dr.GetString(1);
                     lista.Add(area);
                     area=null;
-                }                
+                }
+                dr.Close();
             }
             catch (SqlException e) { throw new Exception("Error Encontrado: " + e.Message); }
             return lista;
@@ -96,6 +101,7 @@ namespace Datos
             try {
                 SqlDataReader dr = cmd.ExecuteReader();
                 dt.Load(dr);
+                dr.Close();
                 return dt;
             }
             catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
@@ -124,6 +130,7 @@ namespace Datos
                     lista.Add(area);
                     area=null;
                 }
+                dr.Close();
             }
             catch (SqlException e) { throw new Exception("Error encontrado: " + e.Message); }
             return lista;

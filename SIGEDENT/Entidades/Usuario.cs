@@ -9,10 +9,9 @@ namespace Entidades
     public class Usuario
     {
         //propiedades de lectura y escritura
-        public string nick { get; set; }
+        public int id { get; set; }
+        public string user { get; set; }
         public string password { get; set; }
-        public string apellidos { get; set; }
-        public string nombres { get; set; }
         public string permisos { get; set; }
     }
 }

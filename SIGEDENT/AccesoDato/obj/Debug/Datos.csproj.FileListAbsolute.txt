@@ -12,3 +12,10 @@ C:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\bin\Debug\Entidades.pdb
 C:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 C:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\obj\Debug\AccesoDato.dll
 C:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\obj\Debug\AccesoDato.pdb
+E:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\bin\Debug\AccesoDato.dll
+E:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\bin\Debug\AccesoDato.pdb
+E:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\bin\Debug\Entidades.dll
+E:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\bin\Debug\Entidades.pdb
+E:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\obj\Debug\AccesoDato.dll
+E:\GITHUB\SIGEDENT\SIGEDENT\AccesoDato\obj\Debug\AccesoDato.pdb

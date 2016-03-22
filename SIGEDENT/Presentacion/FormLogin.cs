@@ -35,7 +35,7 @@ namespace Presentacion
             {
                 logueado = Datos.DUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text);
                 //logueado = Negocio.NUsuario.LNUsuario_Loguear(txb_usuario.Text, txb_password.Text);
-                MessageBox.Show("Bienvenido " + logueado.nombres + " " + logueado.apellidos);
+                MessageBox.Show("Bienvenido usuario correcto"); // + logueado.nombres + " " + logueado.apellidos);
                 this.Hide();
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace Presentacion
                 try
                 {
                     Datos.DUsuario.Usuario_Loguear(txb_usuario.Text, txb_password.Text);
-                    MessageBox.Show("Bienvenido " + logueado.nombres + " " + logueado.apellidos);
+                    MessageBox.Show("Bienvenido usuario correcto"); // + logueado.nombres + " " + logueado.apellidos);
                     this.Hide();
                 }
                 catch (Exception ex)
