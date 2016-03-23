@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user` VARCHAR(10) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
-  `permisos` ENUM('A', 'S', 'E', 'T', 'D') NOT NULL COMMENT '\'A\'=Administrador\n\'S\'=Super Usuario \n\'U\'=Usuario solo con pocos atributos de modificación\n\'E\'=Ejecutivo\n\'T\'=Tecnico\n\'D\'=Doctor',
+  `permisos` ENUM('A', 'S', 'U', 'E', 'T', 'D') NOT NULL COMMENT '\'A\'=Administrador\n\'S\'=Super Usuario \n\'U\'=Usuario solo con pocos atributos de modificación\n\'E\'=Ejecutivo\n\'T\'=Tecnico\n\'D\'=Doctor',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -287,9 +287,10 @@ DROP TABLE IF EXISTS `beraudent`.`empleado` ;
 
 CREATE TABLE IF NOT EXISTS `beraudent`.`empleado` (
   `codigo` VARCHAR(10) NOT NULL,
-  `nombres` VARCHAR(45) NULL,
   `apellidos` VARCHAR(45) NULL,
+  `nombres` VARCHAR(45) NULL,
   `rut` VARCHAR(10) NULL,
+  `email` VARCHAR(45) NULL,
   `id_area_e` TINYINT(1) NOT NULL,
   `id_usuario` INT NOT NULL,
   PRIMARY KEY (`codigo`),
