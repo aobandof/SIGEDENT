@@ -1,0 +1,13 @@
+CREATE TABLE `datos_facturacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `grupo_facturacion` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'nombre del grupo de facturacion por ejemplo OMESA de vidaintegra contiene muchos sucursales que se facturan con este mismo grupo (misma razon social, etc)',
+  `razon_social` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_fantasia` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `direccion` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `rut` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_cliente_df` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Datos_Facturacion_Cliente1_idx` (`id_cliente_df`),
+  CONSTRAINT `fk_Datos_Facturacion_Cliente1` FOREIGN KEY (`id_cliente_df`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

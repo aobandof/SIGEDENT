@@ -1,0 +1,9 @@
+CREATE TABLE `abono_cargo_producto` (
+  `id_abono_cargo_acp` int(11) NOT NULL,
+  `id_producto_solicitado_acp` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_abono_cargo_acp`,`id_producto_solicitado_acp`),
+  KEY `fk_abono_cargo_has_producto_solicitado_producto_solicitado1_idx` (`id_producto_solicitado_acp`),
+  KEY `fk_abono_cargo_has_producto_solicitado_abono_cargo1_idx` (`id_abono_cargo_acp`),
+  CONSTRAINT `fk_abono_cargo_has_producto_solicitado_abono_cargo1` FOREIGN KEY (`id_abono_cargo_acp`) REFERENCES `abono_cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_abono_cargo_has_producto_solicitado_producto_solicitado1` FOREIGN KEY (`id_producto_solicitado_acp`) REFERENCES `producto_solicitado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

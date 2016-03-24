@@ -1,0 +1,13 @@
+CREATE TABLE `cancelacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `periodo` varchar(11) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT '2016-02-ENE   son 11 caracteres',
+  `monto` float DEFAULT NULL,
+  `descuento` float DEFAULT '0',
+  `total` float DEFAULT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_comprobante_c` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_cancelacion_comprobante1_idx` (`id_comprobante_c`),
+  CONSTRAINT `fk_cancelacion_comprobante1` FOREIGN KEY (`id_comprobante_c`) REFERENCES `comprobante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

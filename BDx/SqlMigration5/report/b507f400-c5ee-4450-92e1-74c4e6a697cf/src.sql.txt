@@ -1,0 +1,9 @@
+CREATE TABLE `sucursal_odontologo` (
+  `id_sucursal_so` int(11) NOT NULL,
+  `id_odontologo_so` int(11) NOT NULL,
+  PRIMARY KEY (`id_sucursal_so`,`id_odontologo_so`),
+  KEY `fk_sucursal_has_odontologo_odontologo1_idx` (`id_odontologo_so`),
+  KEY `fk_sucursal_has_odontologo_sucursal1_idx` (`id_sucursal_so`),
+  CONSTRAINT `fk_sucursal_has_odontologo_odontologo1` FOREIGN KEY (`id_odontologo_so`) REFERENCES `odontologo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sucursal_has_odontologo_sucursal1` FOREIGN KEY (`id_sucursal_so`) REFERENCES `sucursal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

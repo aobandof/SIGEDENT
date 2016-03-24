@@ -1,0 +1,13 @@
+CREATE TABLE `prueba_realizada` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_producto_sps` int(11) NOT NULL,
+  `id_producto_solicitado_sps` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_ingreso` date NOT NULL,
+  `fecha_egreso` date NOT NULL,
+  `estado` enum('I','P','T','D') COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_producto_has_producto_solicitado_producto_solicitado1_idx` (`id_producto_solicitado_sps`),
+  KEY `fk_producto_has_producto_solicitado_producto1_idx` (`id_producto_sps`),
+  CONSTRAINT `fk_producto_has_producto_solicitado_producto1` FOREIGN KEY (`id_producto_sps`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_producto_has_producto_solicitado_producto_solicitado1` FOREIGN KEY (`id_producto_solicitado_sps`) REFERENCES `producto_solicitado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

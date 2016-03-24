@@ -1,0 +1,9 @@
+CREATE TABLE `subproducto` (
+  `id_producto_padre_s` int(11) NOT NULL,
+  `id_producto_hijo_s` int(11) NOT NULL,
+  PRIMARY KEY (`id_producto_padre_s`,`id_producto_hijo_s`),
+  KEY `fk_producto_has_producto_producto2_idx` (`id_producto_hijo_s`),
+  KEY `fk_producto_has_producto_producto1_idx` (`id_producto_padre_s`),
+  CONSTRAINT `fk_producto_has_producto_producto1` FOREIGN KEY (`id_producto_padre_s`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_producto_has_producto_producto2` FOREIGN KEY (`id_producto_hijo_s`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

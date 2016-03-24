@@ -1,0 +1,8 @@
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `permisos` enum('A','S','U','E','T','D') COLLATE utf8_spanish_ci NOT NULL COMMENT '''A''=Administrador\n''S''=Super Usuario \n''U''=Usuario solo con pocos atributos de modificación\n''E''=Ejecutivo\n''T''=Tecnico\n''D''=Doctor',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_UNIQUE` (`user`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

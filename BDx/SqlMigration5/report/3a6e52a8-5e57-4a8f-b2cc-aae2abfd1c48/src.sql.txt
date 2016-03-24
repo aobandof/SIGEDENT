@@ -1,0 +1,13 @@
+CREATE TABLE `pago_comprobante` (
+  `id_pago_pc` int(11) NOT NULL,
+  `id_comprobante` int(11) NOT NULL,
+  `tipo_pago` enum('TF','TB','WP','CH') COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `fecha_vencimiento` date DEFAULT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id_pago_pc`,`id_comprobante`),
+  KEY `fk_pago_has_comprobante_pago1_idx` (`id_pago_pc`),
+  KEY `fk_pago_comprobante_comprobante1_idx` (`id_comprobante`),
+  CONSTRAINT `fk_pago_comprobante_comprobante1` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pago_has_comprobante_pago1` FOREIGN KEY (`id_pago_pc`) REFERENCES `pago` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

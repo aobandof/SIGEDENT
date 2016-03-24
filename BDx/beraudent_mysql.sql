@@ -274,7 +274,8 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`usuario` (
   `user` VARCHAR(10) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
   `permisos` ENUM('A', 'S', 'U', 'E', 'T', 'D') NOT NULL COMMENT '\'A\'=Administrador\n\'S\'=Super Usuario \n\'U\'=Usuario solo con pocos atributos de modificación\n\'E\'=Ejecutivo\n\'T\'=Tecnico\n\'D\'=Doctor',
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `user_UNIQUE` (`user` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -292,17 +293,17 @@ CREATE TABLE IF NOT EXISTS `beraudent`.`empleado` (
   `rut` VARCHAR(10) NULL,
   `email` VARCHAR(45) NULL,
   `id_area_e` TINYINT(1) NOT NULL,
-  `id_usuario` INT NOT NULL,
+  `id_usuario_e` INT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `fk_empleado_Area1_idx` (`id_area_e` ASC),
-  INDEX `fk_empleado_usuario1_idx` (`id_usuario` ASC),
+  INDEX `fk_empleado_usuario1_idx` (`id_usuario_e` ASC),
   CONSTRAINT `fk_empleado_Area1`
     FOREIGN KEY (`id_area_e`)
     REFERENCES `beraudent`.`Area` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_empleado_usuario1`
-    FOREIGN KEY (`id_usuario`)
+    FOREIGN KEY (`id_usuario_e`)
     REFERENCES `beraudent`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

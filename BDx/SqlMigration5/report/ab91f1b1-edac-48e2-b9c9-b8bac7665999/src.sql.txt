@@ -1,0 +1,12 @@
+CREATE TABLE `comprobante` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '\n',
+  `numero` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo` enum('F','B','FE','BE','NC','ND','CE','DE') COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `referencia` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `rut_cliente` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `razon_cliente` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `detalle` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `valor_neto` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

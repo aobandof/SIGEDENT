@@ -1,0 +1,9 @@
+CREATE TABLE `fase_producto` (
+  `codigo_fase_fp` int(11) NOT NULL,
+  `id_producto_fp` int(11) NOT NULL,
+  PRIMARY KEY (`codigo_fase_fp`,`id_producto_fp`),
+  KEY `fk_fase_has_producto_producto1_idx` (`id_producto_fp`),
+  KEY `fk_fase_has_producto_fase1_idx` (`codigo_fase_fp`),
+  CONSTRAINT `fk_fase_has_producto_fase1` FOREIGN KEY (`codigo_fase_fp`) REFERENCES `fase` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fase_has_producto_producto1` FOREIGN KEY (`id_producto_fp`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

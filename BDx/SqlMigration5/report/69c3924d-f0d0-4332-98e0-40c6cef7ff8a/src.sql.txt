@@ -1,0 +1,7 @@
+CREATE TABLE `descuento` (
+  `id_sucursal` int(11) NOT NULL,
+  `porcentaje` int(11) DEFAULT NULL,
+  `detalle` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_sucursal`),
+  CONSTRAINT `fk_descuento_sucursal1` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

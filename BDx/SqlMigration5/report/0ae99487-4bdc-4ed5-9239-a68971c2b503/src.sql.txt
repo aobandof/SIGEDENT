@@ -1,0 +1,14 @@
+CREATE TABLE `empleado` (
+  `codigo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombres` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `rut` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_area_e` tinyint(1) NOT NULL,
+  `id_usuario_e` int(11) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `fk_empleado_Area1_idx` (`id_area_e`),
+  KEY `fk_empleado_usuario1_idx` (`id_usuario_e`),
+  CONSTRAINT `fk_empleado_Area1` FOREIGN KEY (`id_area_e`) REFERENCES `area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_empleado_usuario1` FOREIGN KEY (`id_usuario_e`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci

@@ -1,0 +1,10 @@
+CREATE TABLE `precio_expcional` (
+  `id_sucursal_pe` int(11) NOT NULL,
+  `codigo_item_pe` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `precio` float DEFAULT NULL,
+  PRIMARY KEY (`id_sucursal_pe`,`codigo_item_pe`),
+  KEY `fk_sucursal_has_item_item1_idx` (`codigo_item_pe`),
+  KEY `fk_sucursal_has_item_sucursal1_idx` (`id_sucursal_pe`),
+  CONSTRAINT `fk_sucursal_has_item_item1` FOREIGN KEY (`codigo_item_pe`) REFERENCES `item` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sucursal_has_item_sucursal1` FOREIGN KEY (`id_sucursal_pe`) REFERENCES `sucursal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
